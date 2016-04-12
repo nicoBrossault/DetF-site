@@ -1,0 +1,46 @@
+Newsletter:
+  type: entity
+  table: newsletter
+  fields:
+    idnewsletter:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idNewsletter
+      generator:
+        strategy: IDENTITY
+    titre:
+      type: text
+      nullable: false
+    texte:
+      type: text
+      nullable: false
+  manyToMany:
+    idabonne:
+      targetEntity: Abonne
+      cascade: {  }
+      mappedBy: null
+      inversedBy: idnewsletter
+      joinTable:
+        name: recevoir
+        joinColumns:
+          -
+            name: idNewsletter
+            referencedColumnName: idNewsletter
+        inverseJoinColumns:
+          -
+            name: idAbonne
+            referencedColumnName: idAbonne
+      orderBy: null
+  oneToOne:
+    iduser:
+      targetEntity: User
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idUser:
+          referencedColumnName: idUser
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

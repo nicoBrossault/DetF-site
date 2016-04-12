@@ -1,0 +1,85 @@
+body{
+	background-color:#E0C3F2;
+	font-family: 'Grand Hotel', cursive;
+}
+
+/*
+/		+---------------------------+
+/		|			HEADER			|
+/		+---------------------------+
+*/
+
+.headerNav{
+	z-index:5;
+	position:absolute;
+	width:100%;
+	color:white;
+}
+.textHeader{
+	background-color:#E91E63;
+	padding:-1% 0% 0% 0%;
+	width:100%;
+	text-align: center;
+	font-size:8em;
+	-moz-text-shadow: 2px 2px 8px #656565;
+	-webkit-text-shadow: 2px 2px 8px #656565;
+	-o-text-shadow: 2px 2px 8px #656565;
+	text-shadow: 2px 2px 8px #656565;
+}
+.menuLeft{
+	cursor:pointer;
+}
+.menuLeftOpen, .menuLeftClose{
+	width:40px;
+	height:40px;
+	border-radius:20px;
+	background-color:#ad1457;
+	padding-top: 6px;
+}
+.decoHeader{
+	height:60px;
+	background: url('../images/motif-cachemire.png');
+}
+
+/*
+/		+---------------------------+
+/		|			MENU			|
+/		+---------------------------+
+*/
+
+.menuNav{
+	background-color:#F8BBD0;
+	position:fixed;
+	z-index:4;
+	color: white;
+	font-size:2em;
+	top:0px;
+	-moz-box-shadow: 0px 0px 10px 0px #656565;
+	-webkit-box-shadow: 5px 0px 10px 0px #656565;
+	-o-box-shadow: 5px 0px 10px 0px #656565;
+	box-shadow: 5px 0px 10px 0px #656565;
+}
+.sideNav>li>a{
+	color:white;
+	padding: 0% 50% 0% 20%;
+}
+.sideNav>li>a:hover{
+	background-color:#fce4ec;
+	color: #656565;
+	padding-right:48%;
+	-moz-box-shadow: 0px 0px 10px 0px #656565;
+	-webkit-box-shadow: 5px 0px 10px 0px #656565;
+	-o-box-shadow: 5px 0px 10px 0px #656565;
+	box-shadow: 5px 0px 10px 0px #656565;
+}
+
+/*
+/		+---------------------------+
+/		|			CONTENT			|
+/		+---------------------------+
+*/
+
+.contentText{
+	position: absolute;
+	width:75%;
+}

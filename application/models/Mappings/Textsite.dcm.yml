@@ -1,0 +1,31 @@
+Textsite:
+  type: entity
+  table: textsite
+  fields:
+    idtextsite:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idTextSite
+      generator:
+        strategy: IDENTITY
+    titretextsite:
+      type: text
+      nullable: false
+      column: titreTextSite
+    textsite:
+      type: text
+      nullable: false
+      column: textSite
+  oneToOne:
+    iduser:
+      targetEntity: User
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idUser:
+          referencedColumnName: idUser
+      orphanRemoval: false
+  lifecycleCallbacks: {  }
