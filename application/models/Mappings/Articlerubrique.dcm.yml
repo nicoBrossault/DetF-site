@@ -14,6 +14,10 @@ Articlerubrique:
       type: text
       nullable: false
       column: textRubrique
+    titre:
+      type: text
+      nullable: false
+      column: titre
   oneToOne:
     idrubrique:
       targetEntity: Rubrique

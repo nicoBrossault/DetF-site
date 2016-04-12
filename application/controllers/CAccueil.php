@@ -8,7 +8,8 @@ class CAccueil extends CI_Controller {
 		parent::__construct();
 		$titre="Accueil";
 		$this->layout->setTitre($titre);
-		$this->layout->setItemsMenu('Accueil','Laine');
+		$items=array('Accueil','Laine');
+		$this->layout->setItemsMenu($items);
 		$footerAccueil=$this->doctrine->em->find('textsite',4);
 		$imgAccueilFooter=$this->doctrine->em->getRepository('images')->findAll();
 		$imgFooter=array();

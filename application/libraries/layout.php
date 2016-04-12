@@ -2,7 +2,7 @@
 class Layout {
 	private $theme = 'themeMaterial';
 	private $titre;
-	private $itemsMenu=array();
+	private $itemsMenu;
 	private $footer=array();
 	
 	public function getTitre(){
@@ -13,8 +13,8 @@ class Layout {
 		return $this->titre=$titre;
 	}
 
-	public function setItemsMenu($item){
-		return $this->itemsMenu[]=$item;
+	public function setItemsMenu($item=array()){
+		return $this->itemsMenu=$item;
 	}
 	
 	public function setFooter($textFooter, $imgMarque=array()){

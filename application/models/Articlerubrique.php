@@ -27,7 +27,14 @@ class Articlerubrique
      * @Column(name="textRubrique", type="text", nullable=false)
      */
     private $textrubrique;
-
+	
+    /**
+     * @var text $titre
+     *
+     * @Column(name="titre", type="text", nullable=false)
+     */
+    private $titre;
+    
     /**
      * @var Rubrique
      *
@@ -49,6 +56,28 @@ class Articlerubrique
         return $this->idarticlerubrique;
     }
 
+    /**
+     * Set titre
+     *
+     * @param text $titre
+     * @return Articlerubrique
+     */
+    public function setTitre($titre)
+    {
+    	$this->titre = $titre;
+    	return $this;
+    }
+    
+    /**
+     * Get textrubrique
+     *
+     * @return text
+     */
+    public function getTitre()
+    {
+    	return $this->titre;
+    }
+    
     /**
      * Set textrubrique
      *
