@@ -8,7 +8,20 @@ class CAccueil extends CI_Controller {
 		parent::__construct();
 		$titre="Accueil";
 		$this->layout->setTitre($titre);
-		$this->layout->setItemsMenu('Accueil');
+		$this->layout->setItemsMenu('Accueil','Laine');
+		$footerAccueil=$this->doctrine->em->find('textsite',4);
+		$imgAccueilFooter=$this->doctrine->em->getRepository('images')->findAll();
+		$imgFooter=array();
+		foreach($imgAccueilFooter as $imgFooterData){
+			if($imgFooterData->getIdTextSite()!=NULL){
+				if($imgFooterData->getIdTextSite()->getIdTextSite()==4){
+					$imgFooter[]=$imgFooterData->getUrl();
+				}
+			}
+		}
+		$this->layout->setFooter(
+				$footerAccueil->getTextSite(),
+				$imgFooter);
 	}
 	
 	public function index(){

@@ -34,7 +34,14 @@ class Images
      * @Column(name="description", type="text", nullable=true)
      */
     private $description;
-
+	
+    /**
+     * @var text $url
+     *
+     * @Column(name="url", type="text", nullable=false)
+     */
+    private $url;
+    
     /**
      * @var Articlerubrique
      *
@@ -119,7 +126,29 @@ class Images
     {
         return $this->description;
     }
-
+	
+    /**
+     * Set url
+     *
+     * @param text $url
+     * @return Image
+     */
+    public function setUrl($url)
+    {
+    	$this->url = $url;
+    	return $this;
+    }
+    
+    /**
+     * Get url
+     *
+     * @return text
+     */
+    public function getUrl()
+    {
+    	return $this->url;
+    }
+    
     /**
      * Set idarticlerubrique
      *

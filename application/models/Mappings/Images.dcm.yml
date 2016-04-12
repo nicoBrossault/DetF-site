@@ -16,6 +16,10 @@ Images:
     description:
       type: text
       nullable: true
+    url:
+      type: text
+      nullable: false
+      column: URL
   oneToOne:
     idarticlerubrique:
       targetEntity: Articlerubrique

@@ -19,10 +19,12 @@ $(document).ready(function() {
 		$('.menuNav').css('margin-left','-250px');
 		$('.contentText').css('top',$('.textHeader').height()+100+"px");
 		$('.sideNav').css('margin-top',$('.textHeader').height()+20+"px");
+		$('.footer').css('top',$('.contentText').position().top+$('.contentText').height()+'px');
 	}else{
 		$('.menuNav').css('height',heightScreen+"px");
 		$('.menuNav').css('margin-left','0px');
 		$('.contentText').css('top',$('.textHeader').height()+100+"px");
+		$('.footer').css('top',$('.contentText').position().top+$('.contentText').height()+'px');
 	}
 	
 	$(window).resize(function(){
@@ -33,14 +35,17 @@ $(document).ready(function() {
 			$('.textHeader').css("font-size",'2em');
 			$('.contentText').css('top',$('.textHeader').height()+100+"px");
 			$('.sideNav').css('margin-top',$('.textHeader').height()+20+"px");
+			$('.footer').css('top',$('.contentText').position().top+$('.contentText').height()+'px');
 		}else if(widthScreen>500 && widthScreen<800){
 			$('.textHeader').css("font-size",'4em');
 			$('.contentText').css('top',$('.textHeader').height()+100+"px");
 			$('.sideNav').css('margin-top',$('.textHeader').height()+20+"px");
+			$('.footer').css('top',$('.contentText').position().top+$('.contentText').height()+'px');
 		}else{
 			$('.textHeader').css("font-size",'8em');
 			$('.contentText').css('top',$('.textHeader').height()+100+"px");
 			$('.sideNav').css('margin-top',$('.textHeader').height()+20+"px");
+			$('.footer').css('top',$('.contentText').position().top+$('.contentText').height()+'px');
 		}
 	});
 	

@@ -35,7 +35,7 @@
 			<div class="decoHeader"></div>
 		</div>
 		
-		<div class="menuNav">
+		<div class="menuNav z-depth-3">
 	  		<ul class="sideNav">
 	  			</br>
 				<?php foreach($itemsMenu as $item):?>
@@ -50,9 +50,19 @@
 			<div id="content">
 				<?php echo $content_for_layout; ?>
 			</div>
+			<br><br>
 		</div>
 		
-		<div id="footer">
+		<div class='footer'>
+			<div class="pied">
+				<?php foreach ($footer['imgMarque'] as $img):?>
+					<img src="<?=base_url()."assets/".$img?>" 
+						alt="logo" 
+						class="responsive-img" 
+						style="max-height:60px">
+				<?php endforeach;?>
+				<?php echo utf8_encode($footer['footer'])?>
+			</div>
 		</div>
 	</body>
 </html>

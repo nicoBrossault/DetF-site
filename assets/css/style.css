@@ -54,10 +54,6 @@ body{
 	color: white;
 	font-size:2em;
 	top:0px;
-	-moz-box-shadow: 0px 0px 10px 0px #656565;
-	-webkit-box-shadow: 5px 0px 10px 0px #656565;
-	-o-box-shadow: 5px 0px 10px 0px #656565;
-	box-shadow: 5px 0px 10px 0px #656565;
 }
 .sideNav>li>a{
 	color:white;
@@ -82,4 +78,25 @@ body{
 .contentText{
 	position: absolute;
 	width:75%;
+}
+
+/*
+/		+---------------------------+
+/		|			footer			|
+/		+---------------------------+
+*/
+
+.footer{
+	background-color: rgba(0, 0, 0, 0.6);
+	position: absolute;
+	color: white;
+	width:100%;
+}
+.pied{
+	padding:2%;
+	text-align: justify;
+    -webkit-text-align-last: center;
+	-moz-text-align-last: center;
+	-ms-text-align-last: center;
+	-o-text-align-last: center;
 }
