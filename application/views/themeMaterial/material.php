@@ -39,9 +39,15 @@
 	  		<ul class="sideNav">
 	  			</br>
 				<?php foreach($itemsMenu as $item):?>
-				<li >
-					<a href="<?php echo base_url()?>"> <?php echo $item ?></a>
-				</li>
+					<?php if($item=="Accueil"):?>
+						<li >
+							<a href="<?=base_url()?>"> <?php echo $item ?></a>
+						</li>
+					<?php else:?>
+						<li >
+							<a href="<?=base_url()?>CRubrique?nom=<?=$item?>"> <?=$item ?></a>
+						</li>
+					<?php endif;?>
 				<?php endforeach;?>
 			</ul>
 		</div>
