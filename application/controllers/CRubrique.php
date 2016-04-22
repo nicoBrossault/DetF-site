@@ -30,6 +30,7 @@ class CRubrique extends CI_Controller {
 	}
 	
 	public function index(){
+		//Récupération de la rubrique
 		$nomRubrique=$_GET['nom'];
 		$allRubriques=$this->doctrine->em->getRepository('rubrique')->findAll();
 		foreach ($allRubriques as $oneRubrique){
@@ -37,5 +38,21 @@ class CRubrique extends CI_Controller {
 				$rubrique=$this->doctrine->em->find('rubrique',$oneRubrique->getIdrubrique());
 			}
 		}
+		
+		//Récupération de l'image associée à la rubrique
+		$images=$this->doctrine->em->getRepository('images')->findAll();
+		foreach($images as $image){
+			if($image->getIdrubrique()!=NULL){
+				if($image->getIdrubrique()->getIdrubrique()==$rubrique->getIdrubrique()){
+					$image=$image->getUrl();
+				}
+			}
+		}
+		
+		//Passage des données à la view
+		$this->layout->view("rubrique/vRubrique", array(
+				'rubrique'=>$rubrique,
+				'image'=>$image,
+		));
 	}
 }
