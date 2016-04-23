@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 12 Avril 2016 à 16:28
+-- Généré le :  Sam 23 Avril 2016 à 18:07
 -- Version du serveur :  10.1.9-MariaDB
 -- Version de PHP :  5.6.15
 
@@ -51,7 +51,8 @@ CREATE TABLE `articlerubrique` (
 --
 
 INSERT INTO `articlerubrique` (`idArticleRubrique`, `idRubrique`, `titre`, `textRubrique`) VALUES
-(1, 1, 'Un nouveau type de laine', '<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p> \r\n<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>');
+(1, 1, 'Un nouveau type de laine', '<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p> \r\n<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>'),
+(2, 1, 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -75,7 +76,8 @@ CREATE TABLE `images` (
 
 INSERT INTO `images` (`idImages`, `idRubrique`, `idArticleRubrique`, `idTextSite`, `titre`, `description`, `url`) VALUES
 (1, NULL, NULL, 4, 'philadar', 'logo phildar', 'images/marques/phildar.png'),
-(2, NULL, NULL, 4, 'katia', 'logo de katia', 'images/marques/katia.jpg');
+(2, NULL, NULL, 4, 'katia', 'logo de katia', 'images/marques/katia.jpg'),
+(3, 1, 1, NULL, 'laine', 'Notre rayon de laines.', 'images/laineMag.jpg');
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,8 @@ CREATE TABLE `rubrique` (
 --
 
 INSERT INTO `rubrique` (`idRubrique`, `idUser`, `nomRubrique`, `descriptionRubrique`) VALUES
-(1, 1, 'Laine', '<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>');
+(1, 1, 'Laine', '<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>'),
+(2, 1, 'test', 'ceci est une rubrique de test');
 
 -- --------------------------------------------------------
 
@@ -140,7 +143,7 @@ CREATE TABLE `textsite` (
 
 INSERT INTO `textsite` (`idTextSite`, `idUser`, `titreTextSite`, `textSite`) VALUES
 (1, 1, 'Accueil', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-(2, 1, 'Horaire', '<p>Pour la saison estivale, nos horaires d''ouverture sont :</p>\r\n<p>Du lundi au vendredi : </p>\r\n<p>8h00 - 12h00</p>\r\n<p>14h00 - 18h30</p>\r\n<p>Le samedi : </p>\r\n<p>8h00 - 12h00</p>'),
+(2, 1, 'Horaires', '<p>Pour la saison estivale, nos horaires d''ouverture sont :</p>\r\n<p>Du lundi au vendredi : </p>\r\n<p>8h00 - 12h00</p>\r\n<p>14h00 - 18h30</p>\r\n<p>Le samedi : </p>\r\n<p>8h00 - 12h00</p>'),
 (3, 1, 'Inscription à la newletter', '<p>Vous voulez avoir les dernière nouvelles, les promotions ou encore des informations sur nos arrivages en premier ?</p>\r\n<p>Alors n''attenez plus, inscrivez vous à notre newletter !</p>'),
 (4, 1, 'footerAccueil', '<p>Toutes les images ormis celle citant des marques bien définies, appartiennent à la boutique <i> Douceur & Fantaisie</i>.</p>\r\n<p> Aucune reproduction complète ou partielle du site n''est envisageable</p>\r\n<p> Site développée par Nicolas Brossault à l''aide du framework <a href="https://www.codeigniter.com/" target="_blank"><i>CodeIgniter</i></a> et le framework <a href="http://materializecss.com/" target="_blank"><i>Materialize</i></a></p>\r\n');
 
@@ -238,12 +241,12 @@ ALTER TABLE `abonne`
 -- AUTO_INCREMENT pour la table `articlerubrique`
 --
 ALTER TABLE `articlerubrique`
-  MODIFY `idArticleRubrique` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idArticleRubrique` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `images`
 --
 ALTER TABLE `images`
-  MODIFY `idImages` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idImages` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `newsletter`
 --
@@ -253,7 +256,7 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT pour la table `rubrique`
 --
 ALTER TABLE `rubrique`
-  MODIFY `idRubrique` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idRubrique` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `textsite`
 --
