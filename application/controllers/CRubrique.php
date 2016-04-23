@@ -32,6 +32,14 @@ class CRubrique extends CI_Controller {
 	public function index(){
 		//Récupération de la rubrique
 		$nomRubrique=$_GET['nom'];
+		
+		//Test le nom de la rubrique passée en paramètre
+		//si vide retour à l'accueil
+		if($nomRubrique==""){
+			redirect(base_url(),'auto');
+		}
+		
+		//Test si la rubrique exist rubrique passée en paramètre
 		$allRubriques=$this->doctrine->em->getRepository('rubrique')->findAll();
 		foreach ($allRubriques as $oneRubrique){
 			if($oneRubrique->getNomrubrique()==$nomRubrique){
@@ -39,12 +47,17 @@ class CRubrique extends CI_Controller {
 			}
 		}
 		
+		//si vide retour à l'accueil
+		if($rubrique==""){
+			redirect(base_url(),'auto');
+		}
+		
 		//Récupération de l'image associée à la rubrique
 		$images=$this->doctrine->em->getRepository('images')->findAll();
 		foreach($images as $image){
 			if($image->getIdrubrique()!=NULL){
 				if($image->getIdrubrique()->getIdrubrique()==$rubrique->getIdrubrique()){
-					$image=$image->getUrl();
+					$image=$image;
 				}
 			}
 		}
@@ -68,24 +81,24 @@ class CRubrique extends CI_Controller {
 	 */
 	public function getArticleRubrique($idRubrique){
 		$articles=array();
-		$images=array();
-		$articlesImg=array();
+		$imagesArt=array();
 		$allArticles=$this->doctrine->em->getRepository('articleRubrique')->findAll();
 		foreach($allArticles as $article){
 			if($article->getIdrubrique()->getIdrubrique()==$idRubrique){
-				
+				//Récupération des articles assovié à la rubrique
+				$articles[]=$article;
 				//Récupération de l'image associée à l'article
 				$images=$this->doctrine->em->getRepository('images')->findAll();
 				foreach($images as $image){
 					if($image->getIdarticlerubrique()!=NULL){
 						if($image->getIdarticlerubrique()->getIdarticlerubrique()==$article->getIdarticlerubrique()){
-							$images[]=$image->getUrl();
+							$imagesArt[]=$image;
 						}
 					}
 				}
-				$articles[]=$article;
 			}
 		}
-		return array('articles'=>$articles,'images'=>$images);
+		
+		return array('articles'=>$articles,'imagesArt'=>$imagesArt);
 	}
 }
