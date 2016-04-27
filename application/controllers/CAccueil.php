@@ -42,4 +42,8 @@ class CAccueil extends CI_Controller {
 				
 		));
 	}
+	
+	public function connexionAdmin(){
+		$this->layout->view('accueil/vConnexionAdmin');
+	}
 }

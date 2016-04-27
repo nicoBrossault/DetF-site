@@ -8,6 +8,10 @@ $(document).ready(function() {
 	$('.menuLeftOpen').show();
 	$('.menuLeftClose').hide();
 	
+	$('.menuItems').click(function(){
+		$(this).addClass('selectedItems');
+	});
+	
 	if(widthScreen<400){
 		$('.textHeader').css("font-size",'2em');
 		$('.menuNav').css('height',heightScreen+"px");

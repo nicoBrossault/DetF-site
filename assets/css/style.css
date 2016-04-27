@@ -61,11 +61,18 @@ body{
 .sideNav>li>a{
 	color:white;
 	padding: 0% 50% 0% 20%;
+	min-width:200px;
 }
+
 .sideNav>li>a:hover{
-	background-color:#fce4ec;
 	color: #656565;
 	padding-right:48%;
+	min-width:200px;
+}
+
+.sideNav>li:hover{
+	width:200px;
+	background-color:#fce4ec;
 	-moz-box-shadow: 0px 0px 10px 0px #656565;
 	-webkit-box-shadow: 5px 0px 10px 0px #656565;
 	-o-box-shadow: 5px 0px 10px 0px #656565;
@@ -90,6 +97,7 @@ body{
 */
 
 .footer{
+	margin-top:5%;
 	background-color: rgba(0, 0, 0, 0.6);
 	position: absolute;
 	color: white;

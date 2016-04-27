@@ -40,12 +40,16 @@
 	  			</br>
 				<?php foreach($itemsMenu as $item):?>
 					<?php if($item=="Accueil"):?>
-						<li >
-							<a href="<?=base_url()?>"> <?php echo $item ?></a>
+						<li class="menuItems">
+							<a href="<?=base_url()?>" style="width:200px;"> 
+								<?php echo $item ?>
+							</a>
 						</li>
 					<?php else:?>
-						<li >
-							<a href="<?=base_url()?>CRubrique?nom=<?=$item?>"> <?=$item ?></a>
+						<li class="menuItems">
+							<a href="<?=base_url()?>CRubrique?nom=<?=$item?>">
+								<?=$item ?>
+							</a>
 						</li>
 					<?php endif;?>
 				<?php endforeach;?>
