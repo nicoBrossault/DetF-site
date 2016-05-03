@@ -35,15 +35,31 @@ class CAccueil extends CI_Controller {
 		$accueil=$this->doctrine->em->find('textSite',1);
 		$horaire=$this->doctrine->em->find('textSite',2);
 		$newLetter=$this->doctrine->em->find('textSite',3);
-		$this->layout->view('accueil/vAccueil',array(
+		$data=array(
 				'accueil'=>$accueil,
 				'horaire'=>$horaire,
-				'newLetter'=>$newLetter,
-				
-		));
+				'newLetter'=>$newLetter);
+		
+		if($this->isAdmin()){
+			$data+=array('user'=>$this->doctrine->em->find('user',$_SESSION['user']));
+		}
+		
+		$this->layout->view('accueil/vAccueil',$data);
 	}
 	
 	public function connexionAdmin(){
 		$this->layout->view('accueil/vConnexionAdmin');
+	}
+	
+	public function disconnect(){
+		session_destroy();
+		redirect("CAccueil","refresh");
+	}
+	
+	public function isAdmin(){
+		if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
+			return true;
+		}
+		return false;
 	}
 }

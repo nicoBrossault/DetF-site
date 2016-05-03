@@ -6,6 +6,15 @@ body{
 .legend{
 }
 
+.utils{
+	background-color: #ee578c;
+	padding:1%
+}
+
+.utils-nav{
+	background-color: #ee578c;
+}
+
 /*
 /		+---------------------------+
 /		|			HEADER			|

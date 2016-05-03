@@ -5,7 +5,7 @@
 		</div>
 		<div class="card-content">
 			<?php
-				echo form_open('formConnexion');
+				echo form_open('FormConnexion');
 
 				$mailUser= array('name'=>'mailUser','id'=>'mailUser', 'placeholder'=>'Mail', 'value'=>'');
 				echo '<label for="mailUser"><h5>Login</h5></label>';

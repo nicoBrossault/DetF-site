@@ -17,6 +17,7 @@ $(document).ready(function() {
 		$('.menuNav').css('height',heightScreen+"px");
 		$('.contentText').css('top',$('.textHeader').height()+100+"px");
 		$('.sideNav').css('margin-top',$('.textHeader').height()+20+"px");
+		$('.footer').css('top',$('.contentText').position().top+$('.contentText').height()+'px');
 	}else if(widthScreen<800){
 		$('.textHeader').css("font-size",'4em');
 		$('.menuNav').css('height',heightScreen+"px");
@@ -51,6 +52,17 @@ $(document).ready(function() {
 			$('.sideNav').css('margin-top',$('.textHeader').height()+20+"px");
 			$('.footer').css('top',$('.contentText').position().top+$('.contentText').height()+'px');
 		}
+	});
+	
+	$(document).scroll(function(){
+		if($(document).scrollTop() >= $(".headerNav").height()){
+			$(".sideNav").css("margin-top","-8%");
+			/*$('.sideNav').animate({
+				'margin-top':'0%',
+			  }, 300, function() {});*/
+		}else{
+			$(".sideNav").css("margin-top",$('.textHeader').height()+20+"px");
+		};
 	});
 	
 	$('.contentText').css('left','20%');

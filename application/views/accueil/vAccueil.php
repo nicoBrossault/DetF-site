@@ -4,6 +4,18 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 ?>
 
 <div class="card">
+	<?php if(isset($user)):?>
+		<div class="utils right-align">
+			<span style="margin-right: 1%">
+				 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+				 	<i class="material-icons">edit</i>
+				 </a>
+			 </span>
+			 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+			 	<i class="material-icons">delete</i>
+			 </a>
+		</div>
+	<?php endif;?>
 	<div class="card-content">
 		<span class="card-title">
 			<h1>Présentation</h1>
@@ -33,6 +45,18 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 <div class="row">
 	<div class="col l6 m6 s12">
 		<div class="card">
+			<?php if(isset($user)):?>
+				<div class="utils right-align">
+					<span style="margin-right: 1%">
+						 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+						 	<i class="material-icons">edit</i>
+						 </a>
+					 </span>
+					 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+					 	<i class="material-icons">delete</i>
+					 </a>
+				</div>
+			<?php endif;?>
 			<div class="card-content">
 				<span class="card-title">
 					<h1><?=$horaire->getTitreTextSite()?></h1>
@@ -52,6 +76,18 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 	</div>
 	<div class="col l6 m6 s12">
 		<div class="card">
+			<?php if(isset($user)):?>
+				<div class="utils right-align">
+					<span style="margin-right: 1%">
+						 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+						 	<i class="material-icons">edit</i>
+						 </a>
+					 </span>
+					 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+					 	<i class="material-icons">delete</i>
+					 </a>
+				</div>
+			<?php endif;?>
 			<div class="card-content">
 				<span class="card-title">
 					<h1><?=utf8_encode($newLetter->getTitreTextSite())?></h1>

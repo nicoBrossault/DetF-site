@@ -65,12 +65,17 @@ class CRubrique extends CI_Controller {
 		//Récupération des articles et images associé
 		$articlesImg=$this->getArticleRubrique($rubrique->getIdrubrique());
 		
-		//Passage des données à la view
-		$this->layout->view("rubrique/vRubrique", array(
+		$data=array(
 				'articlesImg'=>$articlesImg,
 				'rubrique'=>$rubrique,
-				'image'=>$image,
-		));
+				'image'=>$image);
+		
+		if($this->isAdmin()){
+			$data+=array('user'=>$this->doctrine->em->find('user',$_SESSION['user']));
+		}
+		
+		//Passage des données à la view
+		$this->layout->view("rubrique/vRubrique",$data);
 	}
 	
 	/*
@@ -100,5 +105,12 @@ class CRubrique extends CI_Controller {
 		}
 		
 		return array('articles'=>$articles,'imagesArt'=>$imagesArt);
+	}
+	
+	public function isAdmin(){
+		if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
+			return true;
+		}
+		return false;
 	}
 }
