@@ -89,3 +89,13 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 	</div>
 	<?php endforeach;?>
 <?php endif;?>
+
+<?php if(isset($user)):?>
+	<div class="buttonAdd valign-wrapper" id="<?=$rubrique->getIdrubrique()?>">
+		<span class="center-block valign">
+			 <span class="btn-floating waves-effect waves-light add" style="background-color:#ee578c">
+			 	<i class="material-icons"><b>add</b></i>
+			 </span>
+		</span>
+	</div>
+<?php endif;?>

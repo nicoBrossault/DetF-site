@@ -15,6 +15,22 @@ body{
 	background-color: #ee578c;
 }
 
+.center-block{
+	width:10%;
+	margin:0 auto;
+}
+
+.cache{
+	position:absolute;
+	z-index:7;
+	top:0%;
+	left:0%;
+	width:100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	visibility:hidden;
+}
+
 /*
 /		+---------------------------+
 /		|			HEADER			|
@@ -22,7 +38,7 @@ body{
 */
 
 .headerNav{
-	z-index:5;
+	z-index:10;
 	position:absolute;
 	width:100%;
 	color:white;
@@ -119,4 +135,28 @@ body{
 	-moz-text-align-last: center;
 	-ms-text-align-last: center;
 	-o-text-align-last: center;
+}
+
+/*
+/		+---------------------------+
+/		|			Add				|
+/		+---------------------------+
+*/
+
+.buttonAdd{
+	cursor:pointer;
+	border:5px dashed #ee578c;
+	min-height:120px;
+	tex-align:center;
+}
+.add{
+	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.formAdd{
+	position:absolute;
+	top:20%;
+	left:10%;
+	width:80%;
+	padding:2%;
 }

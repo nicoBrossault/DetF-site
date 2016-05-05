@@ -22,6 +22,9 @@
 		?>
 		<script src="<?=base_url()?>assets/js/general.js"></script>
 		<script src="<?=base_url()?>assets/js/materialize.min.js"></script>
+		<div class="cache">
+			<div class="card formAdd"></div>
+		</div>
 		<div class="headerNav">
 			<?php if(isset($user)):?>
 				<div class="utils-nav right-align" style="margin:-1% 0% -1% 0%; padding:0.5% 2% 0.5% 0.5%;">

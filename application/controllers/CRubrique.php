@@ -39,7 +39,7 @@ class CRubrique extends CI_Controller {
 			redirect(base_url(),'auto');
 		}
 		
-		//Test si la rubrique exist rubrique passée en paramètre
+		//Test si la rubrique existe, rubrique passée en paramètre
 		$allRubriques=$this->doctrine->em->getRepository('rubrique')->findAll();
 		foreach ($allRubriques as $oneRubrique){
 			if($oneRubrique->getNomrubrique()==$nomRubrique){
@@ -73,6 +73,8 @@ class CRubrique extends CI_Controller {
 		if($this->isAdmin()){
 			$data+=array('user'=>$this->doctrine->em->find('user',$_SESSION['user']));
 		}
+		
+		$this->ajaxGet();
 		
 		//Passage des données à la view
 		$this->layout->view("rubrique/vRubrique",$data);
@@ -112,5 +114,23 @@ class CRubrique extends CI_Controller {
 			return true;
 		}
 		return false;
+	}
+	
+	public function addArticle($id=NULL){
+		$this->load->view('rubrique/vAdd');
+	}
+	
+	public function ajaxGet(){
+		$jFunc='$(".cache").css({
+				visibility : "visible",
+				height : $(document).height()
+		})';
+		$this->javascript->getAndBindTo(
+				'.buttonAdd',
+				'click',
+				'CRubrique/addArticle',
+				'.formAdd',
+				$jFunc);
+		$this->javascript->compile();
 	}
 }
