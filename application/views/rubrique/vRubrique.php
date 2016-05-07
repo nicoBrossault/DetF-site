@@ -52,7 +52,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						 	<i class="material-icons">edit</i>
 						 </a>
 					 </span>
-					 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+					 <a class="btn-floating waves-effect waves-light btnDelete" id="<?=$articles->getIdarticlerubrique()?>" style="background-color:#E0C3F2">
 					 	<i class="material-icons">delete</i>
 					 </a>
 				</div>

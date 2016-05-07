@@ -6,7 +6,7 @@ class CRubrique extends CI_Controller {
 	public function __construct(){
 		// Obligatoire
 		parent::__construct();
-		$titre="Accueil";
+		@$titre="Rubrique ".$_GET['nom'];
 		$this->layout->setTitre($titre);
 		$items=array('Accueil');
 		$nomRubrique=$this->doctrine->em->getRepository('rubrique')->findAll();
@@ -117,7 +117,25 @@ class CRubrique extends CI_Controller {
 	}
 	
 	public function addArticle($id=NULL){
-		$this->load->view('rubrique/vAdd');
+		$rubrique=$this->doctrine->em->find('rubrique', $id);
+		$this->load->view('rubrique/vAdd', array('rubrique'=>$rubrique));
+	}
+	
+	public function valDeleteArticle($id){
+		$article=$this->doctrine->em->find('articlerubrique', $id);
+		$this->load->view('rubrique/vDelete', array('article'=>$article));
+	}
+	
+	public function deleteArticle(){
+		$article=$this->doctrine->em->find('articlerubrique', $_GET['id']);
+		$this->doctrine->em->remove($article);
+		$this->doctrine->em->flush();
+		redirect(base_url(),'auto');
+		/*$msg='L\'article : "'.$article->getTitre().'" a bien été supprimé.';
+		$this->layout->view('article/vDelete', array(
+				'msg'		=>	$msg,
+				'article'	=>	$article,
+		));*/
 	}
 	
 	public function ajaxGet(){
@@ -131,6 +149,17 @@ class CRubrique extends CI_Controller {
 				'CRubrique/addArticle',
 				'.formAdd',
 				$jFunc);
+		$this->javascript->getAndBindTo(
+				'.btnDelete',
+				'click',
+				'CRubrique/valDeleteArticle',
+				'.formAdd',
+				$jFunc);
+		$this->javascript->getAndBindTo(
+				'.btnValidDelete',
+				'click',
+				'CRubrique/deleteArticle',
+				'.formAdd');
 		$this->javascript->compile();
 	}
 }

@@ -18,24 +18,20 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <?php
 echo form_open('CFormArticle');
 echo form_hidden('idArticle',NULL);
-echo form_hidden('idUser',$_SESSION['user']);
-?>	
-
-<label for="date"><h5>Date</h5></label>
-<input type="date" name="date" id="date" placeholder"<?=date('Y-m-d')?>" value="<?=date('Y-m-d')?>" class="datepicker" />
-<br>
-<br>
-<br>
-<br>
+echo form_hidden('idRubrique',$rubrique->getIdrubrique());
+?>
 
 <?php
 $titre= array('name'=>'titre',
 		'id'=>'titre',
 		'placeholder'=>'Titre de l\'article',
+		'style'=>"font-size:1.6em",
 		'value'=>'',);
 echo '<label for="titre"><h5>Titre</h5></label>';
 echo form_input($titre);
+echo form_error('titre','<span class="error" style="color:red">','</span></br>');
 echo "<i>Minimum 5 caractère.</i><br><br><br><br>";
+
 ?>
 <label for="texte"><h5>Texte</h5></label>
 <div class="row">
@@ -65,11 +61,13 @@ $texte= array(
 		'name'=>'texte',
 		'id'=>'texte',
 		'class'=>"materialize-textarea article",
+		'style'=>"font-size:1.6em",
 		'placeholder'=>'Texte de l\'article',
 		'value'=>'',
 		'cols' => '40',
 		'rows' => '40');
 echo form_textarea($texte);
+echo form_error('texte','<span class="error" style="color:red">','</span></br>');
 echo '<div id="legende"></div>';
 ?>
 

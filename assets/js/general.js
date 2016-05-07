@@ -90,6 +90,9 @@ $(document).ready(function() {
 	$(".buttonAdd").click(function(){
 		$(document).scrollTop(250);
 	});
+	$(".btnDelete").click(function(){
+		$(document).scrollTop(250);
+	});
 	
 	$(".annuler").click(function(){
 		$(".formAdd").empty();
@@ -117,10 +120,6 @@ $(document).ready(function() {
     	//Définir la limite à atteindre
     	var max="false";
     	var limit = "5";
-    	if ($(".article")[0]){
-    		var limitMax="300";
-	  	    var max="true";
-    	}
 
     	//Récupérer le nombre de caractères dans la zone de texte
     	var currlength = $(this).val().length;
@@ -132,11 +131,7 @@ $(document).ready(function() {
     		.addClass("suffisant")       
     		.css('color','black');
     		$(".materialize-textarea").css('color','black');
-    		if (max=="true"){
-    			$("#legende").html("Vous avez saisi " + currlength + " caractères sur "+limitMax+" maximum");
-    		}else{
-    			$("#legende").html("Vous avez saisi " + currlength + " caractères");
-    		}
+    		$("#legende").html("Vous avez saisi " + currlength + " caractères");
     	}else{
     		$("#legende")
     		.removeClass("suffisant")
@@ -145,14 +140,6 @@ $(document).ready(function() {
     		.css('color','red');
     		$(".materialize-textarea").css('color','red');
     	}
-    	if(max=="true" && currlength >= limitMax){
-			$("#legende")
-			.removeClass("suffisant")
-			.addClass("insuffisant")
-			.html("Vous avez saisi " + currlength + " caractères sur " + limitMax + " maximum")
-			.css('color','red');
-			$(".materialize-textarea").css('color','red');
-		}
 	});
 	        
 })
