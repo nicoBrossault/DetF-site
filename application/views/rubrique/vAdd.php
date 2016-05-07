@@ -11,12 +11,12 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <script src="<?=base_url()?>assets/js/general.js"></script>
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
 
-<h1>Ajouter/Modifier un Article de la Rubrique</h1>
+<h1>Ajouter / Modifier un Article de la Rubrique</h1>
 <br>
 <br>
 
 <?php
-echo form_open('formArticle');
+echo form_open('CFormArticle');
 echo form_hidden('idArticle',NULL);
 echo form_hidden('idUser',$_SESSION['user']);
 ?>	
@@ -39,29 +39,24 @@ echo "<i>Minimum 5 caractère.</i><br><br><br><br>";
 ?>
 <label for="texte"><h5>Texte</h5></label>
 <div class="row">
-	<div class="func col s1 m1 l1 btn waves-effect waves-light" id='u' style="margin-left: 5px;">
+	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='u' style="margin-left: 5px;">
 		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Souligne : écrire entre les balises">
 			<i class="material-icons">format_underlined</i>
 		</div>
 	</div>
-	<div class="func col col s1 m1 l1 btn waves-effect waves-light" id='i' style="margin-left: 5px;">
+	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='i' style="margin-left: 5px;">
 		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Met en Italique : écrire entre les balises">
 			<i class="material-icons">format_italic</i>
 		</div>
 	</div>
-	<div class="func col col s1 m1 l1 btn waves-effect waves-light" id='b' style="margin-left: 5px;">
+	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='b' style="margin-left: 5px;">
 		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Met en Gras : écrire entre les balises">
 			<i class="material-icons">format_bold</i>
 		</div>
 	</div>
-	<div class="func col col s1 m1 l1 btn waves-effect waves-light upLine" id='br' style="margin-left: 5px;">
+	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='br' style="margin-left: 5px;">
 		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Saut de ligne : Ne pas écrire entre les balises">
 			<i class="material-icons">wrap_text</i>
-		</div>
-	</div>
-	<div class="func col col s1 m1 l1 btn waves-effect waves-light clearText" style="margin-left: 5px;">
-		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Supprime tout le texte">
-			<i class="material-icons">format_clear</i>
 		</div>
 	</div>
 </div>
@@ -78,9 +73,8 @@ echo form_textarea($texte);
 echo '<div id="legende"></div>';
 ?>
 
-<input type="submit" name="nom" value="Envoyer" class="btn">
-
+<input type="submit" name="nom" value="Valider" class="btn">
+<div class="btn annuler">Annuler</div>
 <?php
-//echo form_submit('envoi', 'Valider');     
 echo form_close();
 ?>

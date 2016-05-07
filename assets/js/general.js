@@ -57,9 +57,6 @@ $(document).ready(function() {
 	$(document).scroll(function(){
 		if($(document).scrollTop() >= $(".headerNav").height()){
 			$(".sideNav").css("margin-top","-8%");
-			/*$('.sideNav').animate({
-				'margin-top':'0%',
-			  }, 300, function() {});*/
 		}else{
 			$(".sideNav").css("margin-top",$('.textHeader').height()+20+"px");
 		};
@@ -92,6 +89,11 @@ $(document).ready(function() {
 	
 	$(".buttonAdd").click(function(){
 		$(document).scrollTop(250);
+	});
+	
+	$(".annuler").click(function(){
+		$(".formAdd").empty();
+		$(".cache").css("visibility","hidden");
 	});
 	
 	$('.datepicker').pickadate({
