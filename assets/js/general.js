@@ -99,6 +99,10 @@ $(document).ready(function() {
 		$(".cache").css("visibility","hidden");
 	});
 	
+	//Fonction Select
+	$('select').material_select();
+	
+	//Fonction datePicker
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
 		selectYears: 15 // Creates a dropdown of 15 years to control year

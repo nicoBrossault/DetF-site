@@ -43,8 +43,13 @@ class CFormArticle extends CI_Controller {
 			$object->setTextrubrique(utf8_decode($_POST['texte']));
 		}
 		
+		
+		//Aller chercher table image
+		//recuperer id article
+		//associe id article à l'image
+		//ne pas oublier de flush tabe image.
 		/*if(isset($_FILES['fileImg']['name']) && !empty($_FILES['fileImg']['name'])){
-			$dir    = '../theDogsCrew-site/imagesPage/';
+			$dir    = 'assets/images/';
 			$fileImages = scandir($dir);
 			$exist=false;
 			foreach($fileImages as $fileImage){
@@ -53,7 +58,7 @@ class CFormArticle extends CI_Controller {
 				}
 			}
 			if(!$exist){
-				$config['upload_path'] = '../theDogsCrew-site/imagesPage/';
+				$config['upload_path'] = 'assets/images/';
 				$config['allowed_types'] = 'gif|jpg|png|jpeg';
 				$this->load->library('upload', $config);
 		    	$this->upload->initialize($config);

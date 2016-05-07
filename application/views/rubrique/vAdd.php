@@ -30,9 +30,44 @@ $titre= array('name'=>'titre',
 echo '<label for="titre"><h5>Titre</h5></label>';
 echo form_input($titre);
 echo form_error('titre','<span class="error" style="color:red">','</span></br>');
-echo "<i>Minimum 5 caractère.</i><br><br><br><br>";
+echo "<i>Minimum 5 caractère.</i><br><br>";
 
 ?>
+
+<label for="fileImg"><h5>Ajouter une nouvelle Image : </h5></label>
+<input type="file" name="fileImg"/>
+<br>
+<br>
+
+<label for="existImg"><h5>Mettre une Image déjà téléchargé : </h5></label>
+<div class="input-field col s12 m6">
+	<select class="icons select-wrapper" id="existImg" name="existImg">
+		<?php 
+		$dir = 'assets/images';
+		$fileImages = scandir($dir);
+		$exist=false;
+			
+		foreach($fileImages as $fileImage){
+			$count+=1;
+		}
+		for($i=2; $i<$count; $i++):
+			$extension = substr($fileImages[$i], -3, 3);
+			if($extension != ".ai"):
+			?>
+			<option 
+				value="<?=$fileImages[$i]?>" 
+				class="circle" 
+				data-icon="<?=$dir.'/'.$fileImages[$i]?>">
+				<?=$fileImages[$i]?>
+			</option>
+			<?php endif;?>
+		<?php endfor; ?>
+		<option value="NULL" selected >Aucune Image</option>
+	</select>
+</div>
+<br>
+<br>
+
 <label for="texte"><h5>Texte</h5></label>
 <div class="row">
 	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='u' style="margin-left: 5px;">
