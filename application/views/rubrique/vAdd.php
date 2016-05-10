@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <br>
 
 <?php
-echo form_open('CFormArticle');
+echo form_open_multipart('CFormArticle');
 echo form_hidden('idArticle',NULL);
 echo form_hidden('idRubrique',$rubrique->getIdrubrique());
 ?>
@@ -52,7 +52,7 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 		}
 		for($i=2; $i<$count; $i++):
 			$extension = substr($fileImages[$i], -3, 3);
-			if($extension != ".ai"):
+			if($extension == "jpg" || $extension =="png"  || $extension =="JPG" || $extension =="PNG"):
 			?>
 			<option 
 				value="<?=$fileImages[$i]?>" 

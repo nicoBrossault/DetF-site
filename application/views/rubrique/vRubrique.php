@@ -22,6 +22,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		</span>
 		<div class="row">
 			<div class="imgAccueil col s3 m3 l3">
+				<?php if($image != NULL): ?>
 				<img src="<?=base_url()?>assets/<?=$image->getUrl()?>"  
 						class="circle responsive-img"
 						alt="photo de laine"
@@ -34,6 +35,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 							background-color:#90caf9; 
 							margin-left:3%;">
 				<p class="legend"><?=$image->getDescription()?></p>
+				<?php endif;?>
 			</div>
 			<div class="contentAccueil col s10 m6 l9 offset-m2" style="font-size:1.3em">
 				<p><?=utf8_encode($rubrique->getDescriptionrubrique())?></p>

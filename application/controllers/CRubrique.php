@@ -57,9 +57,15 @@ class CRubrique extends CI_Controller {
 		foreach($images as $image){
 			if($image->getIdrubrique()!=NULL){
 				if($image->getIdrubrique()->getIdrubrique()==$rubrique->getIdrubrique()){
-					$image=$image;
+					$imageRub=$image;
 				}
 			}
+		}
+		
+		if(isset($imageRub)){
+			$imgRub=$imageRub;
+		}else{
+			$imgRub=NULL;
 		}
 		
 		//Récupération des articles et images associé
@@ -68,7 +74,7 @@ class CRubrique extends CI_Controller {
 		$data=array(
 				'articlesImg'=>$articlesImg,
 				'rubrique'=>$rubrique,
-				'image'=>$image);
+				'image'=>$imgRub);
 		
 		if($this->isAdmin()){
 			$data+=array('user'=>$this->doctrine->em->find('user',$_SESSION['user']));
@@ -128,9 +134,21 @@ class CRubrique extends CI_Controller {
 	
 	public function deleteArticle(){
 		$article=$this->doctrine->em->find('articlerubrique', $_GET['id']);
+		
+		$imagesArticle=$this->doctrine->em->getRepository("images")->findAll();
+		foreach($imagesArticle as $imgArt){
+			if($imgArt->getIdArticleRubrique()!=NULL &&
+			$imgArt->getIdArticleRubrique()->getIdarticlerubrique()==$article->getIdarticlerubrique()){
+				echo $imgArt->getTitre();
+				$imgSupp=$imgArt;
+			}
+		}
+		
 		$this->doctrine->em->remove($article);
+		$this->doctrine->em->remove($imgSupp);
 		$this->doctrine->em->flush();
 		redirect(base_url(),'auto');
+		
 		/*$msg='L\'article : "'.$article->getTitre().'" a bien été supprimé.';
 		$this->layout->view('article/vDelete', array(
 				'msg'		=>	$msg,
