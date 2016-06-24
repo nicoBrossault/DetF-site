@@ -147,8 +147,14 @@ body{
 	cursor:pointer;
 	border:5px dashed #ee578c;
 	min-height:120px;
-	tex-align:center;
+	text-align:center;
 }
+
+.buttonAddRubrique{
+	cursor:pointer;
+	border:5px dashed #ee578c;
+}
+
 .add{
 	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 }

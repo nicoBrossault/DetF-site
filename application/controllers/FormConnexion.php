@@ -38,23 +38,23 @@ class FormConnexion extends CI_Controller {
 		$msg="";
 		
 		if(isset($_POST['mailUser'])){
-			//echo $_POST['mailUser']."<br>";
+			////echo $_POST['mailUser']."<br>";
 			$this->form_validation
 			->set_rules('mailUser', 'Nom d\'utilisateur', 'required', 'trim|required|min_length[5]|xss_clean');
 			foreach($users as $user){
 				if($user->getMail()==$_POST['mailUser']){
 					$isUser=true;
 					$idUser=$user->getIduser();
-					//echo "true<br>";
+					////echo "true<br>";
 				}else{
 					$msg="Mail invalide : ".$_POST['mailUser']."<br>";
 					$isUser=false;
-					//echo "false<br>";
+					////echo "false<br>";
 				}
 			}
 		}
 		if(isset($_POST['mdp']) && isset($isUser) && isset($idUser)){
-			//echo $_POST['mdp']."<br>";
+			////echo $_POST['mdp']."<br>";
 			$this->form_validation
 			->set_rules('mdp', 'Mot de passe', 'required', 'trim|required|xss_clean');
 
@@ -62,11 +62,11 @@ class FormConnexion extends CI_Controller {
 			$mdpComplet=sha1($_POST['mdp']);
 			if($testUser->getMdp()==$mdpComplet){
 				$isUser=true;
-				//echo "true<br>";
+				////echo "true<br>";
 			}else{
 				$msg.="Mot de passe invalide";
 				$isUser=false;
-				//echo "false<br>";
+				////echo "false<br>";
 			}
 		}
 		

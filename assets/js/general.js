@@ -55,7 +55,7 @@ $(document).ready(function() {
 	});
 	
 	$(document).scroll(function(){
-		if($(document).scrollTop() >= $(".headerNav").height()){
+		if($(document).scrollTop() >= $(".headerNav").height()-100){
 			$(".sideNav").css("margin-top","-8%");
 		}else{
 			$(".sideNav").css("margin-top",$('.textHeader').height()+20+"px");

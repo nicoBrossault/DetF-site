@@ -136,16 +136,18 @@ class CRubrique extends CI_Controller {
 		$article=$this->doctrine->em->find('articlerubrique', $_GET['id']);
 		
 		$imagesArticle=$this->doctrine->em->getRepository("images")->findAll();
-		foreach($imagesArticle as $imgArt){
-			if($imgArt->getIdArticleRubrique()!=NULL &&
-			$imgArt->getIdArticleRubrique()->getIdarticlerubrique()==$article->getIdarticlerubrique()){
-				echo $imgArt->getTitre();
-				$imgSupp=$imgArt;
+		if(!empty($imagesArticle)){
+			foreach($imagesArticle as $imgArt){
+				if($imgArt->getIdArticleRubrique()!=NULL &&
+				$imgArt->getIdArticleRubrique()->getIdarticlerubrique()==$article->getIdarticlerubrique()){
+					echo $imgArt->getTitre();
+					$imgSupp=$imgArt;
+					$this->doctrine->em->remove($imgSupp);
+				}
 			}
 		}
 		
 		$this->doctrine->em->remove($article);
-		$this->doctrine->em->remove($imgSupp);
 		$this->doctrine->em->flush();
 		redirect(base_url(),'auto');
 		

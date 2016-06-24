@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CAccueil extends CI_Controller {
+class CAccueil extends General {
 	
 	public function __construct(){
 		// Obligatoire
