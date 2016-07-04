@@ -6,7 +6,19 @@ class CFormArticle extends CI_Controller {
 		// Obligatoire
 		parent::__construct();
 	}
-
+	
+	public function getImgArt($article){
+		$imgsArt = parent::__getImgArt($article);
+		
+		if(!empty($imgsArt)){
+			foreach ($imgsArt as $imgArt){
+				return $imgArt;
+			}
+		}else{
+			return NULL;
+		}
+	}
+	
 	function index(){
 		$this->load->helper('text');
 		$this->load->helper('security');
@@ -47,6 +59,8 @@ class CFormArticle extends CI_Controller {
 			//echo "test images<br>";
 			$dir    = 'assets/images/';
 			$fileImages = scandir($dir);
+			//Si image existe dans le dossier
+			//ALORS on ne la télécharge pas -> exist = true
 			$exist=false;
 			foreach($fileImages as $fileImage){
 				if($fileImage==$_FILES['fileImg']['name']){
@@ -69,6 +83,11 @@ class CFormArticle extends CI_Controller {
 				}
 				$urlImg='images/'.$_FILES['fileImg']['name'];
 				
+				if(!empty($this->getImgArt($object))){
+					//echo "l'article a une image </br>";
+					$this->doctrine->em->remove($this->getImgArt($object));
+				}
+				
 				$image=new Images();
 				$image->setUrl($urlImg);
 				$image->setTitre($_POST['titre']);
@@ -83,6 +102,23 @@ class CFormArticle extends CI_Controller {
 			if($_POST['existImg']=="NULL"){
 				$emptyImg=true;
 			}else{
+				$this->form_validation->set_rules('existImg', 'Nom existImg', 'trim');
+				$urlImg='images/'.$_POST['existImg'];
+				
+				$image=new Images();
+				$image->setUrl($urlImg);
+				$image->setTitre($_POST['titre']);
+				$newImg=true;
+			}
+			
+			if($_POST['existImg']==$this->getImgArt($object)->getUrl()){
+				//echo "Image de l'article : ".$_POST['existImg'].'</br>';
+				$emptyImg=true;
+				$newImg=false;
+			}else{
+				//permet de changer l'image de l'article
+				$this->doctrine->em->remove($this->getImgArt($object));
+				
 				$this->form_validation->set_rules('existImg', 'Nom existImg', 'trim');
 				$urlImg='images/'.$_POST['existImg'];
 				

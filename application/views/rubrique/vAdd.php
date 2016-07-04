@@ -17,7 +17,15 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 
 <?php
 echo form_open_multipart('CFormArticle');
-echo form_hidden('idArticle',NULL);
+if($articleRubrique==NULL){
+	echo form_hidden('idArticle',NULL);
+	$titreArticle=NULL;
+	$texteArticle=NULL;
+}else{
+	echo form_hidden('idArticle',$articleRubrique->getIdarticlerubrique());
+	$titreArticle=$articleRubrique->getTitre();
+	$texteArticle=$articleRubrique->getTextrubrique();
+};
 echo form_hidden('idRubrique',$rubrique->getIdrubrique());
 ?>
 
@@ -26,7 +34,7 @@ $titre= array('name'=>'titre',
 		'id'=>'titre',
 		'placeholder'=>'Titre de l\'article',
 		'style'=>"font-size:1.6em",
-		'value'=>'',);
+		'value'=>$titreArticle);
 echo '<label for="titre"><h5>Titre</h5></label>';
 echo form_input($titre);
 echo form_error('titre','<span class="error" style="color:red">','</span></br>');
@@ -43,6 +51,13 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 <div class="input-field col s12 m6">
 	<select class="icons select-wrapper" id="existImg" name="existImg">
 		<?php 
+		if(isset($imgArt) && !empty($imgArt)){
+			foreach($imgArt as $img){
+				$imgAR=$img;
+			};
+		}else{
+			$imgAR=NULL;
+		}
 		$dir = 'assets/images';
 		$fileImages = scandir($dir);
 		$exist=false;
@@ -50,6 +65,19 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 		foreach($fileImages as $fileImage){
 			$count+=1;
 		}
+		
+		if($imgAR!=NULL):
+		?>
+			<option 
+				value="<?=$imgAR->getUrl()?>" 
+				class="circle" 
+				data-icon="<?='assets/'.$imgAR->getUrl()?>"
+				selected
+				>
+				<?=$imgAR->getTitre()?>
+			</option>
+		<?php endif;?>
+		<?php
 		for($i=2; $i<$count; $i++):
 			$extension = substr($fileImages[$i], -3, 3);
 			if($extension == "jpg" || $extension =="png"  || $extension =="JPG" || $extension =="PNG"):
@@ -62,7 +90,7 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 			</option>
 			<?php endif;?>
 		<?php endfor; ?>
-		<option value="NULL" selected >Aucune Image</option>
+		<option value="NULL" <?php if($imgAR==NULL):?>selected <?php endif;?>>Aucune Image</option>
 	</select>
 </div>
 <br>
@@ -98,7 +126,7 @@ $texte= array(
 		'class'=>"materialize-textarea article",
 		'style'=>"font-size:1.6em",
 		'placeholder'=>'Texte de l\'article',
-		'value'=>'',
+		'value'=>$texteArticle,
 		'cols' => '40',
 		'rows' => '40');
 echo form_textarea($texte);

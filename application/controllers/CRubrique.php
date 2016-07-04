@@ -6,6 +6,7 @@ class CRubrique extends CI_Controller {
 	public function __construct(){
 		// Obligatoire
 		parent::__construct();
+		
 		@$titre="Rubrique ".$_GET['nom'];
 		$this->layout->setTitre($titre);
 		$items=array('Accueil');
@@ -29,6 +30,14 @@ class CRubrique extends CI_Controller {
 				$imgFooter);
 	}
 	
+	public function disconnect(){
+		parent::__disconnect();
+	}
+	
+	public function connexionAdmin(){
+		parent::__connexionAdmin();
+	}
+	
 	public function index(){
 		//Récupération de la rubrique
 		$nomRubrique=$_GET['nom'];
@@ -39,7 +48,7 @@ class CRubrique extends CI_Controller {
 			redirect(base_url(),'auto');
 		}
 		
-		//Test si la rubrique existe, rubrique passée en paramètre
+		//Test si la rubrique existe, rubrique passée en paramètre url
 		$allRubriques=$this->doctrine->em->getRepository('rubrique')->findAll();
 		foreach ($allRubriques as $oneRubrique){
 			if($oneRubrique->getNomrubrique()==$nomRubrique){
@@ -81,6 +90,7 @@ class CRubrique extends CI_Controller {
 		}
 		
 		$this->ajaxGet();
+		$this->ajaxAddRub();
 		
 		//Passage des données à la view
 		$this->layout->view("rubrique/vRubrique",$data);
@@ -98,21 +108,18 @@ class CRubrique extends CI_Controller {
 		$allArticles=$this->doctrine->em->getRepository('articleRubrique')->findAll();
 		foreach($allArticles as $article){
 			if($article->getIdrubrique()->getIdrubrique()==$idRubrique){
-				//Récupération des articles assovié à la rubrique
+				//Récupération des articles associé à la rubrique
 				$articles[]=$article;
 				//Récupération de l'image associée à l'article
-				$images=$this->doctrine->em->getRepository('images')->findAll();
-				foreach($images as $image){
-					if($image->getIdarticlerubrique()!=NULL){
-						if($image->getIdarticlerubrique()->getIdarticlerubrique()==$article->getIdarticlerubrique()){
-							$imagesArt[]=$image;
-						}
-					}
-				}
+				$imagesArt=$this->getImgArt($article);
 			}
 		}
 		
 		return array('articles'=>$articles,'imagesArt'=>$imagesArt);
+	}
+	
+	public function getImgArt($article){
+		return parent::__getImgArt($article);
 	}
 	
 	public function isAdmin(){
@@ -123,8 +130,21 @@ class CRubrique extends CI_Controller {
 	}
 	
 	public function addArticle($id=NULL){
+		$idArticle=explode('_',$id);
+		
+		$articleRubrique=NULL;
+		$imgArt=NULL;
+		if($idArticle[1]!=NULL){
+			$articleRubrique=$this->doctrine->em->find("articleRubrique",$idArticle[1]);
+			$imgArt=$this->getImgArt($articleRubrique);
+		}
+		
 		$rubrique=$this->doctrine->em->find('rubrique', $id);
-		$this->load->view('rubrique/vAdd', array('rubrique'=>$rubrique));
+		$this->load->view('rubrique/vAdd', array(
+				'rubrique'=>$rubrique,
+				'articleRubrique'=>$articleRubrique,
+				'imgArt'=>$imgArt,
+		));
 	}
 	
 	public function valDeleteArticle($id){
@@ -158,11 +178,25 @@ class CRubrique extends CI_Controller {
 		));*/
 	}
 	
+	
+	public function addRubrique($id=NULL){
+		parent::__addRubrique($id=NULL);
+	}
+	public function ajaxAddRub(){
+		parent::__ajaxAddRubrique();
+	}
+	
 	public function ajaxGet(){
 		$jFunc='$(".cache").css({
 				visibility : "visible",
 				height : $(document).height()
 		})';
+		$this->javascript->getAndBindTo(
+				'.btnEdit',
+				'click',
+				'CRubrique/addArticle',
+				'.formAdd',
+				$jFunc);
 		$this->javascript->getAndBindTo(
 				'.buttonAdd',
 				'click',

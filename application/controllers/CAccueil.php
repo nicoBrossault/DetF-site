@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CAccueil extends General {
+class CAccueil extends CI_Controller {
 	
 	public function __construct(){
 		// Obligatoire
@@ -44,22 +44,22 @@ class CAccueil extends General {
 			$data+=array('user'=>$this->doctrine->em->find('user',$_SESSION['user']));
 		}
 		
+		$this->ajaxAddRub();
 		$this->layout->view('accueil/vAccueil',$data);
 	}
 	
-	public function connexionAdmin(){
-		$this->layout->view('accueil/vConnexionAdmin');
-	}
-	
 	public function disconnect(){
-		session_destroy();
-		redirect("CAccueil","refresh");
+		parent::__disconnect();		
 	}
 	
-	public function isAdmin(){
-		if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
-			return true;
-		}
-		return false;
+	public function connexionAdmin(){
+		parent::__connexionAdmin();
+	}
+	
+	public function addRubrique($id=NULL){
+		parent::__addRubrique($id=NULL);
+	}
+	public function ajaxAddRub(){
+		parent::__ajaxAddRubrique();
 	}
 }

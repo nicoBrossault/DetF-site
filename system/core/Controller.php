@@ -77,6 +77,7 @@ class CI_Controller {
 
 		$this->load =& load_class('Loader', 'core');
 		$this->load->initialize();
+		
 		log_message('info', 'Controller Class Initialized');
 	}
 
@@ -91,6 +92,69 @@ class CI_Controller {
 	public static function &get_instance()
 	{
 		return self::$instance;
+	}
+	
+	public function __connexionAdmin(){
+		$data = [];
+		$CI =& get_instance();
+		$data+=array(	
+				'titre'=>"Connexion",
+				'itemsMenu'=>array("Accueil"),
+				'footer'=>array(
+						'footer'=>"",
+						'imgMarque'=>array())
+		);
+		$params['content_for_layout'] = $CI->load->view('accueil/vConnexionAdmin', $data, true);
+		$CI->load->view('themeMaterial/material', $params);
+	}
+	
+	public function __disconnect(){
+		$uriNameClass=$this->uri->ruri_string();
+		$nameClass= explode("/",$uriNameClass);
+		session_destroy();
+		redirect($nameClass[0],"refresh");
+	}
+	
+	public function isAdmin(){
+		if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
+			return true;
+		}
+		return false;
+	}
+	
+	//Récupération de l'image associée à l'article
+	public function __getImgArt($article){
+		$images=$this->doctrine->em->getRepository('images')->findAll();
+		$imagesArt=NULL;
+		foreach($images as $image){
+			if($image->getIdarticlerubrique()!=NULL){
+				if($image->getIdarticlerubrique()->getIdarticlerubrique()==$article->getIdarticlerubrique()){
+					$imagesArt[]=$image;
+				}
+			}
+		}
+		return $imagesArt;
+	}
+	
+	public function __addRubrique($id=NULL){
+		echo "pouet";
+	}
+	
+	public function __ajaxAddRubrique(){
+		$uriNameClass=$this->uri->ruri_string();
+		$nameClass= explode("/",$uriNameClass);
+		
+		$jFunc='$(".cache").css({
+				visibility : "visible",
+				height : $(document).height()
+		})';
+		$this->javascript->getAndBindTo(
+				'.buttonAddRubrique',
+				'click',
+				$nameClass[0].'/addRubrique',
+				'.formAdd',
+				$jFunc);
+		$this->javascript->compile();
 	}
 
 }

@@ -50,7 +50,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 			<?php if(isset($user)):?>
 				<div class="utils right-align">
 					<span style="margin-right: 1%">
-						 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+						 <a class="btn-floating waves-effect waves-light btnEdit" id="<?=$rubrique->getIdrubrique()."_".$articles->getIdarticlerubrique()?>" style="background-color:#E0C3F2">
 						 	<i class="material-icons">edit</i>
 						 </a>
 					 </span>
@@ -93,7 +93,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 <?php endif;?>
 
 <?php if(isset($user)):?>
-	<div class="buttonAdd valign-wrapper" id="<?=$rubrique->getIdrubrique()?>">
+	<div class="buttonAdd valign-wrapper" id="<?=$rubrique->getIdrubrique()."_".NULL?>">
 		<span class="center-block valign">
 			 <span class="btn-floating waves-effect waves-light add" style="background-color:#ee578c">
 			 	<i class="material-icons"><b>add</b></i>
