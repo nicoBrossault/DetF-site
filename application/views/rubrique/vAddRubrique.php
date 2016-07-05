@@ -17,17 +17,31 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 
 <?php
 echo form_open_multipart('CFormArticle');
-if($articleRubrique==NULL){
-	echo form_hidden('idArticle',NULL);
+if($rubrique==NULL){
+	echo form_hidden('idRubrique',NULL);
 	$titreArticle=NULL;
 	$texteArticle=NULL;
 }else{
-	echo form_hidden('idArticle',$articleRubrique->getIdarticlerubrique());
+	echo form_hidden('idRubrique',$rubrique->getIdrubrique());
 	$titreArticle=$articleRubrique->getTitre();
 	$texteArticle=$articleRubrique->getTextrubrique();
 };
-echo form_hidden('idRubrique',$rubrique->getIdrubrique());
 ?>
+
+<div class="input-field col s4 m4">
+	<?php $alphaIcons=array("A","B","C","D","E","F","G","H","I");
+	foreach($alphaIcons as $alpha):
+	?>
+	<input name="alpha" type="radio" id="<?=$alpha?>"/>
+    <label for="<?=$alpha?>" class="iconsMenu" 
+    style="color:black; margin-left: 1%;">
+    	<h2><?=$alpha?></h2>
+    	<div style="width:2px; height:100px; background-color:black; margin:-100px 0px 0px 70px"></div>
+    </label>
+	<?php endforeach; ?>
+</div>
+</br>
+</br>
 
 <?php
 $titre= array('name'=>'titre',
@@ -98,6 +112,11 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 
 <label for="texte"><h5>Texte</h5></label>
 <div class="row">
+	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='p' style="margin-left: 5px;">
+		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Paragraphe : écrire entre les balises">
+			<i class="material-icons">format_align_left</i>
+		</div>
+	</div>
 	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='u' style="margin-left: 5px;">
 		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Souligne : écrire entre les balises">
 			<i class="material-icons">format_underlined</i>

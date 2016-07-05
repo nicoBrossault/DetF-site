@@ -143,6 +143,15 @@ body{
 /		+---------------------------+
 */
 
+@font-face {
+    font-family: "item_menu";
+    src: url('../font/item-menu/item_menu.ttf');
+}
+
+.iconsMenu{
+	font-family: 'item_menu';
+}
+
 .buttonAdd{
 	cursor:pointer;
 	border:5px dashed #ee578c;

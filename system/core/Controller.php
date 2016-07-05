@@ -137,17 +137,26 @@ class CI_Controller {
 	}
 	
 	public function __addRubrique($id=NULL){
-		
+		$data = [];
+		if(!empty($id)){
+			$data+=array(
+					'rubrique'=>$id,
+			);
+		}else{
+			$data+=array(
+					'rubrique'=>NULL,
+			);
+		}
+		$this->load->view('rubrique/vAddRubrique',$data);
 	}
 	
 	public function __ajaxAddRubrique(){
 		$uriNameClass=$this->uri->ruri_string();
 		$nameClass= explode("/",$uriNameClass);
-		
 		$jFunc='$(".cache").css({
 				visibility : "visible",
 				height : $(document).height()
-		})';
+				})';
 		$this->javascript->getAndBindTo(
 				'.buttonAddRubrique',
 				'click',

@@ -98,6 +98,11 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 
 <label for="texte"><h5>Texte</h5></label>
 <div class="row">
+	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='p' style="margin-left: 5px;">
+		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Paragraphe : écrire entre les balises">
+			<i class="material-icons">format_align_left</i>
+		</div>
+	</div>
 	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='u' style="margin-left: 5px;">
 		<div class="tooltipped" data-position="top" data-delay="50" data-tooltip="Souligne : écrire entre les balises">
 			<i class="material-icons">format_underlined</i>

@@ -76,12 +76,12 @@
 				<?php endforeach;?>
 				<?php if(isset($user)):?>
 					<br>
-					<div class="buttonAddRubrique">
+					<li class="buttonAddRubrique" id="NULL">
 						<span class="btn-floating waves-effect waves-light add" 
 						style="background-color:#ee578c; margin-left:40%">
 						 	<i class="material-icons"><b>add</b></i>
 						</span>
-					</div>
+					</li>
 				<?php endif;?>
 			</ul>
 		</div>

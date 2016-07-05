@@ -111,21 +111,23 @@ class CFormArticle extends CI_Controller {
 				$newImg=true;
 			}
 			
-			if($_POST['existImg']==$this->getImgArt($object)->getUrl()){
-				//echo "Image de l'article : ".$_POST['existImg'].'</br>';
-				$emptyImg=true;
-				$newImg=false;
-			}else{
-				//permet de changer l'image de l'article
-				$this->doctrine->em->remove($this->getImgArt($object));
-				
-				$this->form_validation->set_rules('existImg', 'Nom existImg', 'trim');
-				$urlImg='images/'.$_POST['existImg'];
-				
-				$image=new Images();
-				$image->setUrl($urlImg);
-				$image->setTitre($_POST['titre']);
-				$newImg=true;
+			if(!empty($this->getImgArt($object))){
+				if($_POST['existImg']==$this->getImgArt($object)->getUrl()){
+					//echo "Image de l'article : ".$_POST['existImg'].'</br>';
+					$emptyImg=true;
+					$newImg=false;
+				}else{
+					//permet de changer l'image de l'article
+					$this->doctrine->em->remove($this->getImgArt($object));
+					
+					$this->form_validation->set_rules('existImg', 'Nom existImg', 'trim');
+					$urlImg='images/'.$_POST['existImg'];
+					
+					$image=new Images();
+					$image->setUrl($urlImg);
+					$image->setTitre($_POST['titre']);
+					$newImg=true;
+				}
 			}
 		}
 		
