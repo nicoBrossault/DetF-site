@@ -137,7 +137,7 @@ class CI_Controller {
 	}
 	
 	public function __addRubrique($id=NULL){
-		echo "pouet";
+		
 	}
 	
 	public function __ajaxAddRubrique(){

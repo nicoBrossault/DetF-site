@@ -181,6 +181,8 @@ class CRubrique extends CI_Controller {
 	
 	public function addRubrique($id=NULL){
 		parent::__addRubrique($id=NULL);
+		$data=null;
+		$this->load->view('rubrique/vAddRubrique',$data);
 	}
 	public function ajaxAddRub(){
 		parent::__ajaxAddRubrique();
