@@ -3,16 +3,26 @@ body{
 	font-family: 'Grand Hotel', cursive;
 }
 
+@font-face {
+    font-family: "item_menu";
+    src: url('../font/item-menu/item_menu.ttf');
+}
+
+.iconsMenu{
+	font-family: 'item_menu';
+	font-weight: bold
+}
+
 .legend{
 }
 
 .utils{
-	background-color: #ee578c;
+	background-color: #ad1457;
 	padding:1%
 }
 
 .utils-nav{
-	background-color: #ee578c;
+	background-color: #ad1457;
 }
 
 .center-block{
@@ -38,15 +48,11 @@ body{
 */
 
 .headerNav{
-	z-index:10;
-	position:absolute;
 	width:100%;
 	color:white;
 }
 .textHeader{
 	background-color:#E91E63;
-	padding:-1% 0% 0% 0%;
-	width:100%;
 	text-align: center;
 	font-size:8em;
 	-moz-text-shadow: 2px 2px 8px #656565;
@@ -57,7 +63,7 @@ body{
 .menuLeft{
 	cursor:pointer;
 }
-.menuLeftOpen, .menuLeftClose{
+.menuLeftOpen{
 	width:40px;
 	height:40px;
 	border-radius:20px;
@@ -75,6 +81,10 @@ body{
 /		+---------------------------+
 */
 
+.alphaMenu{
+	font-size:50px;
+}
+
 .menuNav{
 	background-color:#F8BBD0;
 	position:fixed;
@@ -83,20 +93,26 @@ body{
 	font-size:2em;
 	top:0px;
 }
+
+
+.menuItems{
+	
+}
+
 .sideNav>li>a{
-	color:white;
-	padding: 0% 50% 0% 20%;
+	color:#ad1457;
+	padding: 20% 30% 0% 20%;
+	max-height:50px;
 	min-width:200px;
 }
 
 .sideNav>li>a:hover{
 	color: #656565;
-	padding-right:48%;
+	padding-right:28%;
 	min-width:200px;
 }
 
 .sideNav>li:hover{
-	width:200px;
 	background-color:#fce4ec;
 	-moz-box-shadow: 0px 0px 10px 0px #656565;
 	-webkit-box-shadow: 5px 0px 10px 0px #656565;
@@ -111,7 +127,8 @@ body{
 */
 
 .contentText{
-	position: absolute;
+	/*position: absolute;*/
+	margin-left:15%;
 	width:75%;
 }
 
@@ -143,25 +160,16 @@ body{
 /		+---------------------------+
 */
 
-@font-face {
-    font-family: "item_menu";
-    src: url('../font/item-menu/item_menu.ttf');
-}
-
-.iconsMenu{
-	font-family: 'item_menu';
-}
-
 .buttonAdd{
 	cursor:pointer;
-	border:5px dashed #ee578c;
+	border:5px dashed #ad1457;
 	min-height:120px;
 	text-align:center;
 }
 
 .buttonAddRubrique{
 	cursor:pointer;
-	border:5px dashed #ee578c;
+	border:5px dashed #ad1457;
 }
 
 .add{
@@ -174,4 +182,115 @@ body{
 	left:10%;
 	width:80%;
 	padding:2%;
+}
+
+
+/*
+/		+---------------------------+
+/		|		Toggle Styles		|
+/		+---------------------------+
+*/
+
+#menu-toggle{
+	position:absolute;
+	margin: 1% 0% 0% 1%;
+	color:white;
+	font-size:20px;
+	cursor:pointer;
+}
+#wrapper {
+	position:absolute;
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    position: fixed;
+    top:0px;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #F8BBD0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,1);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,1);
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,1);
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/*
+/		+---------------------------+
+/		|		Sidebar Styles		|
+/		+---------------------------+
+*/
+.sidebar-nav {
+    position: absolute;
+    top: 0px;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li, .btnMenu, .index {
+	cursor:pointer;
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a, .btnMenu, .index  {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover, .btnMenu:hover, .index:hover  {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
 }

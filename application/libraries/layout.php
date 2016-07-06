@@ -10,7 +10,8 @@ class Layout {
 	}
 	
 	public function setTitre($titre){
-		return $this->titre=$titre;
+		$titreAlpha=explode("_",$titre);
+		return $this->titre=$titreAlpha;
 	}
 
 	public function setItemsMenu($item=array()){

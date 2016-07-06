@@ -18,7 +18,11 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 	<?php endif;?>
 	<div class="card-content">
 		<span class="card-title">
-			<h1><?=$rubrique->getNomrubrique()?></h1>
+			<?php $itemAlpha=explode('_',$rubrique->getNomrubrique()); ?>
+			<h1>
+				<span class="iconsMenu" style="margin:0px 50px 0px 20px;">
+				<?=$itemAlpha[0]?></span><?=$itemAlpha[1]?>
+			</h1>
 		</span>
 		<div class="row">
 			<div class="imgAccueil col s3 m3 l3">
