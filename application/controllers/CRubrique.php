@@ -7,7 +7,8 @@ class CRubrique extends CI_Controller {
 		// Obligatoire
 		parent::__construct();
 		
-		@$titre="Rubrique ".$_GET['nom'];
+		$nomRub=explode('_',$_GET['nom']);
+		@$titre="Rubrique ".$nomRub[1];
 		$this->layout->setTitre($titre);
 		$items=array('Accueil');
 		$nomRubrique=$this->doctrine->em->getRepository('rubrique')->findAll();

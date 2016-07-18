@@ -43,7 +43,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 </br>
 </br>
 <div class="row">
-	<div class="col l6 m6 s12">
+	<div class="col l6 m12 s12">
 		<div class="card">
 			<?php if(isset($user)):?>
 				<div class="utils right-align">
@@ -74,7 +74,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 			</div>
 		</div>
 	</div>
-	<div class="col l6 m6 s12">
+	<div class="col l6 m12 s12">
 		<div class="card">
 			<?php if(isset($user)):?>
 				<div class="utils right-align">

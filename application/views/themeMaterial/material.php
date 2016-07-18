@@ -3,7 +3,7 @@
 ?>
 <!DOCTYPE html>
 	<head>
-		<title>d&f <?=$titre[1]?></title>
+		<title>d&f <?=$titre[0]?></title>
 		<meta charset="UTF-8">
 		<!--Import Google Icon Font-->
       	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -70,7 +70,10 @@
 				<?php foreach($itemsMenu as $item):?>
 					<?php if($item=="Accueil"):?>
 						<li class="menuItems">
-							<a href="<?=base_url()?>" style="width:200px;">
+							<a href="<?=base_url()?>">
+								<span class="alphaMenu">
+									<i class="material-icons" style="margin-left:-15px;">home</i>
+								</span>
 								<?=$item?>
 							</a>
 						</li>
@@ -91,7 +94,7 @@
 					<li class="buttonAddRubrique" id="NULL">
 						<span class="btn-floating waves-effect waves-light add" 
 						style="background-color:#ad1457; margin-left:78px; margin-top:-5px;">
-						 	<i class="material-icons"><b>add</b></i>
+						 	<i class="material-icons" style="margin-left:-32px;">add</i>
 						</span>
 					</li>
 				<?php endif;?>

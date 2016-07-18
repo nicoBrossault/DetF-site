@@ -17,13 +17,25 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		</div>
 	<?php endif;?>
 	<div class="card-content">
-		<span class="card-title">
+		<div class="card-title">
 			<?php $itemAlpha=explode('_',$rubrique->getNomrubrique()); ?>
+				<div class="iconsMenu" 
+					style="
+						width: 80px;
+						height:80px;
+						border-radius:50%;
+						background-color:#E9E9E9;
+						float:left;
+						margin:0px 20px 0px 20px;
+						padding:15px 0px 0px 20px; 
+						font-size:80px; 
+						font-weight:normal;">
+						<?=$itemAlpha[0]?>
+				</div>
 			<h1>
-				<span class="iconsMenu" style="margin:0px 50px 0px 20px;">
-				<?=$itemAlpha[0]?></span><?=$itemAlpha[1]?>
+			<?=$itemAlpha[1]?>
 			</h1>
-		</span>
+		</div>
 		<div class="row">
 			<div class="imgAccueil col s3 m3 l3">
 				<?php if($image != NULL): ?>

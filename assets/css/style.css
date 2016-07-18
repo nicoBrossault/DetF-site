@@ -36,7 +36,6 @@ body{
 	top:0%;
 	left:0%;
 	width:100%;
-	height: 100%;
 	background-color: rgba(0, 0, 0, 0.6);
 	visibility:hidden;
 }
@@ -52,6 +51,7 @@ body{
 	color:white;
 }
 .textHeader{
+	width:100%;
 	background-color:#E91E63;
 	text-align: center;
 	font-size:8em;
@@ -83,41 +83,7 @@ body{
 
 .alphaMenu{
 	font-size:50px;
-}
-
-.menuNav{
-	background-color:#F8BBD0;
-	position:fixed;
-	z-index:4;
-	color: white;
-	font-size:2em;
-	top:0px;
-}
-
-
-.menuItems{
-	
-}
-
-.sideNav>li>a{
-	color:#ad1457;
-	padding: 20% 30% 0% 20%;
-	max-height:50px;
-	min-width:200px;
-}
-
-.sideNav>li>a:hover{
-	color: #656565;
-	padding-right:28%;
-	min-width:200px;
-}
-
-.sideNav>li:hover{
-	background-color:#fce4ec;
-	-moz-box-shadow: 0px 0px 10px 0px #656565;
-	-webkit-box-shadow: 5px 0px 10px 0px #656565;
-	-o-box-shadow: 5px 0px 10px 0px #656565;
-	box-shadow: 5px 0px 10px 0px #656565;
+	margin-right:10px;
 }
 
 /*
@@ -139,9 +105,7 @@ body{
 */
 
 .footer{
-	margin-top:5%;
 	background-color: rgba(0, 0, 0, 0.6);
-	position: absolute;
 	color: white;
 	width:100%;
 }
@@ -178,7 +142,7 @@ body{
 
 .formAdd{
 	position:absolute;
-	top:300px;
+	top:150px;
 	left:10%;
 	width:80%;
 	padding:2%;
@@ -200,6 +164,7 @@ body{
 }
 #wrapper {
 	position:absolute;
+	width:100%;
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -212,6 +177,7 @@ body{
 }
 
 #sidebar-wrapper {
+	overflow-x: hidden;
     position: fixed;
     top:0px;
     left: 250px;
@@ -255,6 +221,7 @@ body{
     margin: 0;
     padding: 0;
     list-style: none;
+    font-size:2.5em;
 }
 
 .sidebar-nav li, .btnMenu, .index {
@@ -272,7 +239,11 @@ body{
 .sidebar-nav li a:hover, .btnMenu:hover, .index:hover  {
     text-decoration: none;
     color: #fff;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.5);
+    -moz-box-shadow: 0px 0px 10px 0px #656565;
+	-webkit-box-shadow: 5px 0px 10px 0px #656565;
+	-o-box-shadow: 5px 0px 10px 0px #656565;
+	box-shadow: 5px 0px 10px 0px #656565;
 }
 
 .sidebar-nav li a:active,
