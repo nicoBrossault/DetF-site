@@ -16,23 +16,27 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <br>
 
 <?php
-echo form_open_multipart('CFormArticle');
+echo form_open_multipart('CFormRubrique');
 if($rubrique==NULL){
 	echo form_hidden('idRubrique',NULL);
-	$titreArticle=NULL;
-	$texteArticle=NULL;
+	$titreRubrique=NULL;
+	$texteRubrique=NULL;
 }else{
 	echo form_hidden('idRubrique',$rubrique->getIdrubrique());
-	$titreArticle=$articleRubrique->getTitre();
-	$texteArticle=$articleRubrique->getTextrubrique();
+	$titreR=$rubrique->getNomrubrique();
+	$titreRubrique=substr($titreR,2,strlen($titreR));
+	$texteRubrique=$rubrique->getDescriptionrubrique();
 };
 ?>
 
 <div class="input-field col s4 m4">
 	<?php $alphaIcons=array("A","B","C","D","E","F","G","H","I");
 	foreach($alphaIcons as $alpha):
-	?>
-	<input name="alpha" type="radio" id="<?=$alpha?>"/>
+		if(substr($titreR,0,1)==$alpha):?>
+			<input name="alpha" type="radio" id="<?=$alpha?>" value="<?=$alpha?>" checked/>
+		<?php else:?>
+			<input name="alpha" type="radio" id="<?=$alpha?>" value="<?=$alpha?>"/>
+		<?php endif; ?>
     <label for="<?=$alpha?>" class="iconsMenu" 
     style="color:black; margin-left: 1%;">
     	<h2><?=$alpha?></h2>
@@ -48,7 +52,7 @@ $titre= array('name'=>'titre',
 		'id'=>'titre',
 		'placeholder'=>'Titre de l\'article',
 		'style'=>"font-size:1.6em",
-		'value'=>$titreArticle);
+		'value'=>$titreRubrique);
 echo '<label for="titre"><h5>Titre</h5></label>';
 echo form_input($titre);
 echo form_error('titre','<span class="error" style="color:red">','</span></br>');
@@ -60,13 +64,12 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 <input type="file" name="fileImg"/>
 <br>
 <br>
-
 <label for="existImg"><h5>Mettre une Image déjà téléchargé : </h5></label>
 <div class="input-field col s12 m6">
 	<select class="icons select-wrapper" id="existImg" name="existImg">
 		<?php 
-		if(isset($imgArt) && !empty($imgArt)){
-			foreach($imgArt as $img){
+		if(isset($imgRub) && !empty($imgRub)){
+			foreach($imgRub as $img){
 				$imgAR=$img;
 			};
 		}else{
@@ -110,6 +113,11 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 <br>
 <br>
 
+<label for="fileImgMark"><h5>Ajouter des marques : </h5></label>
+<input type="file" name="fileImgMark" multiple/>
+<br>
+<br>
+
 <label for="texte"><h5>Texte</h5></label>
 <div class="row">
 	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='p' style="margin-left: 5px;">
@@ -145,7 +153,7 @@ $texte= array(
 		'class'=>"materialize-textarea article",
 		'style'=>"font-size:1.6em",
 		'placeholder'=>'Texte de l\'article',
-		'value'=>$texteArticle,
+		'value'=>$texteRubrique,
 		'cols' => '40',
 		'rows' => '40');
 echo form_textarea($texte);

@@ -136,11 +136,42 @@ class CI_Controller {
 		return $imagesArt;
 	}
 	
+	//Récupération de l'image associée à l'identité
+	public function __getImgObj($objet, $entite){
+		$images=$this->doctrine->em->getRepository('images')->findAll();
+		$imagesArt=NULL;
+		
+		$dir = 'application/models';
+		$files = scandir($dir);
+		
+		$debutEntite=substr($entite,0,1);
+		$maj=strtoupper($debutEntite);
+		$majEntite=$maj.substr($entite,1);
+		$minEntite=strtolower($debutEntite).substr($entite,1);
+		
+		foreach($files as $file){
+			$file = substr($file, 0, -4);
+			if($file==$majEntite){
+				$getId="getId".$minEntite;
+				foreach($images as $image){
+					if($image->$getId()!=NULL){
+						if($image->$getId()->$getId()==$objet->$getId()){
+							$imagesObj=$image;
+						}
+					}
+				}
+			}
+		}
+		return $imagesObj;
+	}
+	
 	public function __addRubrique($id=NULL){
 		$data = [];
-		if(!empty($id)){
+		if($id!=NULL){
+			$rubrique=$this->doctrine->em->find("rubrique",$id);
 			$data+=array(
-					'rubrique'=>$id,
+					'rubrique'=>$rubrique,
+					"imgRub"=>$this->getImgObj($rubrique,"rubrique"),
 			);
 		}else{
 			$data+=array(

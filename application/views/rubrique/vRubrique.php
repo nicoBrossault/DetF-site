@@ -7,7 +7,9 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 	<?php if(isset($user)):?>
 		<div class="utils right-align">
 			<span style="margin-right: 1%">
-				 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+				 <a class="btn-floating waves-effect waves-light editRub" 
+				 id="<?=$rubrique->getIdrubrique()?>"
+				 style="background-color:#E0C3F2">
 				 	<i class="material-icons">edit</i>
 				 </a>
 			 </span>

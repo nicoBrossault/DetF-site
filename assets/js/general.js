@@ -39,7 +39,6 @@ $(document).ready(function() {
 	
 	/* Test Nav Bar */
 	$("#menu-toggle").click(function(e) {
-		console.log("test menu");
 	    e.preventDefault();
 	    $("#wrapper").toggleClass("toggled");
 	});

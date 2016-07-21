@@ -7,8 +7,13 @@ class CRubrique extends CI_Controller {
 		// Obligatoire
 		parent::__construct();
 		
-		$nomRub=explode('_',$_GET['nom']);
-		@$titre="Rubrique ".$nomRub[1];
+		if(isset($_GET['nom']) && !empty($_GET['nom'])){
+			$nomRub=explode('_',$_GET['nom']);
+			@$titre="Rubrique ".$nomRub[1];
+		}else{
+			@$titre="undefined";
+		}
+		
 		$this->layout->setTitre($titre);
 		$items=array('Accueil');
 		$nomRubrique=$this->doctrine->em->getRepository('rubrique')->findAll();
@@ -112,15 +117,15 @@ class CRubrique extends CI_Controller {
 				//Récupération des articles associé à la rubrique
 				$articles[]=$article;
 				//Récupération de l'image associée à l'article
-				$imagesArt=$this->getImgArt($article);
+				$imagesArt[]=$this->getImgObj($article,"articlerubrique");
 			}
 		}
 		
 		return array('articles'=>$articles,'imagesArt'=>$imagesArt);
 	}
 	
-	public function getImgArt($article){
-		return parent::__getImgArt($article);
+	public function getImgObj($objet, $entite){
+		return parent::__getImgObj($objet, $entite);
 	}
 	
 	public function isAdmin(){
@@ -181,7 +186,7 @@ class CRubrique extends CI_Controller {
 	
 	
 	public function addRubrique($id=NULL){
-		parent::__addRubrique($id=NULL);
+		return parent::__addRubrique($id);
 		
 	}
 	public function ajaxAddRub(){
@@ -216,6 +221,12 @@ class CRubrique extends CI_Controller {
 				'click',
 				'CRubrique/deleteArticle',
 				'.formAdd');
+		$this->javascript->getAndBindTo(
+				'.editRub',
+				'click',
+				'CRubrique/addRubrique',
+				'.formAdd',
+				$jFunc);
 		$this->javascript->compile();
 	}
 }

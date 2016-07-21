@@ -94,7 +94,7 @@
 					<li class="buttonAddRubrique" id="NULL">
 						<span class="btn-floating waves-effect waves-light add" 
 						style="background-color:#ad1457; margin-left:78px; margin-top:-5px;">
-						 	<i class="material-icons" style="margin-left:-32px;">add</i>
+						 	<i class="material-icons" style="margin-left:-33px;">add</i>
 						</span>
 					</li>
 				<?php endif;?>
