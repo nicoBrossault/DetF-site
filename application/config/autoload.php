@@ -143,4 +143,6 @@ $autoload['model'] = array(
 		'rubrique',
 		'textsite',
 		'user',
+		'promo',
+		'marque',
 );

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 23 Avril 2016 à 18:07
+-- Généré le :  Lun 25 Juillet 2016 à 16:14
 -- Version du serveur :  10.1.9-MariaDB
 -- Version de PHP :  5.6.15
 
@@ -51,8 +51,8 @@ CREATE TABLE `articlerubrique` (
 --
 
 INSERT INTO `articlerubrique` (`idArticleRubrique`, `idRubrique`, `titre`, `textRubrique`) VALUES
-(1, 1, 'Un nouveau type de laine', '<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p> \r\n<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>'),
-(2, 1, 'test', 'test');
+(1, 2, 'nouveau test', 'ceci est de nouveau un test'),
+(2, 1, 'Un nouveau type de laine', 'azefoyuaer fapzeirf paerufp iaerp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blarj pfbvaeprfv maieubr pfubaper a<b></b>\r\nazefo qdfb dtyj zfbetyj etyj yuaer fapzzth zht zrht zrthzeirf paerufp iaezrth zrhtzrp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blarj pfbvaeprfv maieubr pfubaper a akegv  zofaoze fouazv erof vaorhvf ohav kr vkazrth zrrv of hvaoerhv fohave ro<b></b>\r\nazefoyuaer fapzeirf paeruaerg aerg aerg aerg ae hfkrthzrtfp iaerp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blaarf ar ar aergaekrh via eri ciafcrej pfbvaeprfv maieubr pfubaper a<b></b>\r\nazefoyuaer fapzeirf paerufp iaerp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blarj pfbvaeprfv maieubr pfubaper a<b></b>');
 
 -- --------------------------------------------------------
 
@@ -76,8 +76,29 @@ CREATE TABLE `images` (
 
 INSERT INTO `images` (`idImages`, `idRubrique`, `idArticleRubrique`, `idTextSite`, `titre`, `description`, `url`) VALUES
 (1, NULL, NULL, 4, 'philadar', 'logo phildar', 'images/marques/phildar.png'),
-(2, NULL, NULL, 4, 'katia', 'logo de katia', 'images/marques/katia.jpg'),
-(3, 1, 1, NULL, 'laine', 'Notre rayon de laines.', 'images/laineMag.jpg');
+(2, 2, NULL, 4, 'katia', 'logo de katia', 'images/marques/katia.jpg'),
+(3, 1, NULL, NULL, 'laine', 'Notre rayon de laines.', 'images/laineMag.jpg'),
+(4, NULL, 1, NULL, 'nouveau test', NULL, 'images/1000-catalogue-cherbourg.jpg'),
+(5, NULL, 2, NULL, 'Un nouveau type de laine', NULL, 'images/laine.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `marque`
+--
+
+CREATE TABLE `marque` (
+  `idMarque` int(3) NOT NULL,
+  `url` text NOT NULL,
+  `idRubrique` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `marque`
+--
+
+INSERT INTO `marque` (`idMarque`, `url`, `idRubrique`) VALUES
+(1, 'test/url', 1);
 
 -- --------------------------------------------------------
 
@@ -91,6 +112,27 @@ CREATE TABLE `newsletter` (
   `titre` text NOT NULL,
   `texte` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `promo`
+--
+
+CREATE TABLE `promo` (
+  `idPromo` int(3) NOT NULL,
+  `libellePromo` text NOT NULL,
+  `textPromo` text NOT NULL,
+  `actif` tinyint(1) NOT NULL,
+  `idUser` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `promo`
+--
+
+INSERT INTO `promo` (`idPromo`, `libellePromo`, `textPromo`, `actif`, `idUser`) VALUES
+(1, 'tests', 'rzgbermbregoizeigb z e oz erk jgbzpke gkbzlekjbg lkjzbtklj gbzlkjtbg lkjzrtlgjb izptbigu bzitjb gklzj bkjs:,nfb pzb m; bpmrej pgh.', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -121,8 +163,8 @@ CREATE TABLE `rubrique` (
 --
 
 INSERT INTO `rubrique` (`idRubrique`, `idUser`, `nomRubrique`, `descriptionRubrique`) VALUES
-(1, 1, 'Laine', '<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>'),
-(2, 1, 'test', 'ceci est une rubrique de test');
+(1, 1, 'E_Laine', '<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>'),
+(2, 1, 'B_test', 'ceci est une rubrique de test');
 
 -- --------------------------------------------------------
 
@@ -144,7 +186,7 @@ CREATE TABLE `textsite` (
 INSERT INTO `textsite` (`idTextSite`, `idUser`, `titreTextSite`, `textSite`) VALUES
 (1, 1, 'Accueil', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
 (2, 1, 'Horaires', '<p>Pour la saison estivale, nos horaires d''ouverture sont :</p>\r\n<p>Du lundi au vendredi : </p>\r\n<p>8h00 - 12h00</p>\r\n<p>14h00 - 18h30</p>\r\n<p>Le samedi : </p>\r\n<p>8h00 - 12h00</p>'),
-(3, 1, 'Inscription à la newletter', '<p>Vous voulez avoir les dernière nouvelles, les promotions ou encore des informations sur nos arrivages en premier ?</p>\r\n<p>Alors n''attenez plus, inscrivez vous à notre newletter !</p>'),
+(3, 1, 'Inscription à la newletter', '<p>Vous voulez avoir les dernière nouvelles, les promotions ou encore des informations sur nos arrivages en premier ?</p>\r\n<p>Alors n''attendez plus, inscrivez vous à notre newletter !</p>'),
 (4, 1, 'footerAccueil', '<p>Toutes les images ormis celle citant des marques bien définies, appartiennent à la boutique <i> Douceur & Fantaisie</i>.</p>\r\n<p> Aucune reproduction complète ou partielle du site n''est envisageable</p>\r\n<p> Site développée par Nicolas Brossault à l''aide du framework <a href="https://www.codeigniter.com/" target="_blank"><i>CodeIgniter</i></a> et le framework <a href="http://materializecss.com/" target="_blank"><i>Materialize</i></a></p>\r\n');
 
 -- --------------------------------------------------------
@@ -166,7 +208,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `nom`, `prenom`, `mail`, `mdp`) VALUES
-(1, 'admin', 'admin', 'ni.brossault@laposte.net', 'admin123!!');
+(1, 'admin', 'admin', 'ni.brossault@laposte.net', '91ddd40cd0b707d98c71a9c8c7b5d5c3222e2ef2');
 
 --
 -- Index pour les tables exportées
@@ -195,11 +237,25 @@ ALTER TABLE `images`
   ADD KEY `fk_illustrer` (`idRubrique`);
 
 --
+-- Index pour la table `marque`
+--
+ALTER TABLE `marque`
+  ADD UNIQUE KEY `idMarque` (`idMarque`),
+  ADD UNIQUE KEY `idRubrique` (`idRubrique`);
+
+--
 -- Index pour la table `newsletter`
 --
 ALTER TABLE `newsletter`
   ADD PRIMARY KEY (`idNewsletter`),
   ADD KEY `fk_envoyer` (`idUser`);
+
+--
+-- Index pour la table `promo`
+--
+ALTER TABLE `promo`
+  ADD PRIMARY KEY (`idPromo`),
+  ADD UNIQUE KEY `iduser` (`idUser`);
 
 --
 -- Index pour la table `recevoir`
@@ -246,12 +302,22 @@ ALTER TABLE `articlerubrique`
 -- AUTO_INCREMENT pour la table `images`
 --
 ALTER TABLE `images`
-  MODIFY `idImages` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idImages` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT pour la table `marque`
+--
+ALTER TABLE `marque`
+  MODIFY `idMarque` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `newsletter`
 --
 ALTER TABLE `newsletter`
   MODIFY `idNewsletter` int(6) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `promo`
+--
+ALTER TABLE `promo`
+  MODIFY `idPromo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `rubrique`
 --

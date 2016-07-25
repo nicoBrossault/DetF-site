@@ -1,0 +1,31 @@
+Rubrique:
+  type: entity
+  table: rubrique
+  fields:
+    idpromo:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idPromo
+      generator:
+        strategy: IDENTITY
+    libellePromo:
+      type: text
+      nullable: false
+      column: libellePromo
+    textPromo:
+      type: text
+      nullable: false
+      column: textPromo
+  oneToOne:
+    iduser:
+      targetEntity: User
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idUser:
+          referencedColumnName: idUser
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

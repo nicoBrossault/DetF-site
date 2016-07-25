@@ -15,25 +15,25 @@ class Promo
     /**
      * @var integer $idpromo
      *
-     * @Column(name="idRubrique", type="integer", nullable=false)
+     * @Column(name="idPromo", type="integer", nullable=false)
      * @Id
      * @GeneratedValue(strategy="IDENTITY")
      */
     private $idpromo;
 
     /**
-     * @var text $nompromo
+     * @var text $libellePromo
      *
-     * @Column(name="nomRubrique", type="text", nullable=false)
+     * @Column(name="libellePromo", type="text", nullable=false)
      */
-    private $nompromo;
+    private $libellePromo;
 
     /**
-     * @var text $descriptionpromo
+     * @var text $textPromo
      *
-     * @Column(name="descriptionRubrique", type="text", nullable=false)
+     * @Column(name="textPromo", type="text", nullable=false)
      */
-    private $descriptionpromo;
+    private $textPromo;
 
     /**
      * @var User
@@ -62,9 +62,9 @@ class Promo
      * @param text $nompromo
      * @return Rubrique
      */
-    public function setNompromo($nompromo)
+    public function setNompromo($libellePromo)
     {
-        $this->nompromo = $nompromo;
+        $this->libellePromo = $libellePromo;
         return $this;
     }
 
@@ -73,38 +73,38 @@ class Promo
      *
      * @return text 
      */
-    public function getNompromo()
+    public function getLibellepromo()
     {
-        return $this->nompromo;
+        return $this->libellePromo;
     }
 
     /**
-     * Set descriptionpromo
+     * Set textPromo
      *
-     * @param text $descriptionpromo
-     * @return Rubrique
+     * @param text $textPromo
+     * @return Promo
      */
-    public function setTextepromo($descriptionpromo)
+    public function setTextpromo($textPromo)
     {
-        $this->descriptionpromo = $descriptionpromo;
+        $this->textPromo = $textPromo;
         return $this;
     }
 
     /**
-     * Get textepromo
+     * Get textPromo
      *
      * @return text 
      */
-    public function getTextepromo()
+    public function getTextPromo()
     {
-        return $this->Textepromo;
+        return $this->textPromo;
     }
 
     /**
      * Set iduser
      *
      * @param User $iduser
-     * @return Rubrique
+     * @return Promo
      */
     public function setIduser(\User $iduser = null)
     {
