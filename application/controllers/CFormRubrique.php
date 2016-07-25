@@ -93,6 +93,46 @@ class CFormRubrique extends CI_Controller {
 			}*/
 		}
 		
+		if(isset($_FILES['fileImgMark']['name']) && !empty($_FILES['fileImgMark']['name'])){
+			echo "test images marques <br>";
+			/*$dir    = 'assets/images/';
+			 $fileImages = scandir($dir);
+			 //Si image existe dans le dossier
+			 //ALORS on ne la télécharge pas -> exist = true
+			 $exist=false;
+			 foreach($fileImages as $fileImage){
+			 	if($fileImage==$_FILES['fileImg']['name']){
+					 $exist=true;
+				 }
+			 }
+			 if(!$exist){
+			 	$config['upload_path'] = 'assets/images/';
+			 	$config['allowed_types'] = 'gif|jpg|png|jpeg|JPG|PNG';
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				$this->upload->set_allowed_types('*');
+				$data['upload_data'] = '';
+			
+				if (!$this->upload->do_upload('fileImg')) {
+					$data = array('msg' => $this->upload->display_errors());
+				}else{
+					$data = array('msg' => "Upload success!");
+					$data['upload_data'] = $this->upload->data();
+				}
+				$urlImg='images/'.$_FILES['fileImg']['name'];
+		
+				if(!empty($this->getImgObj($object,"rubrique"))){
+					echo "l'article a une image </br>";
+					$this->doctrine->em->remove($this->getImgArt($object));
+				}
+		
+				$image=new Images();
+				$image->setUrl($urlImg);
+				$image->setTitre($_POST['titre']);
+				$newImg=true;
+			 }*/
+		}
+		
 		if(isset($_POST['existImg']) && !empty($_POST['existImg']) && !isset($newImg)){
 			echo "Recup Img: ".$_POST['existImg']."<br>";
 			/*$images=$this->doctrine->em->getRepository('images')->findAll();
