@@ -185,7 +185,7 @@ class CFormArticle extends CI_Controller {
 				
 			}
 			
-			redirect('CRubrique?nom="'.$rubrique->getNomrubrique().'"', 'refresh');
+			redirect('CRubrique?nom='.$rubrique->getNomrubrique(), 'refresh');
 		}
 	}
 }

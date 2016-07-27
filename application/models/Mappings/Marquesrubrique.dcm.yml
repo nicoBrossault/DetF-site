@@ -1,0 +1,32 @@
+Articlerubrique:
+  type: entity
+  table: marquesrubrique
+  fields:
+    idmarquesrubrique:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idRubrique
+      generator:
+        strategy: IDENTITY
+  oneToOne:
+    idrubrique:
+      targetEntity: Rubrique
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idRubrique:
+          referencedColumnName: idRubrique
+      orphanRemoval: false
+    idrubrique:
+      targetEntity: Marque
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idRubrique:
+          referencedColumnName: idMarque
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

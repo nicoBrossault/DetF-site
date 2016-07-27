@@ -11,16 +11,22 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <script src="<?=base_url()?>assets/js/general.js"></script>
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
 
+<div class="btn annuler btn-floating waves-effect waves-light" style="left:95%">
+	<i class="material-icons">close</i>
+</div>
+
 <h1>Ajouter / Modifier la Rubrique</h1>
 <br>
 <br>
 
 <?php
 echo form_open_multipart('CFormRubrique');
-if($rubrique==NULL){
+echo form_hidden('user',$_SESSION['user']);
+if(empty($rubrique) || !isset($rubrique)){
 	echo form_hidden('idRubrique',NULL);
 	$titreRubrique=NULL;
 	$texteRubrique=NULL;
+	$titreR=NULL;
 }else{
 	echo form_hidden('idRubrique',$rubrique->getIdrubrique());
 	$titreR=$rubrique->getNomrubrique();
@@ -52,7 +58,7 @@ $titre= array('name'=>'titre',
 		'id'=>'titre',
 		'placeholder'=>'Titre de l\'article',
 		'style'=>"font-size:1.6em",
-		'value'=>$titreRubrique);
+		'value'=>utf8_encode($titreRubrique));
 echo '<label for="titre"><h5>Titre</h5></label>';
 echo form_input($titre);
 echo form_error('titre','<span class="error" style="color:red">','</span></br>');
@@ -114,7 +120,7 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 <br>
 
 <label for="fileImgMark"><h5>Ajouter des marques : </h5></label>
-<input type="file" name="fileImgMark" multiple/>
+<input type="file" name="fileImgMark[]" multiple/>
 <br>
 <br>
 

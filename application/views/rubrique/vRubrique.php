@@ -35,7 +35,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<?=$itemAlpha[0]?>
 				</div>
 			<h1>
-			<?=$itemAlpha[1]?>
+			<?=utf8_encode($itemAlpha[1])?>
 			</h1>
 		</div>
 		<div class="row">
@@ -52,7 +52,6 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 							border-radius:50%;
 							background-color:#90caf9; 
 							margin-left:3%;">
-				<p class="legend"><?=$image->getDescription()?></p>
 				<?php endif;?>
 			</div>
 			<div class="contentAccueil col s10 m6 l9 offset-m2" style="font-size:1.3em">
@@ -79,7 +78,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 			<?php endif;?>
 		<div class="card-content">
 			<span class="card-title">
-				<h1><?=$articles->getTitre()?></h1>
+				<h1><?=utf8_encode($articles->getTitre())?></h1>
 			</span>
 			<div class="row">
 				<div class="imgAccueil col s3 m3 l3">
@@ -97,12 +96,11 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 									background-color:#90caf9; 
 									margin-left:3%;">
 						</br>
-						<p class="legend"><?=$imagesArt->getDescription()?></p>
 						<?php endif;?>
 					<?php endforeach;?>
 				</div>
 				<div class="contentAccueil col s10 m6 l9 offset-m2" style="font-size:1.3em">
-					<p><?=$articles->getTextrubrique()?></p>
+					<p><?=utf8_encode($articles->getTextrubrique())?></p>
 				</div>
 			</div>
 		</div>

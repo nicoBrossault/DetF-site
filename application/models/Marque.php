@@ -28,16 +28,6 @@ class Marque
      */
     private $url;
 
-    /**
-     * @var Rubrique
-     *
-     * @OneToOne(targetEntity="Rubrique")
-     * @JoinColumns({
-     *   @JoinColumn(name="idRubrique", referencedColumnName="idRubrique", unique=true)
-     * })
-     */
-    private $idrubrique;
-
 
     /**
      * Get idMarque
@@ -69,27 +59,5 @@ class Marque
     public function getUrl()
     {
     	return $this->url;
-    }
-
-    /**
-     * Set idrubrique
-     *
-     * @param Rubrique $idrubrique
-     * @return Images
-     */
-    public function setIdrubrique(\Rubrique $idrubrique = null)
-    {
-        $this->idrubrique = $idrubrique;
-        return $this;
-    }
-
-    /**
-     * Get idrubrique
-     *
-     * @return Rubrique 
-     */
-    public function getIdrubrique()
-    {
-        return $this->idrubrique;
     }
 }

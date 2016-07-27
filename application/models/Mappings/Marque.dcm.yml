@@ -14,14 +14,4 @@ Images:
       type: text
       nullable: false
       column: URL
-  oneToOne:
-    idrubrique:
-      targetEntity: Rubrique
-      cascade: {  }
-      mappedBy: null
-      inversedBy: null
-      joinColumns:
-        idRubrique:
-          referencedColumnName: idRubrique
-      orphanRemoval: false
   lifecycleCallbacks: {  }

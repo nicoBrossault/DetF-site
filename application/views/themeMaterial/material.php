@@ -79,12 +79,12 @@
 						</li>
 					<?php else:?>
 						<li class="menuItems">
-							<a href="<?=base_url()?>CRubrique?nom=<?=$item?>">
+							<a href="<?=base_url()?>CRubrique?nom=<?=utf8_encode($item)?>">
 								<?php $itemAlpha=explode('_',$item); ?>
 								<span class="alphaMenu iconsMenu">
 									<?=$itemAlpha[0]." "?>
 								</span>
-								<?=$itemAlpha[1]?>
+								<?=utf8_encode($itemAlpha[1])?>
 							</a>
 						</li>
 					<?php endif;?>

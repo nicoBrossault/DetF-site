@@ -9,7 +9,7 @@ class CRubrique extends CI_Controller {
 		
 		if(isset($_GET['nom']) && !empty($_GET['nom'])){
 			$nomRub=explode('_',$_GET['nom']);
-			@$titre="Rubrique ".$nomRub[1];
+			@$titre="Rubrique ".utf8_decode(utf8_encode($nomRub[1]));
 		}else{
 			@$titre="undefined";
 		}
@@ -46,7 +46,7 @@ class CRubrique extends CI_Controller {
 	
 	public function index(){
 		//Récupération de la rubrique
-		$nomRubrique=$_GET['nom'];
+		$nomRubrique=utf8_encode($_GET['nom']);
 		
 		//Test le nom de la rubrique passée en paramètre
 		//si vide retour à l'accueil
@@ -57,7 +57,7 @@ class CRubrique extends CI_Controller {
 		//Test si la rubrique existe, rubrique passée en paramètre url
 		$allRubriques=$this->doctrine->em->getRepository('rubrique')->findAll();
 		foreach ($allRubriques as $oneRubrique){
-			if($oneRubrique->getNomrubrique()==$nomRubrique){
+			if(utf8_encode($oneRubrique->getNomrubrique())==utf8_decode($nomRubrique)){
 				$rubrique=$this->doctrine->em->find('rubrique',$oneRubrique->getIdrubrique());
 			}
 		}
