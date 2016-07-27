@@ -148,8 +148,11 @@ class CI_Controller {
 		$majEntite=$maj.substr($entite,1);
 		$minEntite=strtolower($debutEntite).substr($entite,1);
 		
+		$imagesObj=NULL;
+		
 		foreach($files as $file){
 			$file = substr($file, 0, -4);
+			//echo $file."==".$majEntite."<br>";
 			if($file==$majEntite){
 				$getId="getId".$minEntite;
 				foreach($images as $image){

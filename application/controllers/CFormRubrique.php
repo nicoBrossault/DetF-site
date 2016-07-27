@@ -19,6 +19,15 @@ class CFormRubrique extends CI_Controller {
 		}
 	}
 	
+	public function check_alpha(){
+		if(isset($_POST['alpha']) && !empty($_POST['alpha'])){
+			return true;
+		}else{
+			$this->form_validation->set_message('check_alpha','Vous devez cocher une icône !');
+			return false;
+		}
+	}
+	
 	function index(){
 		$this->load->helper('text');
 		$this->load->helper('security');
@@ -42,16 +51,19 @@ class CFormRubrique extends CI_Controller {
 			$object->setIduser($this->doctrine->em->find('user',$_POST['user']));
 		}
 		
-		if(isset($_POST['alpha']) && !empty($_POST['alpha'])){
-			//echo 'alpha : '.$_POST['alpha'].'</br>';
+		
+		//echo 'alpha : '.$_POST['alpha'].'</br>';
+		$this->form_validation->set_rules('alpha', 'alpha', 'trim|min_length[1]|max_length[1]|xss_clean');
+		if(isset($_POST['alpha']) && !empty($_POST['alpha'])){	
 			$alpha=$_POST['alpha'];
 		}
 		
-		if(isset($_POST['titre']) && !empty($_POST['titre']) && $alpha){
-			//echo "titre : ".$_POST['titre']."<br>";
-			$this->form_validation->set_rules('titre', 'Titre', 'trim|min_length[5]|xss_clean');
+		//echo "titre : ".$_POST['titre']."<br>";
+		$this->form_validation->set_rules('titre', 'Titre', 'trim|min_length[5]|xss_clean|callback_check_alpha');
+		if(isset($alpha)){
 			$object->setNomrubrique($alpha."_".utf8_decode($_POST['titre']));
 		}
+
 		if(isset($_POST['texte']) && !empty($_POST['texte'])){
 			//echo "texte : ".$_POST['texte']."<br>";
 			$this->form_validation->set_rules('texte', 'texte', 'trim|min_length[5]|xss_clean');
@@ -206,7 +218,12 @@ class CFormRubrique extends CI_Controller {
 		
 		if ($this->form_validation->run() == FALSE){
 			//echo 'test false';
-			$titre="Rubrique ".$rubrique->getNomrubrique();
+			if(isset($_POST['idRubrique']) && !empty($_POST['idRubrique'])){
+				$titre="Rubrique ".$rubrique->getNomrubrique();
+			}else{
+				$titre="Rubrique ";
+				$rubrique=$object;
+			}
 			$this->layout->setTitre($titre);
 			$items=array('Accueil');
 			$nomRubrique=$this->doctrine->em->getRepository('rubrique')->findAll();

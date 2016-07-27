@@ -141,8 +141,8 @@ class CRubrique extends CI_Controller {
 		$articleRubrique=NULL;
 		$imgArt=NULL;
 		if($idArticle[1]!=NULL){
-			$articleRubrique=$this->doctrine->em->find("articleRubrique",$idArticle[1]);
-			$imgArt=$this->getImgArt($articleRubrique);
+			$articleRubrique=$this->doctrine->em->find("articlerubrique",$idArticle[1]);
+			$imgArt=$this->getImgObj($articleRubrique,"articlerubrique");
 		}
 		
 		$rubrique=$this->doctrine->em->find('rubrique', $id);

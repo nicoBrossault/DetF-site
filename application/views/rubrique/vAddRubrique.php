@@ -48,7 +48,9 @@ if(empty($rubrique) || !isset($rubrique)){
     	<h2><?=$alpha?></h2>
     	<div style="width:2px; height:100px; background-color:black; margin:-100px 0px 0px 70px"></div>
     </label>
-	<?php endforeach; ?>
+	<?php endforeach; 
+		echo form_error('check_alpha','<span class="error" style="color:red">','</span></br>');
+	?>
 </div>
 </br>
 </br>

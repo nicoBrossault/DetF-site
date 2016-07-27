@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 25 Juillet 2016 à 16:14
+-- Généré le :  Mer 27 Juillet 2016 à 23:09
 -- Version du serveur :  10.1.9-MariaDB
 -- Version de PHP :  5.6.15
 
@@ -52,7 +52,8 @@ CREATE TABLE `articlerubrique` (
 
 INSERT INTO `articlerubrique` (`idArticleRubrique`, `idRubrique`, `titre`, `textRubrique`) VALUES
 (1, 2, 'nouveau test', 'ceci est de nouveau un test'),
-(2, 1, 'Un nouveau type de laine', 'azefoyuaer fapzeirf paerufp iaerp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blarj pfbvaeprfv maieubr pfubaper a<b></b>\r\nazefo qdfb dtyj zfbetyj etyj yuaer fapzzth zht zrht zrthzeirf paerufp iaezrth zrhtzrp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blarj pfbvaeprfv maieubr pfubaper a akegv  zofaoze fouazv erof vaorhvf ohav kr vkazrth zrrv of hvaoerhv fohave ro<b></b>\r\nazefoyuaer fapzeirf paeruaerg aerg aerg aerg ae hfkrthzrtfp iaerp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blaarf ar ar aergaekrh via eri ciafcrej pfbvaeprfv maieubr pfubaper a<b></b>\r\nazefoyuaer fapzeirf paerufp iaerp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blarj pfbvaeprfv maieubr pfubaper a<b></b>');
+(2, 1, 'Un nouveau type de laine', 'azefoyuaer fapzeirf paerufp iaerp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blarj pfbvaeprfv maieubr pfubaper a<b></b>\r\nazefo qdfb dtyj zfbetyj etyj yuaer fapzzth zht zrht zrthzeirf paerufp iaezrth zrhtzrp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blarj pfbvaeprfv maieubr pfubaper a akegv  zofaoze fouazv erof vaorhvf ohav kr vkazrth zrrv of hvaoerhv fohave ro<b></b>\r\nazefoyuaer fapzeirf paeruaerg aerg aerg aerg ae hfkrthzrtfp iaerp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blaarf ar ar aergaekrh via eri ciafcrej pfbvaeprfv maieubr pfubaper a<b></b>\r\nazefoyuaer fapzeirf paerufp iaerp faer  baerpjbf lahje rlj halerhbf paerpi vaprj bpuaepr blarj pfbvaeprfv maieubr pfubaper a<b></b>'),
+(3, 4, 'Essai d''article pour les sous-vêtements', 'Ceci est un test d''article pour la rubrique "Sous-Vêtements".');
 
 -- --------------------------------------------------------
 
@@ -65,6 +66,7 @@ CREATE TABLE `images` (
   `idRubrique` int(3) DEFAULT NULL,
   `idArticleRubrique` int(3) DEFAULT NULL,
   `idTextSite` int(3) DEFAULT NULL,
+  `idPromo` int(3) DEFAULT NULL,
   `titre` text NOT NULL,
   `description` text,
   `url` varchar(255) NOT NULL
@@ -74,12 +76,15 @@ CREATE TABLE `images` (
 -- Contenu de la table `images`
 --
 
-INSERT INTO `images` (`idImages`, `idRubrique`, `idArticleRubrique`, `idTextSite`, `titre`, `description`, `url`) VALUES
-(1, NULL, NULL, 4, 'philadar', 'logo phildar', 'images/marques/phildar.png'),
-(2, 2, NULL, 4, 'katia', 'logo de katia', 'images/marques/katia.jpg'),
-(3, 1, NULL, NULL, 'laine', 'Notre rayon de laines.', 'images/laineMag.jpg'),
-(4, NULL, 1, NULL, 'nouveau test', NULL, 'images/1000-catalogue-cherbourg.jpg'),
-(5, NULL, 2, NULL, 'Un nouveau type de laine', NULL, 'images/laine.jpg');
+INSERT INTO `images` (`idImages`, `idRubrique`, `idArticleRubrique`, `idTextSite`, `idPromo`, `titre`, `description`, `url`) VALUES
+(1, NULL, NULL, 4, 0, 'philadar', 'logo phildar', 'images/marques/phildar.png'),
+(2, 2, NULL, 4, 0, 'katia', 'logo de katia', 'images/marques/katia.jpg'),
+(3, 1, NULL, NULL, 0, 'laine', 'Notre rayon de laines.', 'images/laineMag.jpg'),
+(4, NULL, 1, NULL, 0, 'nouveau test', NULL, 'images/1000-catalogue-cherbourg.jpg'),
+(5, NULL, 2, NULL, 0, 'Un nouveau type de laine', NULL, 'images/laine.jpg'),
+(6, 3, NULL, NULL, NULL, 'Doudou', NULL, 'images/ours-slumber-premium-de-prince.jpg'),
+(7, NULL, 3, NULL, NULL, 'Essai d''article pour les sous-vÃªtements', NULL, 'images/Art-Nouveau-03.jpg'),
+(9, 4, NULL, NULL, NULL, 'Sous vÃªtements', NULL, 'images/sousVet.jpg');
 
 -- --------------------------------------------------------
 
@@ -89,16 +94,38 @@ INSERT INTO `images` (`idImages`, `idRubrique`, `idArticleRubrique`, `idTextSite
 
 CREATE TABLE `marque` (
   `idMarque` int(3) NOT NULL,
-  `url` text NOT NULL,
-  `idRubrique` int(3) NOT NULL
+  `url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `marque`
 --
 
-INSERT INTO `marque` (`idMarque`, `url`, `idRubrique`) VALUES
-(1, 'test/url', 1);
+INSERT INTO `marque` (`idMarque`, `url`) VALUES
+(1, 'images/marques/arbre-03.png'),
+(2, 'images/marques/Art-Nouveau-03.jpg'),
+(3, 'images/marques/couvertureJPG.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `marquesrubrique`
+--
+
+CREATE TABLE `marquesrubrique` (
+  `idMarquesRubrique` int(3) NOT NULL,
+  `idRubrique` int(3) NOT NULL,
+  `idMarque` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `marquesrubrique`
+--
+
+INSERT INTO `marquesrubrique` (`idMarquesRubrique`, `idRubrique`, `idMarque`) VALUES
+(1, 3, 1),
+(2, 3, 2),
+(3, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -164,7 +191,9 @@ CREATE TABLE `rubrique` (
 
 INSERT INTO `rubrique` (`idRubrique`, `idUser`, `nomRubrique`, `descriptionRubrique`) VALUES
 (1, 1, 'E_Laine', '<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>'),
-(2, 1, 'B_test', 'ceci est une rubrique de test');
+(2, 1, 'B_test', 'ceci est une rubrique de test'),
+(3, 1, 'A_Doudou', 'Ceci est un test pour la rubrique "Doudou"'),
+(4, 1, 'B_Sous vêtements', 'un nouveau test');
 
 -- --------------------------------------------------------
 
@@ -234,14 +263,20 @@ ALTER TABLE `images`
   ADD PRIMARY KEY (`idImages`),
   ADD KEY `fk_afficher` (`idArticleRubrique`),
   ADD KEY `fk_decorer` (`idTextSite`),
-  ADD KEY `fk_illustrer` (`idRubrique`);
+  ADD KEY `fk_illustrer` (`idRubrique`),
+  ADD KEY `idPromo` (`idPromo`);
 
 --
 -- Index pour la table `marque`
 --
 ALTER TABLE `marque`
-  ADD UNIQUE KEY `idMarque` (`idMarque`),
-  ADD UNIQUE KEY `idRubrique` (`idRubrique`);
+  ADD UNIQUE KEY `idMarque` (`idMarque`);
+
+--
+-- Index pour la table `marquesrubrique`
+--
+ALTER TABLE `marquesrubrique`
+  ADD PRIMARY KEY (`idMarquesRubrique`);
 
 --
 -- Index pour la table `newsletter`
@@ -297,17 +332,22 @@ ALTER TABLE `abonne`
 -- AUTO_INCREMENT pour la table `articlerubrique`
 --
 ALTER TABLE `articlerubrique`
-  MODIFY `idArticleRubrique` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idArticleRubrique` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `images`
 --
 ALTER TABLE `images`
-  MODIFY `idImages` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idImages` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `marque`
 --
 ALTER TABLE `marque`
-  MODIFY `idMarque` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idMarque` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `marquesrubrique`
+--
+ALTER TABLE `marquesrubrique`
+  MODIFY `idMarquesRubrique` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `newsletter`
 --
@@ -322,7 +362,7 @@ ALTER TABLE `promo`
 -- AUTO_INCREMENT pour la table `rubrique`
 --
 ALTER TABLE `rubrique`
-  MODIFY `idRubrique` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idRubrique` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `textsite`
 --
