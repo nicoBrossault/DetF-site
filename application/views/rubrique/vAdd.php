@@ -45,19 +45,19 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 <label for="fileImg"><h5>Ajouter une nouvelle Image : </h5></label>
 <input type="file" name="fileImg"/>
 <br>
-<br>
-
+<br>	
+	
 <label for="existImg"><h5>Mettre une Image déjà téléchargé : </h5></label>
 <div class="input-field col s12 m6">
 	<select class="icons select-wrapper" id="existImg" name="existImg">
 		<?php 
+		$imgAR=NULL;
 		if(isset($imgArt) && !empty($imgArt)){
-			foreach($imgArt as $img){
-				$imgAR=$img;
-			};
+			$imgAR=$imgArt;
 		}else{
 			$imgAR=NULL;
 		}
+		
 		$dir = 'assets/images';
 		$fileImages = scandir($dir);
 		$exist=false;

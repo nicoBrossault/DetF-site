@@ -13,7 +13,9 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 				 	<i class="material-icons">edit</i>
 				 </a>
 			 </span>
-			 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
+			 <a id="<?=$rubrique->getIdrubrique()?>"
+			 	class="btn-floating waves-effect waves-light btnDeleteRub" 
+			 	style="background-color:#E0C3F2">
 			 	<i class="material-icons">delete</i>
 			 </a>
 		</div>
@@ -43,7 +45,7 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 				<?php if($image != NULL): ?>
 				<img src="<?=base_url()?>assets/<?=$image->getUrl()?>"  
 						class="circle responsive-img"
-						alt="photo de laine"
+						alt="<?php $image->getTitre()?>"
 						style="
 							min-width:150px; 
 							min-height:150px; 
@@ -81,24 +83,24 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 				<h1><?=utf8_encode($articles->getTitre())?></h1>
 			</span>
 			<div class="row">
-				<div class="imgAccueil col s3 m3 l3">
-					<?php foreach($articlesImg['imagesArt'] as $imagesArt):?>
-						<?php if($imagesArt->getIdarticlerubrique()->getIdarticlerubrique()==$articles->getIdarticlerubrique()):?>
-						<img src="<?=base_url()?>assets/<?=$imagesArt->getUrl()?>"  
-								class="circle responsive-img"
-								alt="photo de laine"
-								style="
-									min-width:150px; 
-									min-height:150px; 
-									max-width:150px; 
-									max-height:150px;
-									border-radius:50%;
-									background-color:#90caf9; 
-									margin-left:3%;">
-						</br>
-						<?php endif;?>
-					<?php endforeach;?>
-				</div>
+				<?php foreach($articlesImg['imagesArt'] as $imagesArt):?>
+					<?php if(isset($imagesArt) && $imagesArt->getUrl()!="NULL"):?>
+						<div class="imgAccueil col s3 m3 l3">
+							<img src="<?=base_url()?>assets/<?=$imagesArt->getUrl()?>"  
+									class="circle responsive-img"
+									alt="<?php $imagesArt->getTitre()?>"
+									style="
+										min-width:150px; 
+										min-height:150px; 
+										max-width:150px; 
+										max-height:150px;
+										border-radius:50%;
+										background-color:#90caf9; 
+										margin-left:3%;">
+							</br>
+						</div>
+					<?php endif;?>
+				<?php endforeach;?>
 				<div class="contentAccueil col s10 m6 l9 offset-m2" style="font-size:1.3em">
 					<p><?=utf8_encode($articles->getTextrubrique())?></p>
 				</div>

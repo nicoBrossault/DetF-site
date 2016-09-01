@@ -19,6 +19,18 @@ class CFormArticle extends CI_Controller {
 		}
 	}
 	
+	public function getImgObj($objet, $entite){
+		$imgsRub = parent::__getImgObj($objet, $entite);
+		
+		if(!empty($imgsRub)){
+			//echo "test imgObj</br>";
+			return $imgsRub;
+		}else{
+			//echo "test imgObj empty </br>";
+			return NULL;
+		}
+	}
+	
 	function index(){
 		$this->load->helper('text');
 		$this->load->helper('security');
@@ -31,7 +43,7 @@ class CFormArticle extends CI_Controller {
 		//appel de l'object
 		if(isset($_POST['idArticle']) && !empty($_POST['idArticle'])){
 			$id=$_POST['idArticle'];
-			//echo "id : ".$id."<br>";
+			//echo "id Article : ".$id."<br>";
 			$this->form_validation->set_rules('idArticle', 'Id de l\'article', 'trim');
 			$object = $this->doctrine->em->find('articlerubrique', $id);
 		}else{
@@ -39,7 +51,7 @@ class CFormArticle extends CI_Controller {
 		}
 		if(isset($_POST['idRubrique']) && !empty($_POST['idRubrique'])){
 			$id=$_POST['idRubrique'];
-			//echo "id : ".$id."<br>";
+			//echo "id Rubrique: ".$id."<br>";
 			$this->form_validation->set_rules('idRubrique', 'Id de l\'article', 'trim');
 			$rubrique=$this->doctrine->em->find('rubrique',$id);
 			$object->setIdrubrique($rubrique);
@@ -98,9 +110,11 @@ class CFormArticle extends CI_Controller {
 		if(isset($_POST['existImg']) && !empty($_POST['existImg']) && !isset($newImg)){
 			//echo "Recup Img: ".$_POST['existImg']."<br>";
 			$images=$this->doctrine->em->getRepository('images')->findAll();
-			
+			$emptyImg=false;
+						
 			if($_POST['existImg']=="NULL"){
 				$emptyImg=true;
+				//echo "-> image : null </br>";
 			}else{
 				$this->form_validation->set_rules('existImg', 'Nom existImg', 'trim');
 				$urlImg='images/'.$_POST['existImg'];
@@ -112,11 +126,17 @@ class CFormArticle extends CI_Controller {
 			}
 			
 			if(!empty($this->getImgArt($object))){
-				if($_POST['existImg']==$this->getImgArt($object)->getUrl()){
+				$existImg=$_POST['existImg'];
+				if($_POST['existImg']=="NULL"){
+					$existImg="images/".$_POST['existImg'];
+				}
+				//echo $existImg."==".$this->getImgArt($object)->getUrl()."<br>";
+				if($existImg==$this->getImgArt($object)->getUrl()){
 					//echo "Image de l'article : ".$_POST['existImg'].'</br>';
-					$emptyImg=true;
+					$selectEmptyImg=true;
 					$newImg=false;
 				}else{
+					//echo "-> Changement de l'image <br>";
 					//permet de changer l'image de l'article
 					$this->doctrine->em->remove($this->getImgArt($object));
 					
@@ -181,8 +201,16 @@ class CFormArticle extends CI_Controller {
 				$this->doctrine->em->persist($image);
 				$this->doctrine->em->flush();
 			}
+			
 			if(isset($emptyImg) && $emptyImg==true){
-				
+				//echo "test \'emptyImg\' <br>";
+				$imgArt=$this->getImgObj($object, 'articlerubrique');
+				if(!empty($imgArt)){
+					$imgArt->setUrl("NULL");
+					$imgArt->setTitre("NULL");
+					$this->doctrine->em->persist($imgArt);
+					$this->doctrine->em->flush();
+				};
 			}
 			
 			redirect('CRubrique?nom='.$rubrique->getNomrubrique(), 'refresh');

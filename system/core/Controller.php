@@ -138,6 +138,7 @@ class CI_Controller {
 	
 	//Récupération de l'image associée à l'identité
 	public function __getImgObj($objet, $entite){
+		//echo "function getImgObj (object, $entite): <br>";
 		$images=$this->doctrine->em->getRepository('images')->findAll();
 		
 		$dir = 'application/models';
@@ -154,17 +155,20 @@ class CI_Controller {
 			$file = substr($file, 0, -4);
 			//echo $file."==".$majEntite."<br>";
 			if($file==$majEntite){
+				//echo "|=> Test Concluant ! <br>";
 				$getId="getId".$minEntite;
 				foreach($images as $image){
 					if($image->$getId()!=NULL){
 						if($image->$getId()->$getId()==$objet->$getId()){
 							$imagesObj=$image;
+							//echo "|=> Image Url : ".$imagesObj->getUrl()."<br>";
 						}
 					}
 				}
+				break;
 			}
 		}
-		
+		//echo "--> Sortie Boucle <br>--> Return : ImgObj =>".$imagesObj->getUrl()."<br>";
 		return $imagesObj;
 	}
 	

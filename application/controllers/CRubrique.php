@@ -184,6 +184,11 @@ class CRubrique extends CI_Controller {
 		));*/
 	}
 	
+	public function valDeleteRub($id){
+		$rubrique=$this->doctrine->em->find('rubrique', $id);
+		$this->load->view('rubrique/vDelete', array('rubrique'=>$rubrique));
+	}
+	
 	
 	public function addRubrique($id=NULL){
 		return parent::__addRubrique($id);
@@ -221,6 +226,14 @@ class CRubrique extends CI_Controller {
 				'click',
 				'CRubrique/deleteArticle',
 				'.formAdd');
+		
+		$this->javascript->getAndBindTo(
+				'.btnDeleteRub',
+				'click',
+				'CRubrique/valDeleteRub',
+				'.formAdd',
+				$jFunc);
+		
 		$this->javascript->getAndBindTo(
 				'.editRub',
 				'click',
