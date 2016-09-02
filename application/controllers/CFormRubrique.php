@@ -19,6 +19,10 @@ class CFormRubrique extends CI_Controller {
 		}
 	}
 	
+	public function getMarqueRub($objet){
+		return parent::__getMarqueRub($objet);
+	}
+	
 	public function check_alpha(){
 		if(isset($_POST['alpha']) && !empty($_POST['alpha'])){
 			return true;
@@ -40,7 +44,7 @@ class CFormRubrique extends CI_Controller {
 		//appel de l'object
 		if(isset($_POST['idRubrique']) && !empty($_POST['idRubrique'])){
 			$id=$_POST['idRubrique'];
-			//echo "id : ".$id."<br>";
+			echo "id : ".$id."<br>";
 			$this->form_validation->set_rules('idRubrique', 'Id de l\'article', 'trim');
 			$object = $this->doctrine->em->find('rubrique', $id);
 		}else{
@@ -52,13 +56,13 @@ class CFormRubrique extends CI_Controller {
 		}
 		
 		
-		//echo 'alpha : '.$_POST['alpha'].'</br>';
+		echo 'alpha : '.$_POST['alpha'].'</br>';
 		$this->form_validation->set_rules('alpha', 'alpha', 'required|trim|min_length[1]|max_length[1]|xss_clean');
 		if(isset($_POST['alpha']) && !empty($_POST['alpha'])){	
 			$alpha=$_POST['alpha'];
 		}
 		
-		//echo "titre : ".$_POST['titre']."<br>";
+		echo "titre : ".$_POST['titre']."<br>";
 		$this->form_validation->set_rules('titre', 'Titre', 'required|trim|min_length[5]|xss_clean|callback_check_alpha');
 		if(isset($alpha)){
 			$object->setNomrubrique($alpha."_".utf8_decode($_POST['titre']));
@@ -66,12 +70,12 @@ class CFormRubrique extends CI_Controller {
 		
 		$this->form_validation->set_rules('texte', 'texte', 'required|trim|min_length[5]|xss_clean');
 		if(isset($_POST['texte']) && !empty($_POST['texte'])){
-			//echo "texte : ".$_POST['texte']."<br>";
+			echo "texte : ".$_POST['texte']."<br>";
 			$object->setDescriptionrubrique(utf8_decode($_POST['texte']));
 		}
 		
 		if(isset($_FILES['fileImg']['name']) && !empty($_FILES['fileImg']['name'])){
-			//echo "test images<br>";
+			echo "test images<br>";
 			$dir    = 'assets/images/';
 			$fileImages = scandir($dir);
 			//Si image existe dans le dossier
@@ -99,7 +103,7 @@ class CFormRubrique extends CI_Controller {
 				$urlImg='images/'.$_FILES['fileImg']['name'];
 				
 				if(!empty($this->getImgObj($object,"rubrique"))){
-					//echo "l'article a une image </br>";
+					echo "l'article a une image </br>";
 					$this->doctrine->em->remove($this->getImgArt($object));
 				}
 				
@@ -113,11 +117,11 @@ class CFormRubrique extends CI_Controller {
 		if(isset($_FILES['fileImgMark']['name']) && !empty($_FILES['fileImgMark']['name'])){
 			$file_count=count($_FILES['fileImgMark']['name']);
 			
-			//echo "test images marques : <br>";
-		    //echo "Nombre d'images : ".$file_count."</br>";
-			//echo "<pre>";
+			echo "test images marques : <br>";
+		    echo "Nombre d'images : ".$file_count."</br>";
+			echo "<pre>";
 		    //print_r($_FILES['fileImgMark']);
-		    //echo "</pre>";
+		    echo "</pre>";
 		    
 		    $dir = 'assets/images/marques';
 			$fileImages = scandir($dir);
@@ -132,13 +136,13 @@ class CFormRubrique extends CI_Controller {
 						$exist=true;
 					}
 				 }
-				 //echo "existe : ";
+				 echo "existe : ";
 				 if($exist){
-				 	//echo "1";
+				 	echo "1";
 				 }else{
-				 	//echo "0";
+				 	echo "0";
 				 }
-				 //echo "</br>";
+				 echo "</br>";
 				 
 				 if($_FILES['fileImgMark']['name'][$i]==""){
 				 	$exist=true;
@@ -160,10 +164,10 @@ class CFormRubrique extends CI_Controller {
 					$_FILES['fileImgMarkUpload']['size']= $_FILES['fileImgMark']['size'][$i];
 				
 					if (!$this->upload->do_upload('fileImgMarkUpload')){
-						//echo "error ! </br>";
+						echo "error ! </br>";
 						$data = array('msg' => $this->upload->display_errors());
 					}else{
-						//echo "success ! </br>";
+						echo "success ! </br>";
 						$data = array('msg' => "Upload success!");
 						$data['upload_data'] = $this->upload->data();
 					}
@@ -174,28 +178,57 @@ class CFormRubrique extends CI_Controller {
 					$newImgMark=true;
 				}
 			}
-			//echo "<pre>";
+			echo "<pre>";
 			//print_r($imgMarks);
-			//echo "</pre>";
+			echo "</pre>";
 			
 		}
 		
 		if(isset($_POST['checkMark']) && !empty($_POST['checkMark'])){
-			//echo "marque check : <br>";
+			echo "marque check : <br>";
 			$checkMarks=$_POST['checkMark'];
-			foreach($checkMarks as $checkMark){
-				//echo "-> ".$checkMark."<br>";
+			$alreadyCheck=$this->getMarqueRub($object);
+			if(isset($alreadyCheck) && !empty($alreadyCheck)){
+			
+				$countCheckMark=count($checkMarks);
+				echo "-> count checkMark : ".$countCheckMark."<br>";
+				
+				$countAlreadyCheckMark=count($alreadyCheck);
+				echo "-> count AlreadycheckMark : ".$countAlreadyCheckMark."<br>";
+			
+				for($i=0; $i<$countAlreadyCheckMark; $i++){
+					echo "entree boucle : ".$countCheckMark."<br>";
+					echo "<pre>";
+					print_r($checkMarks);
+					echo "</pre>";
+					for($j=0; $j<$countCheckMark; $j++){
+						if(substr($alreadyCheck[$i]->getUrl(),15)==$checkMarks[$j]){
+							echo "=> egal <br>";
+							array_splice($checkMarks,$j,1);
+							$countCheckMark=count($checkMarks);
+							echo "sortie : ".$countCheckMark."<br><br>";
+							break;
+						}
+					}
+				}
+				
+				foreach ($checkMarks as $cm){
+					echo "element restant : ".$cm."<br>";
+				}
+			}
+			
+			/*foreach($checkMarks as $checkMark){
+				echo "-> ".$checkMark."<br>";
 				$urlImg='images/marques/'.$checkMark;
-					
+				
 				$marque=new Marque();
 				$imgMarks[]=$marque->setUrl($urlImg);
 				$newImgMark=true;
-			}
-			//echo "<br>";
+			}*/
 		}
 		
 		if(isset($_POST['existImg']) && !empty($_POST['existImg']) && !isset($newImg)){
-			//echo "Recup Img: ".$_POST['existImg']."<br>";
+			echo "Recup Img: ".$_POST['existImg']."<br>";
 			$image=$this->doctrine->em->getRepository('images')->findAll();
 			
 			if($_POST['existImg']=="NULL"){
@@ -212,7 +245,7 @@ class CFormRubrique extends CI_Controller {
 			
 			if(!empty($this->getImgObj($object,'rubrique'))){
 				if($_POST['existImg']==$this->getImgObj($object,'rubrique')->getUrl()){
-					//echo "Image de la rubrique : ".$_POST['existImg'].'</br>';
+					echo "Image de la rubrique : ".$_POST['existImg'].'</br>';
 					$emptyImg=true;
 					$newImg=false;
 				}else{
@@ -231,8 +264,8 @@ class CFormRubrique extends CI_Controller {
 		}
 		
 		if ($this->form_validation->run() == FALSE){
-			//echo 'test false';
-			if(isset($_POST['idRubrique']) && !empty($_POST['idRubrique'])){
+			echo 'test false';
+			/*if(isset($_POST['idRubrique']) && !empty($_POST['idRubrique'])){
 				$titre="Rubrique ".$rubrique->getNomrubrique();
 			}else{
 				$titre="Rubrique ";
@@ -263,10 +296,10 @@ class CFormRubrique extends CI_Controller {
 			$this->layout->view('rubrique/vAddRubrique',
 								array(
 									'rubrique'	=>	$rubrique,
-								));
+								));*/
 		}else{
-			//echo 'test true</br>';
-			//Update or Put articleRubrique
+			echo 'test true</br>';
+			/*//Update or Put articleRubrique
 			$this->doctrine->em->persist($object);
 			$this->doctrine->em->flush();
 			
@@ -281,7 +314,7 @@ class CFormRubrique extends CI_Controller {
 			if($newImgMark){
 				if(!isset($_POST['idRubrique']) || empty($_POST['idRubrique'])){
 					$count=count($this->doctrine->em->getRepository('rubrique')->findAll());
-					//echo $count;
+					echo $count;
 					foreach ($imgMarks as $marque){
 						$this->doctrine->em->persist($marque);
 						$this->doctrine->em->flush();
@@ -318,7 +351,7 @@ class CFormRubrique extends CI_Controller {
 				$count=count($this->doctrine->em->getRepository('rubrique')->findAll());
 				$rubrique=$this->doctrine->em->find('rubrique',$count);
 			}
-			redirect('CRubrique?nom='.$rubrique->getNomrubrique(), 'refresh');
+			redirect('CRubrique?nom='.$rubrique->getNomrubrique(), 'refresh');*/
 		}
 	}
 }

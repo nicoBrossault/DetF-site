@@ -146,6 +146,10 @@ class CI_Controller {
 			}
 		}
 		
+		/*foreach ($marquesRub as $mr){
+			echo $mr->getUrl()."<br>";
+		}*/
+		
 		return $marqRub;
 	}
 	
@@ -207,6 +211,7 @@ class CI_Controller {
 			$data+=array(
 					'rubrique'=>$rubrique,
 					"imgRub"=>$imgRub,
+					"marquesRub"=>self::__getMarqueRub($rubrique),
 			);
 		}else{
 			$data+=array(

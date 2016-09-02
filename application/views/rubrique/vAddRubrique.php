@@ -140,7 +140,21 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 		$extension = substr($fileMarks[$i], -3, 3);
 		if($extension == "jpg" || $extension =="png"  || $extension =="JPG" || $extension =="PNG"):
 	?>
-		<input type="checkbox" name="checkMark[]" id="<?=substr($fileMarks[$i],0,-4)?>" value=<?=$fileMarks[$i]?>/>
+		<input 
+			type="checkbox" 
+			name="checkMark[]" 
+			id="<?=substr($fileMarks[$i],0,-4)?>" 
+			value="<?=$fileMarks[$i]?>"
+			<?php 
+				foreach ($marquesRub as $mr):
+					if(substr($mr->getUrl(),15)==$fileMarks[$i]):
+			?>
+					checked="checked"		
+			<?php
+					endif;
+				endforeach;
+			?>
+			/>
 	    <label for="<?=substr($fileMarks[$i],0,-4)?>">
 	    	<img 
 	    		alt="<?=substr($fileMarks[$i],0,-4)?>" 
