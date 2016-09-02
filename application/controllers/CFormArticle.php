@@ -56,14 +56,16 @@ class CFormArticle extends CI_Controller {
 			$rubrique=$this->doctrine->em->find('rubrique',$id);
 			$object->setIdrubrique($rubrique);
 		}
+		
+		$this->form_validation->set_rules('titre', 'titre', 'required|trim|min_length[5]|xss_clean');
 		if(isset($_POST['titre']) && !empty($_POST['titre'])){
 			//echo "titre : ".$_POST['titre']."<br>";
-			$this->form_validation->set_rules('titre', 'Titre', 'trim|min_length[5]|xss_clean');
 			$object->setTitre(utf8_decode($_POST['titre']));
 		}
+		
+		$this->form_validation->set_rules('texte', 'texte', 'required|trim|min_length[5]|xss_clean');
 		if(isset($_POST['texte']) && !empty($_POST['texte'])){
 			//echo "texte : ".$_POST['texte']."<br>";
-			$this->form_validation->set_rules('texte', 'texte', 'trim|min_length[5]|xss_clean');
 			$object->setTextrubrique(utf8_decode($_POST['texte']));
 		}
 		
@@ -138,12 +140,16 @@ class CFormArticle extends CI_Controller {
 				}else{
 					//echo "-> Changement de l'image <br>";
 					//permet de changer l'image de l'article
-					$this->doctrine->em->remove($this->getImgArt($object));
+					//$this->doctrine->em->remove($this->getImgArt($object));
+					
+					$image = $this->getImgArt($object);
+					
+					//echo "-> URL image existante: ".$image->getUrl()."<br>";
 					
 					$this->form_validation->set_rules('existImg', 'Nom existImg', 'trim');
 					$urlImg='images/'.$_POST['existImg'];
 					
-					$image=new Images();
+					//$image=new Images();
 					$image->setUrl($urlImg);
 					$image->setTitre($_POST['titre']);
 					$newImg=true;
@@ -152,7 +158,7 @@ class CFormArticle extends CI_Controller {
 		}
 		
 		if ($this->form_validation->run() == FALSE){
-			//echo 'test false';
+			//echo 'test false <br>';
 			$titre="Rubrique ".$rubrique->getNomrubrique();
 			$this->layout->setTitre($titre);
 			$items=array('Accueil');
@@ -171,32 +177,49 @@ class CFormArticle extends CI_Controller {
 					}
 				}
 			}
+			
+			if(isset($_POST['idArticle']) && !empty($_POST['idArticle'])){
+				$articlerubrique=$this->doctrine->em->find('articlerubrique',$_POST['idArticle']);
+				//echo "articlerubrique true <br>";
+			}else{
+				$articlerubrique=new Articlerubrique();
+				//echo "articlerubrique false <br>";
+			}
+			
+			
 			$this->layout->setFooter(
 					$footerAccueil->getTextSite(),
 					$imgFooter);
 			
 			
-			$this->layout->view('rubrique/vAdd',array(
-								'rubrique'	=>	$rubrique,
-								));
+			$this->layout->view(
+					'rubrique/vAdd',array(
+					'rubrique'	=>	$rubrique,
+					'articleRubrique' => $articlerubrique,
+					));
 		}else{
-			//echo 'test true</br>';
+			//echo 'test true </br>';
 			//Update or Put articleRubrique
 			$this->doctrine->em->persist($object);
 			$this->doctrine->em->flush();
 			
 			//Put Images
-			if($newImg){
+			if(isset($newImg) && $newImg){
 				$articles=$this->doctrine->em->getRepository('articlerubrique')->findAll();
 				foreach ($articles as $article){
-					//echo $article->getIdrubrique()->getIdrubrique()."<br>";
-					//echo $rubrique->getIdrubrique()."<br>";
+					//echo "-> Id rubrique par l'article : ".$article->getIdrubrique()->getIdrubrique()."<br>";
+					//echo "-> Id rubrique : ".$rubrique->getIdrubrique()."<br>";
 					if($article->getIdrubrique()->getIdrubrique()==$rubrique->getIdrubrique()){
-						$last=$article;
-						//echo "test</br>";
+						if(empty($_POST['idArticle'])){
+							$last=$article;
+							//echo $last->getIdarticlerubrique()."<br>";
+						}else{
+							$last=$object;
+							//echo $last->getIdarticlerubrique()."<br>";
+						}
 					}
 				}
-				//echo $last->getIdarticlerubrique();
+				
 				$image->setIdarticlerubrique($last);
 				$this->doctrine->em->persist($image);
 				$this->doctrine->em->flush();
@@ -205,7 +228,9 @@ class CFormArticle extends CI_Controller {
 			if(isset($emptyImg) && $emptyImg==true){
 				//echo "test \'emptyImg\' <br>";
 				$imgArt=$this->getImgObj($object, 'articlerubrique');
-				if(!empty($imgArt)){
+				if(!empty($imgArt) && 
+					$imgArt->getIdarticlerubrique()->getIdarticlerubrique()==$object->getIdarticlerubrique()){
+					//echo $imgArt->getIdarticlerubrique()->getIdarticlerubrique();
 					$imgArt->setUrl("NULL");
 					$imgArt->setTitre("NULL");
 					$this->doctrine->em->persist($imgArt);

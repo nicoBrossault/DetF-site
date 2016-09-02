@@ -136,6 +136,19 @@ class CI_Controller {
 		return $imagesArt;
 	}
 	
+	//Récupération des marques associé à la rubrique
+	public function __getMarqueRub($object){
+		$allMarqueRub=$this->doctrine->em->getRepository('marquesrubrique')->findAll();
+		foreach ($allMarqueRub as $marquesRub){
+			if($marquesRub->getIdrubrique()->getIdrubrique()==$object->getIdrubrique()){
+				$marque=$this->doctrine->em->find("marque",$marquesRub->getIdmarque()->getIdmarque());
+				$marqRub[]=$marque;
+			}
+		}
+		
+		return $marqRub;
+	}
+	
 	//Récupération de l'image associée à l'identité
 	public function __getImgObj($objet, $entite){
 		//echo "function getImgObj (object, $entite): <br>";
@@ -157,9 +170,11 @@ class CI_Controller {
 			if($file==$majEntite){
 				//echo "|=> Test Concluant ! <br>";
 				$getId="getId".$minEntite;
+				//echo "|=> lancement de '".$getId."()'...<br>";
 				foreach($images as $image){
 					if($image->$getId()!=NULL){
 						if($image->$getId()->$getId()==$objet->$getId()){
+							//echo "|=> Id objet :".$image->$getId()->$getId()."<br>";
 							$imagesObj=$image;
 							//echo "|=> Image Url : ".$imagesObj->getUrl()."<br>";
 						}

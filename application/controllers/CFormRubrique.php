@@ -53,20 +53,20 @@ class CFormRubrique extends CI_Controller {
 		
 		
 		//echo 'alpha : '.$_POST['alpha'].'</br>';
-		$this->form_validation->set_rules('alpha', 'alpha', 'trim|min_length[1]|max_length[1]|xss_clean');
+		$this->form_validation->set_rules('alpha', 'alpha', 'required|trim|min_length[1]|max_length[1]|xss_clean');
 		if(isset($_POST['alpha']) && !empty($_POST['alpha'])){	
 			$alpha=$_POST['alpha'];
 		}
 		
 		//echo "titre : ".$_POST['titre']."<br>";
-		$this->form_validation->set_rules('titre', 'Titre', 'trim|min_length[5]|xss_clean|callback_check_alpha');
+		$this->form_validation->set_rules('titre', 'Titre', 'required|trim|min_length[5]|xss_clean|callback_check_alpha');
 		if(isset($alpha)){
 			$object->setNomrubrique($alpha."_".utf8_decode($_POST['titre']));
 		}
-
+		
+		$this->form_validation->set_rules('texte', 'texte', 'required|trim|min_length[5]|xss_clean');
 		if(isset($_POST['texte']) && !empty($_POST['texte'])){
 			//echo "texte : ".$_POST['texte']."<br>";
-			$this->form_validation->set_rules('texte', 'texte', 'trim|min_length[5]|xss_clean');
 			$object->setDescriptionrubrique(utf8_decode($_POST['texte']));
 		}
 		
@@ -180,6 +180,20 @@ class CFormRubrique extends CI_Controller {
 			
 		}
 		
+		if(isset($_POST['checkMark']) && !empty($_POST['checkMark'])){
+			//echo "marque check : <br>";
+			$checkMarks=$_POST['checkMark'];
+			foreach($checkMarks as $checkMark){
+				//echo "-> ".$checkMark."<br>";
+				$urlImg='images/marques/'.$checkMark;
+					
+				$marque=new Marque();
+				$imgMarks[]=$marque->setUrl($urlImg);
+				$newImgMark=true;
+			}
+			//echo "<br>";
+		}
+		
 		if(isset($_POST['existImg']) && !empty($_POST['existImg']) && !isset($newImg)){
 			//echo "Recup Img: ".$_POST['existImg']."<br>";
 			$image=$this->doctrine->em->getRepository('images')->findAll();
@@ -257,7 +271,7 @@ class CFormRubrique extends CI_Controller {
 			$this->doctrine->em->flush();
 			
 			//Put Images
-			if($newImg){
+			if(isset($newImg) && $newImg){
 				$last=count($this->doctrine->em->getRepository('rubrique')->findAll());
 				$image->setIdrubrique($this->doctrine->em->find('rubrique',$last));
 				$this->doctrine->em->persist($image);

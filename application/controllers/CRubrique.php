@@ -128,6 +128,10 @@ class CRubrique extends CI_Controller {
 		return parent::__getImgObj($objet, $entite);
 	}
 	
+	public function getMarqueRub($objet){
+		return parent::__getMarqueRub($objet);
+	}
+	
 	public function isAdmin(){
 		if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
 			return true;
@@ -189,6 +193,66 @@ class CRubrique extends CI_Controller {
 		$this->load->view('rubrique/vDelete', array('rubrique'=>$rubrique));
 	}
 	
+	public function deleteRubrique(){
+		echo $_GET['id']."<br>";
+		$rubrique=$this->doctrine->em->find('rubrique', $_GET['id']);
+		$articles=$this->doctrine->em->getRepository('articlerubrique')->findAll();
+		$articleRubrique=array();
+		
+		echo $rubrique->getNomrubrique()."<br>";
+		
+		foreach ($articles as $article){
+			if($article->getIdrubrique()->getIdrubrique()==$rubrique->getIdrubrique()){
+				$articleRubrique[]=$article;
+			}
+		}
+		
+		if(isset($articleRubrique) &&!empty($articleRubrique)){
+			foreach ($articleRubrique as $artRub){
+				echo $artRub->getTitre()."<br>";
+				$imgArtRub=$this->getImgObj($artRub, "articlerubrique");
+				if(isset($imgArtRub) && !empty($imgArtRub)){
+					echo "-> Image Associé : ".$imgArtRub->getTitre()."<br>";
+					$this->doctrine->em->remove($artRub);
+					$this->doctrine->em->remove($imgArtRub);
+				}else{
+					$this->doctrine->em->remove($artRub);
+				}
+				
+			}
+		}
+		
+		$marquesRub=$this->getMarqueRub($rubrique);
+		foreach ($marquesRub as $marqueRub){
+			$this->doctrine->em->remove($marqueRub);
+		}
+		
+		$allMarqueRub=$this->doctrine->em->getRepository('marquesrubrique')->findAll();
+		foreach ($allMarqueRub as $marquesRub){
+			if($marquesRub->getIdrubrique()->getIdrubrique()==$rubrique->getIdrubrique()){
+				$this->doctrine->em->remove($marquesRub);
+			}
+		}
+		
+		$imagesRub=$this->getImgObj($rubrique, "rubrique");
+		if(isset($imagesRub) &&!empty($imagesRub)){
+			foreach ($imagesRub as $imageRub){
+				echo $imageRub->getTitre()."<br>";
+				$this->doctrine->em->remove($imageRub);
+			}
+		}
+		
+		$this->doctrine->em->remove($rubrique);
+		$this->doctrine->em->flush();
+		redirect(base_url(),'auto');
+	
+		/*$msg='L\'article : "'.$article->getTitre().'" a bien été supprimé.';
+			$this->layout->view('article/vDelete', array(
+			'msg'		=>	$msg,
+			'article'	=>	$article,
+			));*/
+	}
+	
 	
 	public function addRubrique($id=NULL){
 		return parent::__addRubrique($id);
@@ -221,11 +285,6 @@ class CRubrique extends CI_Controller {
 				'CRubrique/valDeleteArticle',
 				'.formAdd',
 				$jFunc);
-		$this->javascript->getAndBindTo(
-				'.btnValidDelete',
-				'click',
-				'CRubrique/deleteArticle',
-				'.formAdd');
 		
 		$this->javascript->getAndBindTo(
 				'.btnDeleteRub',

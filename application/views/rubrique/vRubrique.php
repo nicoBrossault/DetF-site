@@ -83,24 +83,25 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 				<h1><?=utf8_encode($articles->getTitre())?></h1>
 			</span>
 			<div class="row">
-				<?php foreach($articlesImg['imagesArt'] as $imagesArt):?>
-					<?php if(isset($imagesArt) && $imagesArt->getUrl()!="NULL"):?>
-						<div class="imgAccueil col s3 m3 l3">
+				<div class="imgAccueil col s3 m3 l3">
+					<?php 
+					$CI =& get_instance();
+					$imagesArt=$CI->getImgObj($articles,"articlerubrique");
+					if(isset($imagesArt) && !empty($imagesArt) && $imagesArt->getUrl()!="NULL"):?>
 							<img src="<?=base_url()?>assets/<?=$imagesArt->getUrl()?>"  
-									class="circle responsive-img"
-									alt="<?php $imagesArt->getTitre()?>"
-									style="
-										min-width:150px; 
-										min-height:150px; 
-										max-width:150px; 
-										max-height:150px;
-										border-radius:50%;
-										background-color:#90caf9; 
-										margin-left:3%;">
+								class="circle responsive-img"
+								alt="<?php $imagesArt->getTitre()?>"
+								style="
+									min-width:150px; 
+									min-height:150px; 
+									max-width:150px; 
+									max-height:150px;
+									border-radius:50%;
+									background-color:#90caf9; 
+									margin-left:3%;">
 							</br>
-						</div>
 					<?php endif;?>
-				<?php endforeach;?>
+				</div>
 				<div class="contentAccueil col s10 m6 l9 offset-m2" style="font-size:1.3em">
 					<p><?=utf8_encode($articles->getTextrubrique())?></p>
 				</div>

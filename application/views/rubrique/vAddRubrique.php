@@ -31,7 +31,7 @@ if(empty($rubrique) || !isset($rubrique)){
 	echo form_hidden('idRubrique',$rubrique->getIdrubrique());
 	$titreR=$rubrique->getNomrubrique();
 	$titreRubrique=substr($titreR,2,strlen($titreR));
-	$texteRubrique=$rubrique->getDescriptionrubrique();
+	$texteRubrique=utf8_encode($rubrique->getDescriptionrubrique());
 };
 ?>
 
@@ -125,7 +125,34 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 <input type="file" name="fileImgMark[]" multiple/>
 <br>
 <br>
-
+<br>
+<br>
+<?php 
+	$dirMark = 'assets/images/marques';
+	$fileMarks = scandir($dirMark);
+	$countMark = 0;
+	
+	foreach($fileMarks as $fileMark){
+		$countMark+=1;
+	}
+	
+	for($i=0; $i<$countMark; $i++):
+		$extension = substr($fileMarks[$i], -3, 3);
+		if($extension == "jpg" || $extension =="png"  || $extension =="JPG" || $extension =="PNG"):
+	?>
+		<input type="checkbox" name="checkMark[]" id="<?=substr($fileMarks[$i],0,-4)?>" value=<?=$fileMarks[$i]?>/>
+	    <label for="<?=substr($fileMarks[$i],0,-4)?>">
+	    	<img 
+	    		alt="<?=substr($fileMarks[$i],0,-4)?>" 
+	    		src="<?=$dirMark.'/'.$fileMarks[$i]?>"
+	    		style="max-width: 50px; height:50px;"
+	    		>
+	    		<div style="width:2px; height:100px; background-color:black; margin:-100px 0px 0px 70px"></div>
+	    </label>
+	<?php
+		endif;
+	endfor;
+?>
 <label for="texte"><h5>Texte</h5></label>
 <div class="row">
 	<div class="func col s2 m2 l2 btn waves-effect waves-light" id='p' style="margin-left: 5px;">
