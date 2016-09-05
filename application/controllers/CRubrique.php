@@ -19,7 +19,7 @@ class CRubrique extends CI_Controller {
 		$nomRubrique=$this->doctrine->em->getRepository('rubrique')->findAll();
 		foreach($nomRubrique as $item){
 			$items[]=$item->getNomrubrique();
-			if(isset($_GET['nom']) && !empty($_GET['nom']) && $item->getNomrubrique()==$_GET['nom']){
+			if(isset($_GET['nom']) && !empty($_GET['nom']) && utf8_encode($item->getNomrubrique())==$_GET['nom']){
 				$rubrique=$item;
 			}
 		}
@@ -197,12 +197,12 @@ class CRubrique extends CI_Controller {
 	}
 	
 	public function deleteRubrique(){
-		////echo $_GET['id']."<br>";
+	//echo $_GET['id']."<br>";
 		$rubrique=$this->doctrine->em->find('rubrique', $_GET['id']);
 		$articles=$this->doctrine->em->getRepository('articlerubrique')->findAll();
 		$articleRubrique=array();
 		
-		////echo $rubrique->getNomrubrique()."<br>";
+		//echo $rubrique->getNomrubrique()."<br>";
 		
 		foreach ($articles as $article){
 			if($article->getIdrubrique()->getIdrubrique()==$rubrique->getIdrubrique()){
@@ -239,9 +239,12 @@ class CRubrique extends CI_Controller {
 		
 		$imagesRub=$this->getImgObj($rubrique, "rubrique");
 		if(isset($imagesRub) &&!empty($imagesRub)){
-			foreach ($imagesRub as $imageRub){
-				//echo $imageRub->getTitre()."<br>";
-				$this->doctrine->em->remove($imageRub);
+			if(count($imagesRub)==1){
+				$this->doctrine->em->remove($imagesRub);
+			}else{
+				foreach ($imagesRub as $imageRub){
+					$this->doctrine->em->remove($imageRub);
+				}
 			}
 		}
 		

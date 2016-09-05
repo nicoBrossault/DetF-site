@@ -64,9 +64,23 @@
 	        <div id="sidebar-wrapper">
 	            <ul class="sidebar-nav">
 	            	<?php if(isset($user)):?>
-					</br>
-				<?php endif;?>
-	  			</br>
+						</br>
+					<?php endif;?>
+		  			</br>
+					<li id="menu-toggle-bis" class="menuLeft">
+						<span class="menuLeft">
+							<i class="material-icons menuLeftOpen" 
+								style="
+									position:absolute; 
+									top:2%;
+									color:white;
+								">
+								<span style="margin-left: -12px">
+									close
+								</span>
+							</i>
+						</span>
+					</li>
 				<?php foreach($itemsMenu as $item):?>
 					<?php if($item=="Accueil"):?>
 						<li class="menuItems">
@@ -93,7 +107,7 @@
 					<br>
 					<li class="buttonAddRubrique" id="NULL">
 						<span class="btn-floating waves-effect waves-light add" 
-						style="background-color:#ad1457; margin-left:78px; margin-top:-5px;">
+						style="background-color:#ad1457; margin-left:100px; margin-top:-5px;">
 						 	<i class="material-icons" style="margin-left:-33px;">add</i>
 						</span>
 					</li>

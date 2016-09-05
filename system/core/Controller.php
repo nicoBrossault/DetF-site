@@ -138,6 +138,8 @@ class CI_Controller {
 	
 	//Récupération des marques associé à la rubrique
 	public function __getMarqueRub($object){
+		//echo "function getMarqueRub : <br>";
+		$marqRub=array();
 		$allMarqueRub=$this->doctrine->em->getRepository('marquesrubrique')->findAll();
 		foreach ($allMarqueRub as $marquesRub){
 			if($marquesRub->getIdrubrique()->getIdrubrique()==$object->getIdrubrique()){
@@ -145,8 +147,7 @@ class CI_Controller {
 				$marqRub[]=$marque;
 			}
 		}
-		
-		/*foreach ($marquesRub as $mr){
+		/*foreach ($marqRub as $mr){
 			echo $mr->getUrl()."<br>";
 		}*/
 		

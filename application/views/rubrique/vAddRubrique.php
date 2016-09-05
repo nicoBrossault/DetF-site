@@ -73,13 +73,19 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 <br>
 <br>
 <label for="existImg"><h5>Mettre une Image déjà téléchargé : </h5></label>
+
 <div class="input-field col s12 m6">
 	<select class="icons select-wrapper" id="existImg" name="existImg">
 		<?php 
 		if(isset($imgRub) && !empty($imgRub)){
-			foreach($imgRub as $img){
-				$imgAR=$img;
-			};
+			$count=0;
+			if(count($imgRub)==1){
+				$imgAR=$imgRub;
+			}else{
+				foreach($imgRub as $img){
+					$imgAR=$img;
+				}
+			}
 		}else{
 			$imgAR=NULL;
 		}
@@ -146,13 +152,15 @@ echo "<i>Minimum 5 caractère.</i><br><br>";
 			id="<?=substr($fileMarks[$i],0,-4)?>" 
 			value="<?=$fileMarks[$i]?>"
 			<?php 
-				foreach ($marquesRub as $mr):
-					if(substr($mr->getUrl(),15)==$fileMarks[$i]):
+				if(isset($marquesRub) && !empty($marquesRub)):
+					foreach ($marquesRub as $mr):
+						if(substr($mr->getUrl(),15)==$fileMarks[$i]):
 			?>
-					checked="checked"		
+							checked="checked"		
 			<?php
-					endif;
-				endforeach;
+						endif;
+					endforeach;
+				endif;
 			?>
 			/>
 	    <label for="<?=substr($fileMarks[$i],0,-4)?>">

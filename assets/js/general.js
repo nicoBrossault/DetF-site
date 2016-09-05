@@ -43,6 +43,11 @@ $(document).ready(function() {
 	    $("#wrapper").toggleClass("toggled");
 	});
 	
+	$("#menu-toggle-bis").click(function(e) {
+	    e.preventDefault();
+	    $("#wrapper").toggleClass("toggled");
+	});
+	
 	$('.contentText').css('left','20%');
 	
 	$(".buttonAdd").click(function(){
