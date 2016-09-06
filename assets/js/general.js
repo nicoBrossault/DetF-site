@@ -9,7 +9,6 @@ $(document).ready(function() {
 		$(this).addClass('selectedItems');
 	});
 	
-	
 	if(widthScreen<400){
 		$('.textHeader').css("font-size",'2em');
 		$('.contentText').css('top',$('.textHeader').height()+100+"px");

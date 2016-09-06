@@ -45,7 +45,24 @@ class CAccueil extends CI_Controller {
 		}
 		
 		$this->ajaxAddRub();
+		$this->ajaxGet();
 		$this->layout->view('accueil/vAccueil',$data);
+	}
+	
+	public function editThisText($id=NULL){
+		$this->javascript->ready("
+					$('.annuler').click(function(){
+						console.log('annuler');
+						document.location.reload(true);
+					});"
+				);
+		
+		$this->javascript->compile();
+		
+		$this->load->view('accueil/vEdit', 
+				array(
+						'textSite'=>$this->doctrine->em->find('textsite',$id),
+				));
 	}
 	
 	public function disconnect(){
@@ -61,5 +78,22 @@ class CAccueil extends CI_Controller {
 	}
 	public function ajaxAddRub(){
 		parent::__ajaxAddRubrique();
+	}
+	public function ajaxGet($id=NULL){
+		$jFunc='$(".cache").css({
+				visibility : "visible",
+				height : $(document).height()
+		})';
+		
+		$this->javascript->ready("
+					$('.btnEditText').click(function(){
+						var idText = $(this).attr('id');
+						url='CAccueil/editThisText/'+$(this).attr('id');
+						$.get(url,{}).done(function( data ) {
+							$('#text_'+idText).html( data );
+						});
+					});"
+				);
+		$this->javascript->compile();
 	}
 }

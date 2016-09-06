@@ -73,9 +73,10 @@
 								style="
 									position:absolute; 
 									top:2%;
+									padding-top:7px;
 									color:white;
 								">
-								<span style="margin-left: -12px">
+								<span style="margin-left: -12px;">
 									close
 								</span>
 							</i>
