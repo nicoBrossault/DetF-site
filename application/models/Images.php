@@ -72,7 +72,16 @@ class Images
      */
     private $idrubrique;
 
-
+    /**
+     * @var Promo
+     *
+     * @OneToOne(targetEntity="Promo")
+     * @JoinColumns({
+     *   @JoinColumn(name="idPromo", referencedColumnName="idPromo", unique=true)
+     * })
+     */
+    private $idpromo;
+    
     /**
      * Get idimages
      *
@@ -82,7 +91,7 @@ class Images
     {
         return $this->idimages;
     }
-
+    
     /**
      * Set titre
      *
@@ -213,5 +222,27 @@ class Images
     public function getIdrubrique()
     {
         return $this->idrubrique;
+    }
+    
+    /**
+     * Get idpromo
+     *
+     * @return integer
+     */
+    public function getIdpromo()
+    {
+    	return $this->idpromo;
+    }
+    
+    /**
+     * Set idpromo
+     *
+     * @param Promo $idpromo
+     * @return Images
+     */
+    public function setIdpromo(\Promo $idpromo = null)
+    {
+    	$this->idpromo = $idpromo;
+    	return $this;
     }
 }

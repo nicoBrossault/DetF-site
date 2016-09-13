@@ -48,4 +48,13 @@ Images:
         idRubrique:
           referencedColumnName: idRubrique
       orphanRemoval: false
+    idpromo:
+      targetEntity: Promo
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idRubrique:
+          referencedColumnName: idPromo
+      orphanRemoval: false
   lifecycleCallbacks: {  }

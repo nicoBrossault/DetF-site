@@ -63,12 +63,32 @@ body{
 .menuLeft{
 	cursor:pointer;
 }
+
 .menuLeftOpen{
 	width:40px;
 	height:40px;
 	border-radius:20px;
 	background-color:#ad1457;
 	padding-top: 6px;
+}
+
+.menuLeft-bis{
+	position:absolute; 
+	top:2%;
+	margin-left:200px;
+	padding-top:7px;
+	color:white;
+}
+
+.menuLeftOpen-bis{
+	width:40px;
+	height:40px;
+	border-radius:20px;
+	background-color:#E91E63;
+	padding-top: 6px;
+	-webkit-box-shadow: inset 4px 2px 8px 0px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 4px 2px 8px 0px rgba(0,0,0,0.5);
+	box-shadow: inset 4px 2px 8px 0px rgba(0,0,0,0.5);
 }
 .decoHeader{
 	height:70px;

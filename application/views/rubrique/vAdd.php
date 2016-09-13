@@ -34,7 +34,8 @@ $titre= array('name'=>'titre',
 		'id'=>'titre',
 		'placeholder'=>'Titre de l\'article',
 		'style'=>"font-size:1.6em",
-		'value'=>$titreArticle);
+		'value'=>utf8_encode($titreArticle)
+		);
 echo '<label for="titre"><h5>Titre</h5></label>';
 echo form_input($titre);
 echo form_error('titre','<span class="error" style="color:red">','</span></br>');
@@ -131,7 +132,7 @@ $texte= array(
 		'class'=>"materialize-textarea article",
 		'style'=>"font-size:1.6em",
 		'placeholder'=>'Texte de l\'article',
-		'value'=>$texteArticle,
+		'value'=>utf8_encode($texteArticle),
 		'cols' => '40',
 		'rows' => '40');
 echo form_textarea($texte);

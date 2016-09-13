@@ -215,16 +215,17 @@ class CFormRubrique extends CI_Controller {
 							$countAlreadyCheckMark=count($alreadyCheck);
 							$countCheckMark=count($checkMarks);
 							//echo "sortie : ".$countCheckMark."<br><br>";
-							break;
 						}
 					}
 				}
 				
-				if(count($checkMarks)==1 && count($alreadyCheck)==1){
+				if(count($checkMarks)==1 || count($alreadyCheck)==1){
 					foreach ($alreadyCheck as $acm){
-						if(substr($acm->getUrl(),15)==$checkMarks[0]){
-							array_splice($checkMarks,0,1);
-							array_splice($alreadyCheck,0,1);
+						if(count($checkMarks)!=0){
+							if(substr($acm->getUrl(),15)==$checkMarks[0]){
+								array_splice($checkMarks,0,1);
+								array_splice($alreadyCheck,0,1);
+							}
 						}
 					}
 				}

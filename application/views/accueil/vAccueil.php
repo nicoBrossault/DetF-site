@@ -7,15 +7,36 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 	<?php if(isset($user)):?>
 		<div class="utils right-align">
 			<span style="margin-right: 1%">
+				<a class="btn-floating waves-effect waves-light btnEditPromo" 
+				 	id="promo"
+				 	style="background-color:#E0C3F2">
+					<i class="material-icons">edit</i>
+				</a>
+			</span>
+		</div>
+	<?php endif;?>
+	<div class="card-content editPromo">
+		<span class="card-title">
+			<h1><?=$promo->getLibellepromo()?></h1>
+		</span>
+		<div class="contentAccueil col s10 m6 l9 offset-m2" 
+		style="font-size:1.3em"
+		id="">
+			<p style="font-size:1.3em"><?=$promo->getTextpromo()?></p>
+		</div>
+	</div>
+</div>
+
+<div class="card">
+	<?php if(isset($user)):?>
+		<div class="utils right-align">
+			<span style="margin-right: 1%">
 				 <a class="btn-floating waves-effect waves-light btnEditText" 
 				 	id="<?=$accueil->getIdtextsite()?>"
 				 	style="background-color:#E0C3F2">
 				 	<i class="material-icons">edit</i>
 				 </a>
 			 </span>
-			 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
-			 	<i class="material-icons">delete</i>
-			 </a>
 		</div>
 	<?php endif;?>
 	<div class="card-content">
@@ -58,9 +79,6 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						 	<i class="material-icons">edit</i>
 						 </a>
 					 </span>
-					 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
-					 	<i class="material-icons">delete</i>
-					 </a>
 				</div>
 			<?php endif;?>
 			<div class="card-content">
@@ -93,9 +111,6 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 							<i class="material-icons">edit</i>
 						</a>
 					 </span>
-					 <a class="btn-floating waves-effect waves-light" style="background-color:#E0C3F2">
-					 	<i class="material-icons">delete</i>
-					 </a>
 				</div>
 			<?php endif;?>
 			<div class="card-content">

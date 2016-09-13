@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CAccueil extends CI_Controller {
+class CImages extends CI_Controller {
 	
 	public function __construct(){
 		// Obligatoire
 		parent::__construct();
-		$titre="Accueil";
+		$titre="Gestion des Images";
 		$this->layout->setTitre($titre);
 		//items du menu
 		$items=array('Accueil');
@@ -32,41 +32,54 @@ class CAccueil extends CI_Controller {
 	}
 	
 	public function index(){
-		$data=array(
-				'accueil'=>$this->doctrine->em->find('textSite',1),
-				'horaire'=>$this->doctrine->em->find('textSite',2),
-				'newLetter'=>$this->doctrine->em->find('textSite',3),
-				'promo'=>$this->doctrine->em->find('promo',1)
-		);
+		$data=array();
 		
+		$count=0;
+		$allImages=array();
 		if($this->isAdmin()){
 			$data+=array('user'=>$this->doctrine->em->find('user',$_SESSION['user']));
+		}else{
+			redirect('CAccueil', 'refresh');
 		}
+		
+		//Images
+		$dir = 'assets/images';
+		$fileImages = scandir($dir);
+			
+		foreach($fileImages as $fileImage){
+			$count+=1;
+		}
+		for($i=2; $i<$count; $i++){
+			$extension = substr($fileImages[$i], -3, 3);
+			if($extension == "jpg" || $extension =="png"  || $extension =="JPG" || $extension =="PNG"){
+				if($fileImages[$i]!="motif-cachemire.png"){
+					$allImages[]=$fileImages[$i];
+				}
+			}
+		}
+		
+		//Marques
+		$allImagesMarK=array();
+		$count=0;
+		$dirMark = 'assets/images/marques';
+		opendir($dirMark);
+		$fileImagesMark = scandir($dirMark);
+			
+		foreach($fileImagesMark as $fileImageMark){
+			$count+=1;
+		}
+		for($i=2; $i<$count; $i++){
+			$extension = substr($fileImages[$i], -3, 3);
+			if($extension == "jpg" || $extension =="png"  || $extension =="JPG" || $extension =="PNG"){
+				$allImagesMarK[]=$fileImagesMark[$i];
+			}
+		}
+		
+		$data+=array('allImages'=>$allImages, 'allImagesMark'=>$allImagesMarK);
 		
 		$this->ajaxAddRub();
 		$this->ajaxGet();
-		$this->layout->view('accueil/vAccueil',$data);
-	}
-	
-	public function editThisText($id=NULL){
-		$this->javascript->ready("
-					$('.annuler').click(function(){
-						console.log('annuler');
-						document.location.reload(true);
-					});"
-				);
-		
-		$this->javascript->compile();
-		
-		$this->load->view('accueil/vEdit', array(
-				'textSite'=>$this->doctrine->em->find('textsite',$id),
-				));
-	}
-	
-	public function editPromo($id=NULL){
-		$this->load->view('accueil/vEditPromo',array(
-				'promo'=>$this->doctrine->em->find('promo',1),
-				));
+		$this->layout->view('images/vImages',$data);
 	}
 	
 	public function disconnect(){
@@ -98,11 +111,6 @@ class CAccueil extends CI_Controller {
 						});
 					});"
 				);
-		$this->javascript->getAndBindTo(
-				'.btnEditPromo',
-				'click',
-				'CAccueil/editPromo',
-				'.editPromo');
 		$this->javascript->compile();
 	}
 }

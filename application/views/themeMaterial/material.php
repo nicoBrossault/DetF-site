@@ -1,6 +1,16 @@
 <?php
 	use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 ?>
+<?php 
+	require base_url().'assets/css/lessphp/lessc.inc.php';
+	
+	try {
+		lessc::ccompile(base_url().'assets/css/dynCss/input.less', base_url().'assets/css/dynCss/out.css');
+	} catch (exception $ex) {
+		exit('lessc fatal error:
+	     '.$ex->getMessage());
+	}
+?>
 <!DOCTYPE html>
 	<head>
 		<title>d&f <?=$titre[0]?></title>
@@ -12,6 +22,7 @@
 		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/rangeslider.css">
 		<link rel="icon" type="image/png" href="<?=base_url()?>assets/images/favicon.png" />
 		<link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" media="screen" href="<?=base_url()?>assets/css/dynCss/out.css" />
 	</head>
 	<body>
 		<script src="<?=base_url()?>assets/js/jquery.js"></script>
@@ -34,15 +45,32 @@
 				<?php if(isset($user)):?>
 					<div class="utils-nav right-align" style="margin:-1% 0% -1% 0%; padding:0.5% 2% 0.5% 0.5%;">
 						<h5>
-							<span style="margin-right: 1%">
-								Bonjour, <?=$user->getPrenom()." ".$user->getNom()?>
+							<span class="s8 m2 l2">
+								<a
+								href="<?=base_url('CImages')?>"
+								class="waves-effect waves-light btn" 
+								style="
+									text-transform:none;
+									border-radius:0;
+									background-color:#E0C3F2;
+									padding:0px 40px 0px 40px;
+									margin:5px 0px 5px 0px;
+								">
+									Gestion des Images
+								</a>
 							</span>
-							<a 
-								href="<?=base_url('CAccueil')?>/disconnect"
-								class="btn-floating waves-effect waves-light" 
-								style="background-color:#E0C3F2">
-							 	<i class="material-icons">power_settings_new</i>
-							 </a>
+							<div class="s8 m2 l2">
+								Bonjour, <?=$user->getPrenom()." ".$user->getNom()?>
+								<a 
+									href="<?=base_url('CAccueil')?>/disconnect"
+									class="btn-floating waves-effect waves-light" 
+									style="
+										background-color:#E0C3F2;
+										margin-left: 1%
+										">
+								 	<i class="material-icons">power_settings_new</i>
+								 </a>
+							 </div>
 						</h5>
 					</div>
 				<?php endif;?>
@@ -67,20 +95,12 @@
 						</br>
 					<?php endif;?>
 		  			</br>
-					<li id="menu-toggle-bis" class="menuLeft">
-						<span class="menuLeft">
-							<i class="material-icons menuLeftOpen" 
-								style="
-									position:absolute; 
-									top:2%;
-									padding-top:7px;
-									color:white;
-								">
-								<span style="margin-left: -12px;">
-									close
-								</span>
-							</i>
-						</span>
+					<li id="menu-toggle-bis" class="menuLeft-bis">
+						<i class="material-icons menuLeftOpen-bis">
+							<span style="margin-left: -12px;">
+								close
+							</span>
+						</i>
 					</li>
 				<?php foreach($itemsMenu as $item):?>
 					<?php if($item=="Accueil"):?>
