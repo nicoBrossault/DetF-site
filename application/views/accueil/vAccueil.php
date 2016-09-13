@@ -15,17 +15,28 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 			</span>
 		</div>
 	<?php endif;?>
-	<div class="card-content editPromo">
-		<span class="card-title">
-			<h1><?=$promo->getLibellepromo()?></h1>
-		</span>
-		<div class="contentAccueil col s10 m6 l9 offset-m2" 
-		style="font-size:1.3em"
-		id="">
-			<p style="font-size:1.3em"><?=$promo->getTextpromo()?></p>
+	<?php if($promo->getActif()!=0):?>
+		<div class="card-content editPromo center-align carton" style="color:white">
+			<span class="card-title center-align">
+				<h1><?=$promo->getLibellepromo()?></h1>
+			</span>
+			<div class="contentAccueil center-align promoContent">
+				<p style="font-size:1.3em"><?=$promo->getTextpromo()?></p>
+			</div>
 		</div>
-	</div>
+	<?php 
+		endif;
+		if($promo->getActif()==0 && isset($user)):
+	?>
+		<div class="card-content editPromo">
+			<p class="center-align" style="font-size:3em">
+				Aucune <em>"Promotion"</em> ou <em>"Nouvelle"</em> actif...
+			<p>
+		</div>
+	<?php endif;?>
 </div>
+<br>
+<br>
 
 <div class="card">
 	<?php if(isset($user)):?>

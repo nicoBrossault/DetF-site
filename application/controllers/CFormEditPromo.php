@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class CFormText extends CI_Controller {
+class CFormEditPromo extends CI_Controller {
 	public function __construct(){
 		// Obligatoire
 		parent::__construct();
@@ -17,12 +17,7 @@ class CFormText extends CI_Controller {
 		
 		//Regle de validation
 		//appel de l'object
-		if(isset($_POST['idTextSite']) && !empty($_POST['idTextSite'])){
-			$id=$_POST['idTextSite'];
-			//echo "id Article : ".$id."<br>";
-			$this->form_validation->set_rules('idText', 'Id du texte', 'trim');
-			$object = $this->doctrine->em->find('textSite', $id);
-		}
+		$object = $this->doctrine->em->find('promo', 1);
 		
 		if(isset($_POST['user']) && !empty($_POST['user'])){
 			$object->setIduser($this->doctrine->em->find('user',$_POST['user']));
@@ -31,18 +26,30 @@ class CFormText extends CI_Controller {
 		$this->form_validation->set_rules('titre', 'titre', 'required|trim|min_length[5]|xss_clean');
 		if(isset($_POST['titre']) && !empty($_POST['titre'])){
 			//echo "titre : ".$_POST['titre']."<br>";
-			$object->setTitretextsite(utf8_decode($_POST['titre']));
+			$object->setNompromo(utf8_decode($_POST['titre']));
 		}
 		
 		$this->form_validation->set_rules('texte', 'texte', 'required|trim|min_length[5]|xss_clean');
 		if(isset($_POST['texte']) && !empty($_POST['texte'])){
 			//echo "texte : ".$_POST['texte']."<br>";
-			$object->setTextsite(utf8_decode($_POST['texte']));
+			$object->setTextpromo(utf8_decode($_POST['texte']));
+		}
+		
+		if(isset($_POST['checkActif']) && !empty($_POST['checkActif'])){
+			foreach($_POST['checkActif'] as $isActif){
+				//echo "actif : true<br>";
+				$actif=true;
+			}
+			$object->setActif($actif);
+		}else{
+			//echo "actif : false<br>";
+			$actif=false;
+			$object->setActif($actif);
 		}
 		
 		if ($this->form_validation->run() == FALSE){
 			//echo 'test false <br>';
-			$titre="Accueil";
+			$titre="Promo";
 			$this->layout->setTitre($titre);
 			$items=array('Accueil');
 			$nomRubrique=$this->doctrine->em->getRepository('rubrique')->findAll();
@@ -61,10 +68,7 @@ class CFormText extends CI_Controller {
 				}
 			}
 			
-			if(isset($_POST['idTextSite']) && !empty($_POST['idTextSite'])){
-				$textsite=$this->doctrine->em->find('textsite',$_POST['idTextSite']);
-				//echo "articlerubrique true <br>";
-			}
+			$promo=$this->doctrine->em->find('promo',1);
 			
 			
 			$this->layout->setFooter(
@@ -73,8 +77,8 @@ class CFormText extends CI_Controller {
 			
 			
 			$this->layout->view(
-					'accueil/vEdit',array(
-					'textsite'	=>	$textSite,
+					'accueil/vEditPromo',array(
+					'promo'	=>	$promo,
 					));
 		}else{
 			//echo 'test true </br>';

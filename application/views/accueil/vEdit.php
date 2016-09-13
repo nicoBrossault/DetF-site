@@ -14,6 +14,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 <?php
 echo form_open_multipart('CFormText');
 echo form_hidden('idTextSite',$textSite->getIdtextsite());
+echo form_hidden('user',$_SESSION['user']);
 ?>
 
 

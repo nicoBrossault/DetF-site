@@ -43,8 +43,7 @@ if(empty($rubrique) || !isset($rubrique)){
 		<?php else:?>
 			<input name="alpha" type="radio" id="<?=$alpha?>" value="<?=$alpha?>"/>
 		<?php endif; ?>
-    <label for="<?=$alpha?>" class="iconsMenu" 
-    style="color:black; margin-left: 1%;">
+    <label for="<?=$alpha?>" class="iconsMenu" style="color:black; margin-left: 1%;">
     	<h2><?=$alpha?></h2>
     	<div style="width:2px; height:100px; background-color:black; margin:-100px 0px 0px 70px"></div>
     </label>

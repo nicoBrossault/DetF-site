@@ -13,7 +13,9 @@ body{
 	font-weight: bold
 }
 
-.legend{
+.btn{
+	text-transform:none;
+	font-size:2em;
 }
 
 .utils{
@@ -111,6 +113,19 @@ body{
 /		|			CONTENT			|
 /		+---------------------------+
 */
+
+.carton{
+	margin: 0% 0% 0% 0%;
+	background: url('../images/plante2.png');
+}
+
+.promoContent{
+	width:80%;
+	height:80%;
+	margin:auto;
+	font-size:1.63em;
+	background-color:rgba(0, 0, 0, 0.6);
+}
 
 .contentText{
 	/*position: absolute;*/

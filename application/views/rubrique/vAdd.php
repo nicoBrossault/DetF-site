@@ -27,6 +27,7 @@ if($articleRubrique==NULL){
 	$texteArticle=$articleRubrique->getTextrubrique();
 };
 echo form_hidden('idRubrique',$rubrique->getIdrubrique());
+echo form_hidden('user',$_SESSION['user']);
 ?>
 
 <?php

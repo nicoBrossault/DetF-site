@@ -18,6 +18,10 @@ Rubrique:
       type: text
       nullable: false
       column: textPromo
+    actif:
+      type: boolean
+      nullable: false
+      column: actif
   oneToOne:
     iduser:
       targetEntity: User

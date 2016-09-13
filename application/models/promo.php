@@ -34,6 +34,13 @@ class Promo
      * @Column(name="textPromo", type="text", nullable=false)
      */
     private $textPromo;
+    
+    /**
+     * @var boolean $actif
+     *
+     * @Column(name="actif", type="boolean", nullable=false)
+     */
+    private $actif;
 
     /**
      * @var User
@@ -98,6 +105,28 @@ class Promo
     public function getTextPromo()
     {
         return $this->textPromo;
+    }
+      
+    /**
+     * Set actif
+     *
+     * @param boolean $actif
+     * @return Promo
+     */
+    public function setActif($actif)
+    {
+    	$this->actif = $actif;
+    	return $this;
+    }
+    
+    /**
+     * Get actif
+     *
+     * @return boolean
+     */
+    public function getActif()
+    {
+    	return $this->actif;
     }
 
     /**

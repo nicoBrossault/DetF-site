@@ -1,16 +1,7 @@
 <?php
 	use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 ?>
-<?php 
-	require base_url().'assets/css/lessphp/lessc.inc.php';
-	
-	try {
-		lessc::ccompile(base_url().'assets/css/dynCss/input.less', base_url().'assets/css/dynCss/out.css');
-	} catch (exception $ex) {
-		exit('lessc fatal error:
-	     '.$ex->getMessage());
-	}
-?>
+
 <!DOCTYPE html>
 	<head>
 		<title>d&f <?=$titre[0]?></title>
@@ -22,7 +13,6 @@
 		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/rangeslider.css">
 		<link rel="icon" type="image/png" href="<?=base_url()?>assets/images/favicon.png" />
 		<link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" media="screen" href="<?=base_url()?>assets/css/dynCss/out.css" />
 	</head>
 	<body>
 		<script src="<?=base_url()?>assets/js/jquery.js"></script>
@@ -51,6 +41,7 @@
 								class="waves-effect waves-light btn" 
 								style="
 									text-transform:none;
+									font-size:1em;
 									border-radius:0;
 									background-color:#E0C3F2;
 									padding:0px 40px 0px 40px;

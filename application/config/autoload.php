@@ -67,7 +67,6 @@ $autoload['libraries'] = array(
 		'form_validation',
 		'pagination',
 		'upload',
-		'lessc'
 );
 
 /*

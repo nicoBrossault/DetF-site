@@ -64,6 +64,15 @@ class CAccueil extends CI_Controller {
 	}
 	
 	public function editPromo($id=NULL){
+		$this->javascript->ready("
+					$('.annuler').click(function(){
+						console.log('annuler');
+						document.location.reload(true);
+					});"
+				);
+		
+		$this->javascript->compile();
+		
 		$this->load->view('accueil/vEditPromo',array(
 				'promo'=>$this->doctrine->em->find('promo',1),
 				));
@@ -84,10 +93,10 @@ class CAccueil extends CI_Controller {
 		parent::__ajaxAddRubrique();
 	}
 	public function ajaxGet($id=NULL){
-		$jFunc='$(".cache").css({
-				visibility : "visible",
-				height : $(document).height()
-		})';
+		$jFunc='$(".carton").css({
+					background : "white",
+					color : "black"
+				})';
 		
 		$this->javascript->ready("
 					$('.btnEditText').click(function(){
@@ -102,7 +111,8 @@ class CAccueil extends CI_Controller {
 				'.btnEditPromo',
 				'click',
 				'CAccueil/editPromo',
-				'.editPromo');
+				'.editPromo',
+				$jFunc);
 		$this->javascript->compile();
 	}
 }
