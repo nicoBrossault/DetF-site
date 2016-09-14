@@ -19,6 +19,19 @@ Abonne:
     mail:
       type: text
       nullable: false
+    reponse:
+      type: text
+      nullable: false
+  oneToOne:
+    idarticlerubrique:
+      targetEntity: Question
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        idArticleRubrique:
+          referencedColumnName: idQstSecrete
+      orphanRemoval: false
   manyToMany:
     idnewsletter:
       targetEntity: Newsletter

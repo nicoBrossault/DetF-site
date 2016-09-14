@@ -1,0 +1,17 @@
+Question:
+  type: entity
+  table: question
+  fields:
+    idQstSecrete:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      column: idQstSecrete
+      generator:
+        strategy: IDENTITY
+    question:
+      type: text
+      nullable: false
+      column: question
+  lifecycleCallbacks: {  }

@@ -135,6 +135,9 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						<span><?=utf8_encode($newLetter->getTextSite())?></span>
 					</div>
 				</div>
+				<div class="btn waves-effect waves-light" id='br' style="margin-left: 5px;">
+					<a href="<?=base_url('CNewsletter')?>" style="text-decoration:none; color:white">S'insrire ?</a>
+				</div>
 			</div>
 		</div>
 	</div>

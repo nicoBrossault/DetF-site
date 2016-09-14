@@ -1,7 +1,5 @@
 <?php
 
-
-
 use Doctrine\Mapping as ORM;
 
 /**
@@ -41,6 +39,23 @@ class Abonne
      * @Column(name="mail", type="text", nullable=false)
      */
     private $mail;
+    
+    /**
+     * @var text $repSecrete
+     *
+     * @Column(name="repSecrete", type="text", nullable=false)
+     */
+    private $repSecrete;
+    
+    /**
+     * @var Question
+     *
+     * @OneToOne(targetEntity="Question")
+     * @JoinColumns({
+     *   @JoinColumn(name="idQstsecrete", referencedColumnName="idQstSecrete", unique=true)
+     * })
+     */
+    private $idQstSecrete;
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
@@ -129,7 +144,29 @@ class Abonne
     {
         return $this->mail;
     }
-
+	
+    /**
+     * Set reponse
+     *
+     * @param text $reponse
+     * @return Abonne
+     */
+    public function setReponse($repSecrete)
+    {
+    	$this->repSecrete = $repSecrete;
+    	return $this;
+    }
+    
+    /**
+     * Get reponse
+     *
+     * @return text
+     */
+    public function getReponse()
+    {
+    	return $this->repSecrete;
+    }
+    
     /**
      * Add idnewsletter
      *
@@ -143,12 +180,24 @@ class Abonne
     }
 
     /**
-     * Get idnewsletter
+     * Get idQuestion
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getIdnewsletter()
+    public function getIdQstSecrete()
     {
-        return $this->idnewsletter;
+        return $this->idQstSecrete;
+    }
+    
+    /**
+     * Set idQuestion
+     *
+     * @param Question $idQstSecrete
+     * @return Abonne
+     */
+    public function setIdQstSecrete(\Question $idQstSecrete = null)
+    {
+        $this->idQstSecrete = $idQstSecrete;
+        return $this;
     }
 }
