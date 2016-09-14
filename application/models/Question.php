@@ -27,13 +27,13 @@ class Question
 	private $question;
 	
     /**
-     * Get idMarquesRubrique
+     * Get idQstSecrete
      *
      * @return integer
      */
     public function getIdQstSecrete()
     {
-    	return $this->IdQstSecrete;
+    	return $this->idQstSecrete;
     }
     
     /**
@@ -43,7 +43,7 @@ class Question
      */
     public function getQuestion()
     {
-    	return $this->reponse;
+    	return $this->question;
     }
     
     /**
@@ -52,7 +52,7 @@ class Question
      * @param text $question
      * @return Question
      */
-    public function setReponse($question)
+    public function setQuestion($question)
     {
     	$this->question = $question;
     	return $this;

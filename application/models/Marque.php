@@ -1,7 +1,5 @@
 <?php
 
-
-
 use Doctrine\Mapping as ORM;
 
 /**

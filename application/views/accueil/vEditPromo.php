@@ -10,7 +10,7 @@ echo form_hidden('idPromo',1);
 		echo $script_foot;
 	}
 ?>
-<script src="<?=base_url()?>assets/js/general.js"></script>
+<!-- <script src="<?=base_url()?>assets/js/general.js"></script>-->
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
 
 <div class="row btn" style="width:100%; height:100%; text-transform:none">

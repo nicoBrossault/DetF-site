@@ -8,7 +8,6 @@ use Doctrine\Common\Persistence\Mapping\Driver\PHPDriver;
 		echo $script_foot;
 	}
 ?>
-<script src="<?=base_url()?>assets/js/general.js"></script>
 <script src="<?=base_url()?>assets/js/materialize.min.js"></script>
 
 <div class="btn annuler btn-floating waves-effect waves-light" style="left:95%">

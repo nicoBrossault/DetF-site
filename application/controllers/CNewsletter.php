@@ -6,7 +6,7 @@ class CNewsletter extends CI_Controller {
 	public function __construct(){
 		// Obligatoire
 		parent::__construct();
-		$titre="Accueil";
+		$titre="Newsletter";
 		$this->layout->setTitre($titre);
 		//items du menu
 		$items=array('Accueil');
@@ -45,6 +45,31 @@ class CNewsletter extends CI_Controller {
 		$this->layout->view('newsletter/vNewsletter',$data);
 	}
 	
+	public function desinscrire(){
+		$data=array(
+		);
+		$this->ajaxAddRub();
+		$this->ajaxGet();
+		$this->layout->view('newsletter/vDesinscrire',$data);
+	}
+	
+	public function result($mail=NULL){
+		$data=array();
+		
+		$mail=str_replace("_atmail_", "@",$mail);
+		
+		$abonne = $this->doctrine->em->getRepository('abonne')->findOneBy(array('mail'=>$mail));
+		if(isset($abonne) && !empty($abonne)){
+			$data+=array(
+				'abonne'=>$abonne->getIdabonne(),
+				'question'=>$abonne->getidQstSecrete()->getQuestion(),
+			);
+			$this->load->view('newsletter/vResultOk',$data);
+		}else{
+			echo "<p style='color:red; font-size:2em' class='center-align'>Oooups, pas de compte associé... </p>";
+		}
+	}
+	
 	public function disconnect(){
 		parent::__disconnect();		
 	}
@@ -71,6 +96,18 @@ class CNewsletter extends CI_Controller {
 						url='CAccueil/editThisText/'+$(this).attr('id');
 						$.get(url,{}).done(function( data ) {
 							$('#text_'+idText).html( data );
+						});
+					});"
+				);
+		$this->javascript->ready("
+					$('.recherche').click(function(){
+						var mail = $('#mail').val();
+						console.log(mail);
+						newMail = mail.replace(/@/i, '_atmail_');
+						console.log(newMail);
+						url='result/'+ newMail;
+						$.get(url,{}).done(function( data ) {
+							$('.resultRechOk').html(data)
 						});
 					});"
 				);
