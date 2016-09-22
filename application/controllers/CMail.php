@@ -17,18 +17,19 @@ class CMail extends CI_Controller {
 		$this->email->from('postmaster@localhost', 'Nico');
 		//$this->email->to('ni.brossault1493@gmail.com');
 		//$this->email->to('mtr-nico@hotmail.fr');
-		$this->email->to($abonne->getMail());
-		//$this->email->bcc('');
+		//$this->email->to($abonne->getMail());
+		$adresses=array($abonne->getMail(),'mtr-nico@hotmail.fr','ni.brossault1493@gmail.com','ni.brossault@yahoo.com');
+		$this->email->bcc($adresses);
 		
 		$this->email->subject('Bienvenue '.$abonne->getPrenom().' '.$abonne->getNom().' !');
 		
 		$data=array(
-				"prenom"=>$abonne->getPrenom(),
-				"nom"=>$abonne->getNom(),
-				"qstSec"=>$abonne->getIdQstSecrete()->getQuestion(),
-				"reponse"=>$abonne->getReponse(),
-				"titreMailBienvenue"=>$this->doctrine->em->getRepository('textsite')->findOneBy(array('idtextsite'=>5))->getTextSite(),
-				"textMailBienvenue"=>$this->doctrine->em->getRepository('textsite')->findOneBy(array('idtextsite'=>6))->getTextSite(),
+				"prenom"=>utf8_encode($abonne->getPrenom()),
+				"nom"=>utf8_encode($abonne->getNom()),
+				"qstSec"=>utf8_encode($abonne->getIdQstSecrete()->getQuestion()),
+				"reponse"=>utf8_encode($abonne->getReponse()),
+				"titreMailBienvenue"=>utf8_encode($this->doctrine->em->getRepository('textsite')->findOneBy(array('idtextsite'=>5))->getTextSite()),
+				"textMailBienvenue"=>utf8_encode($this->doctrine->em->getRepository('textsite')->findOneBy(array('idtextsite'=>6))->getTextSite()),
 				);
 		
 		//--- le contenu du mail est dans une vue
