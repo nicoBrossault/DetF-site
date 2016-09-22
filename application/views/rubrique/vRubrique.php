@@ -47,16 +47,16 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 						class="circle responsive-img"
 						alt="<?php $image->getTitre()?>"
 						style="
-							min-width:150px; 
-							min-height:150px; 
-							max-width:150px; 
-							max-height:150px;
+							min-width:200px; 
+							min-height:200px; 
+							max-width:200px; 
+							max-height:200px;
 							border-radius:50%;
 							background-color:#90caf9; 
 							margin-left:3%;">
 				<?php endif;?>
 			</div>
-			<div class="contentAccueil col s10 m6 l9 offset-m2" style="font-size:1.3em">
+			<div class="contentAccueil col s10 m6 l9 offset-m2" style="font-size:2em">
 				<p><?=utf8_encode($rubrique->getDescriptionrubrique())?></p>
 			</div>
 		</div>
@@ -89,20 +89,17 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 					$imagesArt=$CI->getImgObj($articles,"articlerubrique");
 					if(isset($imagesArt) && !empty($imagesArt) && $imagesArt->getUrl()!="NULL"):?>
 							<img src="<?=base_url()?>assets/<?=$imagesArt->getUrl()?>"  
-								class="circle responsive-img"
+								class="responsive-img"
 								alt="<?php $imagesArt->getTitre()?>"
 								style="
-									min-width:150px; 
-									min-height:150px; 
-									max-width:150px; 
-									max-height:150px;
-									border-radius:50%;
+									min-width:200px; 
+									max-width:200px; 
 									background-color:#90caf9; 
 									margin-left:3%;">
 							</br>
 					<?php endif;?>
 				</div>
-				<div class="contentAccueil col s10 m6 l9 offset-m2" style="font-size:1.3em">
+				<div class="contentAccueil col s10 m6 l9 offset-m2" style="font-size:2em">
 					<p><?=utf8_encode($articles->getTextrubrique())?></p>
 				</div>
 			</div>

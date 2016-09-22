@@ -23,7 +23,7 @@ echo form_hidden('user',$_SESSION['user']);
 $titre= array(
 		'name'=>'titre',
 		'id'=>'titre',
-		'style'=>"font-size:1.6em",
+		'style'=>"font-size:1em",
 		'placeholder'=>'Titre du texte', 
 		'value'=>utf8_encode($textSite->getTitretextsite())
 		);
@@ -66,7 +66,7 @@ $texte= array(
 		'name'=>'texte',
 		'id'=>'texte',
 		'class'=>"materialize-textarea article",
-		'style'=>"font-size:1.6em",
+		'style'=>"font-size:1em",
 		'placeholder'=>'Texte de l\'article',
 		'value'=>utf8_encode($textSite->getTextsite()),
 		'cols' => '40',
@@ -75,8 +75,8 @@ echo form_textarea($texte);
 echo form_error('texte','<span class="error" style="color:red">','</span></br>');
 echo '<div id="legende"></div>';
 ?>
-<input type="submit" name="nom" value="Valider" class="btn">
-<div class="btn annuler">Annuler</div>
+<input type="submit" name="nom" value="Valider" class="btn" style="font-size: 1em">
+<div class="btn annuler" style="font-size: 1em">Annuler</div>
 <?php
 echo form_close();
 ?>

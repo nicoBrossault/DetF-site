@@ -52,9 +52,7 @@ class CImages extends CI_Controller {
 		for($i=2; $i<$count; $i++){
 			$extension = substr($fileImages[$i], -3, 3);
 			if($extension == "jpg" || $extension =="png"  || $extension =="JPG" || $extension =="PNG"){
-				if($fileImages[$i]!="motif-cachemire.png"){
-					$allImages[]=$fileImages[$i];
-				}
+				$allImages[]=$fileImages[$i];
 			}
 		}
 		

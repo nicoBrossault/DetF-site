@@ -94,7 +94,7 @@ body{
 }
 .decoHeader{
 	height:70px;
-	background: url('../images/motif-cachemire.png');
+	background: url('../images/systemImg/motif-cachemire.png');
 }
 
 /*
@@ -116,14 +116,14 @@ body{
 
 .carton{
 	margin: 0% 0% 0% 0%;
-	background: url('../images/plante2.png');
+	background: url('../images/systemImg/plante2.png');
 }
 
 .promoContent{
 	width:80%;
 	height:80%;
 	margin:auto;
-	font-size:1.63em;
+	font-size:2em;
 	background-color:rgba(0, 0, 0, 0.6);
 }
 

@@ -229,12 +229,35 @@ class CI_Controller {
 				visibility : "visible",
 				height : $(document).height()
 				})';
-		$this->javascript->getAndBindTo(
-				'.buttonAddRubrique',
-				'click',
-				$nameClass[0].'/addRubrique',
-				'.formAdd',
-				$jFunc);
+		$jSelect="$('select').material_select()";
+		$jAnnule="$('.annuler').click(function(){
+						$('.formAdd').empty();
+						$('.cache').css('visibility','hidden');
+					});";
+		$jUtils="$('.func').click(function(){
+				var func=$(this).attr('id');
+				var text=$('.materialize-textarea').val()+'<'+func+'></'+func+'>';
+					$('.materialize-textarea').val(text);
+				});
+				$('.clearText').click(function(){
+					var text='';
+					$('.materialize-textarea').val(text);
+				});";
+		$this->javascript->ready(
+				"$('.buttonAddRubrique').click(function(){
+					url='".$nameClass[0]."/addRubrique';
+					url=url+'/'+$(this).attr('id');
+					$.get(url,{}).done(function( data ) {
+							$('.formAdd').html( data );
+							$jSelect;
+							$jAnnule;
+							$jUtils;
+						});
+					$('.cache').css({
+						visibility : 'visible',
+						height : $(document).height()
+					});
+				});");
 		$this->javascript->compile();
 	}
 

@@ -73,10 +73,11 @@ class CFormDelImages extends CI_Controller {
 					if($mark==substr($markBdd->getUrl(),15)){
 						//echo "=> test conclant <br>";
 						$this->doctrine->em->remove($markBdd);
-						foreach($markRub as $mb){
-							if($mb->getIdmarque()->getIdmarque()==$markBdd->getIdMarque()){
+						foreach($markRub as $mr){
+							if($mr->getIdmarque()->getIdmarque()==$markBdd->getIdMarque()){
 								//echo $markBdd->getIdMarque()."<br>";
 								$this->doctrine->em->remove($markBdd);
+								$this->doctrine->em->remove($mr);
 							}
 						}
 						$this->doctrine->em->flush();

@@ -208,7 +208,7 @@ class CFormRubrique extends CI_Controller {
 					//print_r($checkMarks);
 					//echo "</pre>";
 					for($j=0; $j<$countCheckMark; $j++){
-						if(substr($alreadyCheck[$i]->getUrl(),15)==$checkMarks[$j]){
+						if(isset($alreadyCheck[$i]) && substr($alreadyCheck[$i]->getUrl(),15)==$checkMarks[$j]){
 							//echo "=> ".$checkMarks[$j]." ==> egal <br>";
 							array_splice($checkMarks,$j,1);
 							array_splice($alreadyCheck,$i,1);

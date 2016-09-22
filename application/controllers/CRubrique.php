@@ -144,7 +144,6 @@ class CRubrique extends CI_Controller {
 	
 	public function addArticle($id=NULL){
 		$idArticle=explode('_',$id);
-		
 		$articleRubrique=NULL;
 		$imgArt=NULL;
 		if($idArticle[1]!=NULL){
@@ -161,6 +160,7 @@ class CRubrique extends CI_Controller {
 	}
 	
 	public function valDeleteArticle($id){
+		$this->ajaxGet();
 		$article=$this->doctrine->em->find('articlerubrique', $id);
 		$this->load->view('rubrique/vDelete', array('article'=>$article));
 	}
@@ -192,6 +192,7 @@ class CRubrique extends CI_Controller {
 	}
 	
 	public function valDeleteRub($id){
+		$this->ajaxGet();
 		$rubrique=$this->doctrine->em->find('rubrique', $id);
 		$this->load->view('rubrique/vDelete', array('rubrique'=>$rubrique));
 	}
@@ -273,18 +274,66 @@ class CRubrique extends CI_Controller {
 				visibility : "visible",
 				height : $(document).height()
 		})';
-		$this->javascript->getAndBindTo(
-				'.btnEdit',
-				'click',
-				'CRubrique/addArticle',
-				'.formAdd',
-				$jFunc);
-		$this->javascript->getAndBindTo(
-				'.buttonAdd',
-				'click',
-				'CRubrique/addArticle',
-				'.formAdd',
-				$jFunc);
+		$jSelect="$('select').material_select()";
+		$jAnnule="$('.annuler').click(function(){
+						$('.formAdd').empty();
+						$('.cache').css('visibility','hidden');
+					});";
+		$jUtils="$('.func').click(function(){
+				var func=$(this).attr('id');
+				var text=$('.materialize-textarea').val()+'<'+func+'></'+func+'>';
+					$('.materialize-textarea').val(text);
+				});
+				$('.clearText').click(function(){
+					var text='';
+					$('.materialize-textarea').val(text);
+				});";
+		$this->javascript->ready(
+				"$('.btnEdit').click(function(){
+					url='CRubrique/addArticle';
+					url=url+'/'+$(this).attr('id');
+					$.get(url,{}).done(function( data ) {
+						$('.formAdd').html( data );
+						$jSelect;
+						$jAnnule;
+						$jUtils;
+					});
+					$('.cache').css({
+						visibility : 'visible',
+						height : $(document).height()
+					});
+				});");
+		$this->javascript->ready(
+					"$('.buttonAdd').click(function(){
+						url='CRubrique/addArticle';
+						url=url+'/'+$(this).attr('id');
+						$.get(url,{}).done(function( data ) {
+							$('.formAdd').html( data );
+							$jSelect;
+							$jAnnule;
+							$jUtils;
+						});
+						$('.cache').css({
+							visibility : 'visible',
+							height : $(document).height()
+						});
+					});");
+		$this->javascript->ready(
+				"$('.editRub').click(function(){
+					url='CRubrique/addRubrique';
+					url=url+'/'+$(this).attr('id');
+					$.get(url,{}).done(function( data ) {
+						$('.formAdd').html( data );
+						$jSelect;
+						$jAnnule;
+						$jUtils;
+					});
+					$('.cache').css({
+						visibility : 'visible',
+						height : $(document).height()
+					});
+				});");
+		
 		$this->javascript->getAndBindTo(
 				'.btnDelete',
 				'click',
@@ -298,13 +347,8 @@ class CRubrique extends CI_Controller {
 				'CRubrique/valDeleteRub',
 				'.formAdd',
 				$jFunc);
+		$this->javascript->ready($jAnnule);
 		
-		$this->javascript->getAndBindTo(
-				'.editRub',
-				'click',
-				'CRubrique/addRubrique',
-				'.formAdd',
-				$jFunc);
 		$this->javascript->compile();
 	}
 }
