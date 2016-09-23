@@ -115,7 +115,7 @@
 									<table align="center">
 										<tbody>
 											<tr align="center" style="text-align: center;">
-												<td><u>Récpitulatif de votre compte :</u></td>
+												<td><u>Récapitulatif de votre compte :</u></td>
 											</tr>
 											<tr align="center" style="text-align: center;">
 												<td>
@@ -129,7 +129,7 @@
 											</tr>
 											<tr align="center" style="text-align: center;">
 												<td style="color:red">
-													<em>Attention c'est information seront utile si vous voulez vous retirer de notre liste d'envoie</em>
+													<em>Attention ces informations seront utile si vous voulez vous retirer de notre liste d'envoie</em>
 												</td>
 											</tr>
 										</tbody>
