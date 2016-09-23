@@ -49,6 +49,15 @@ echo form_open_multipart('CFormInscription');
 					</div>
 				</div>
 				<div class="row">
+					<?php if(isset($errorMail) && !empty($errorMail)):?>
+						<br>
+						<br>
+						<div class="error" style="color:red; margin-left:5%">
+							<h5>/!\ <?=$errorMail?></h5>
+						</div>
+						<br>
+						<br>
+					<?php endif;?>
 					<div class="input-field col s10 m10 l10 offset-s1 offset-m1 offset-l1">
 						<?php
 							$mail= array(
@@ -61,6 +70,24 @@ echo form_open_multipart('CFormInscription');
 									'required'=>'required',
 									);
 							echo '<label for="mail"><h5>Mail</h5></label>';
+							echo form_input($mail);
+							echo form_error('mail','<span class="error" style="color:red">','</span></br>');
+						?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s10 m10 l10 offset-s1 offset-m1 offset-l1">
+						<?php
+							$mail= array(
+									'name'=>'mail2',
+									'id'=>'mail2',
+									'type'=>'email',
+									'placeholder'=>'Votre Mail',
+									'style'=>"font-size:1.6em",
+									'value'=>"",
+									'required'=>'required',
+									);
+							echo '<label for="mail"><h5>Ecrire de nouveau votre mail</h5></label>';
 							echo form_input($mail);
 							echo form_error('mail','<span class="error" style="color:red">','</span></br>');
 						?>

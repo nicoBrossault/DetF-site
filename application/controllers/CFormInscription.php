@@ -32,9 +32,18 @@ class CFormInscription extends CI_Controller {
 		}
 		
 		$this->form_validation->set_rules('mail', 'mail', 'required|trim|xss_clean');
-		if(isset($_POST['mail']) && !empty($_POST['mail'])){
+		if(isset($_POST['mail']) && !empty($_POST['mail']) && isset($_POST['mail2']) && !empty($_POST['mail2'])){
 			//echo "mail : ".$_POST['mail']."<br>";
-			$object->setMail(utf8_decode($_POST['mail']));
+			$isMailValid=true;
+			if($_POST['mail']==$_POST['mail2']){
+				$object->setMail(utf8_decode($_POST['mail']));
+			}else{
+				$isMailValid=False;
+				$errorMail="Les adresses mail entrées ne sont pas égales...";
+			}
+		}else{
+			$isMailValid=False;
+			$errorMail="L'adresse mail n'est pas renseignée...";
 		}
 		
 		//Question
@@ -49,7 +58,7 @@ class CFormInscription extends CI_Controller {
 			$object->setReponse(utf8_decode($_POST['reponse']));
 		}
 		
-		if ($this->form_validation->run() == FALSE){
+		if ($this->form_validation->run() == FALSE || $isMailValid==False){
 			//echo 'test false <br>';
 			$titre="Inscription";
 			$this->layout->setTitre($titre);
@@ -76,8 +85,9 @@ class CFormInscription extends CI_Controller {
 			
 			
 			$this->layout->view(
-					'accueil/vEdit',array(
-							'questions'=>$this->doctrine->em->getRepository('question')->findAll()
+					'newsletter/vNewsletter',array(
+							'questions'=>$this->doctrine->em->getRepository('question')->findAll(),
+							'errorMail'=>$errorMail,
 					));
 		}else{
 			//echo 'test true </br>';
@@ -85,7 +95,8 @@ class CFormInscription extends CI_Controller {
 			$this->doctrine->em->persist($object);
 			$this->doctrine->em->flush();
 			
-			redirect('CAccueil', 'refresh');
+			redirect('CMail/bienvenue/'.$object->getIdabonne(), 'refresh');
+			//redirect('CAccueil', 'refresh');
 		}
 	}
 }

@@ -17,9 +17,9 @@ class CMail extends CI_Controller {
 		$this->email->from('postmaster@localhost', 'Nico');
 		//$this->email->to('ni.brossault1493@gmail.com');
 		//$this->email->to('mtr-nico@hotmail.fr');
-		//$this->email->to($abonne->getMail());
-		$adresses=array($abonne->getMail(),'mtr-nico@hotmail.fr','ni.brossault1493@gmail.com','ni.brossault@yahoo.com');
-		$this->email->bcc($adresses);
+		$this->email->to($abonne->getMail());
+		//$adresses=array($abonne->getMail(),'mtr-nico@hotmail.fr','ni.brossault1493@gmail.com','ni.brossault@yahoo.com');
+		//$this->email->bcc($adresses);
 		
 		$this->email->subject('Bienvenue '.$abonne->getPrenom().' '.$abonne->getNom().' !');
 		
@@ -38,6 +38,6 @@ class CMail extends CI_Controller {
 		
 		$this->email->send();
 		
-		//redirect('CAccueil','auto');
+		redirect('CAccueil','auto');
 	}
 }

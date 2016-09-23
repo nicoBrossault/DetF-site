@@ -145,20 +145,8 @@
 					<table align="right" cellpadding="0" cellspacing="0">
 						<tbody>
 							<tr>
-								<td background="https://github.com/nicoBrossault/DetF-site/blob/master/assets/images/systemImg/ruban.png?raw=true" bgcolor="#E0C3F2" valign="top" height="400" style="font-size=400px; line-height=400px">
-									<!--[if gte mso 9]>
-										<v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;height:71px;">
-										<v:fill type="tile" src="https://github.com/nicoBrossault/DetF-site/blob/master/assets/images/systemImg/motif-cachemire.png?raw=true" color="#E91E63" />
-										<v:textbox inset="0,0,0,0">
-									<![endif]-->
-									<div>
-									test
-										&nbsp;
-									</div>
-									<!--[if gte mso 9]>
-										</v:textbox>
-										</v:rect>
-									<![endif]-->
+								<td>
+									<img alt="ruban" src="https://github.com/nicoBrossault/DetF-site/blob/master/assets/images/systemImg/ruban-2.png?raw=true" width="400" height="386" valign="top">
 								</td>
 							</tr>
 							<tr>
