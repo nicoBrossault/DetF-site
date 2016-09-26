@@ -64,6 +64,8 @@ class CFormText extends CI_Controller {
 			if(isset($_POST['idTextSite']) && !empty($_POST['idTextSite'])){
 				$textsite=$this->doctrine->em->find('textsite',$_POST['idTextSite']);
 				//echo "articlerubrique true <br>";
+			}else{
+				$textsite="";
 			}
 			
 			
@@ -74,7 +76,7 @@ class CFormText extends CI_Controller {
 			
 			$this->layout->view(
 					'accueil/vEdit',array(
-					'textsite'	=>	$textSite,
+					'textSite'	=>	$textsite,
 					));
 		}else{
 			//echo 'test true </br>';

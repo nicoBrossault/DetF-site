@@ -5,7 +5,7 @@ use Doctrine\Mapping as ORM;
 /**
  * Marquesrubrique
  *
- * @Table(name="marquesRubrique")
+ * @Table(name="marquesrubrique")
  * @Entity
  */
 class Marquesrubrique

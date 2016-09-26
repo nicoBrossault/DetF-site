@@ -147,6 +147,6 @@ $autoload['model'] = array(
 		'user',
 		'promo',
 		'marque',
-		'marquesRubrique',
+		'marquesrubrique',
 		'question',
 );

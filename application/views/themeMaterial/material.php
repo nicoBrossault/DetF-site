@@ -3,9 +3,14 @@
 ?>
 
 <!DOCTYPE html>
+<html lang="fr">
 	<head>
-		<title>d&f <?=$titre[0]?></title>
+		<title>Douceur &amp; Fantaisie <?=$titre[0]?></title>
 		<meta charset="UTF-8">
+		<link rel="alternate" href="XXX" hreflang="fr"/>
+		<meta name="description" content="Ceci est la page officiel de la boutique Douceur &amp; Fantaisie à Villers-Bocages" />
+		<meta name="keywords" content="douceur et fantaisie, douceur & fantaisie, fantasy, douceur & fantasy, laine, vetement enfant, doudou, villers, bocage, normandie,
+		katia, achat laine," />
 		<!--Import Google Icon Font-->
       	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/materialize.min.css">
