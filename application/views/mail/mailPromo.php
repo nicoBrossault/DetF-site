@@ -88,7 +88,7 @@
 										<tbody>
 											<tr>
 												<td align="center" height="20" style="text-align: center; font-size:20px;">
-													<b>{titreMailBienvenue} {prenom} {nom}</b>
+													<b>{titrePromo}</b>
 												</td>
 											</tr>
 											<tr>
@@ -96,7 +96,7 @@
 											</tr>
 											<tr>
 												<td>
-													{textMailBienvenue}
+													{textPromo}
 												</td>
 											</tr>
 										</tbody>
@@ -109,28 +109,6 @@
 										<tbody>
 											<tr>
 												<td>&nbsp;</td>
-											</tr>
-										</tbody>
-									</table>
-									<table align="center">
-										<tbody>
-											<tr align="center" style="text-align: center;">
-												<td><u>Récapitulatif de votre compte :</u></td>
-											</tr>
-											<tr align="center" style="text-align: center;">
-												<td>
-													<em><b>Question secrète :</b> {qstSec}</em>
-												</td>
-											</tr>
-											<tr align="center" style="text-align: center;">
-												<td>
-													<em><b>Réponse :</b> {reponse}</em>
-												</td>
-											</tr>
-											<tr align="center" style="text-align: center;">
-												<td style="color:red">
-													<em>Attention ces informations seront utile si vous voulez vous retirer de notre liste d'envoie</em>
-												</td>
 											</tr>
 										</tbody>
 									</table>

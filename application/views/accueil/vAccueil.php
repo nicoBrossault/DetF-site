@@ -6,6 +6,13 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 <div class="card">
 	<?php if(isset($user)):?>
 		<div class="utils right-align">
+			<span style="margin-right: 1%; font-size:10px;">
+				<a href="<?=base_url('CMail/envoiePromo')?>"
+					class="btn waves-effect waves-light" 
+				 	style="background-color:#E0C3F2">
+					Envoyer à la NewsLetter
+				</a>
+			</span>
 			<span style="margin-right: 1%">
 				<a class="btn-floating waves-effect waves-light btnEditPromo" 
 				 	id="promo"

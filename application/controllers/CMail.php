@@ -2,6 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class CMail extends CI_Controller {
+	
+	private $nom = 'Douceur & Fantaisie';
+	private $adresse = 'postmaster@localhost';
+	
 	public function index(){
 		$this->bienvenue(1);
 	}
@@ -14,7 +18,7 @@ class CMail extends CI_Controller {
 		//--- On charge les paramètres du fichier de configuration
 		$this->email->initialize();
 		$this->email->set_mailtype('html');
-		$this->email->from('postmaster@localhost', 'Nico');
+		$this->email->from($this->adresse, $this->nom);
 		//$this->email->to('ni.brossault1493@gmail.com');
 		//$this->email->to('mtr-nico@hotmail.fr');
 		$this->email->to($abonne->getMail());
@@ -34,6 +38,39 @@ class CMail extends CI_Controller {
 		
 		//--- le contenu du mail est dans une vue
 		$contenuMail = $this->parser->parse('mail/mailBienvenue', $data, true);
+		$this->email->message($contenuMail);
+		
+		$this->email->send();
+		
+		redirect('CAccueil','auto');
+	}
+	
+	public function envoiePromo(){
+		$promo=$this->doctrine->em->find('promo',1);
+		$abonnes=$this->doctrine->em->getRepository('abonne')->findAll();
+		$adresses=array();		
+		
+		//--- On charge les paramètres du fichier de configuration
+		$this->email->initialize();
+		$this->email->initialize();
+		$this->email->set_mailtype('html');
+		$this->email->from($this->adresse, $this->nom);
+		
+		foreach ($abonnes as $abonne){
+			$adresses[]=$abonne->getMail();
+		}
+		
+		$this->email->bcc($adresses);
+		
+		$this->email->subject(utf8_encode($promo->getLibellePromo()));
+		
+		$data=array(
+				"titrePromo"=>utf8_encode($promo->getLibellepromo()),
+				"textPromo"=>utf8_encode($promo->getTextPromo()),
+		);
+		
+		//--- le contenu du mail est dans une vue
+		$contenuMail = $this->parser->parse('mail/mailPromo', $data, true);
 		$this->email->message($contenuMail);
 		
 		$this->email->send();
